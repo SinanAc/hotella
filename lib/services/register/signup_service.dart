@@ -1,6 +1,8 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
-import 'package:premio_inn/model/sign_up/signup_model.dart';
-import 'package:premio_inn/model/sign_up/signup_response_model.dart';
+import 'package:premio_inn/model/register/sign_up/signup_model.dart';
+import 'package:premio_inn/model/register/sign_up/signup_response_model.dart';
 import 'package:premio_inn/services/dio_service.dart';
 import 'package:premio_inn/services/internet_checker.dart';
 import 'package:premio_inn/utils/url.dart';
@@ -17,12 +19,10 @@ class SignUpService {
           return SignUpResponseModel.fromJson(response.data);
         }
       } on DioError catch (e) {
-        if(e.response!.statusCode==422){
-                  return SignUpResponseModel(
-            message: 'Email address already exists !!');
-        }else{
-          return SignUpResponseModel(message: e.response!.statusMessage.toString());
-        }
+        return SignUpResponseModel(
+            message: e.response!.statusMessage.toString());
+      } on SocketException catch (e) {
+        return SignUpResponseModel(message: e.message);
       } catch (e) {
         return SignUpResponseModel(message: e.toString());
       }

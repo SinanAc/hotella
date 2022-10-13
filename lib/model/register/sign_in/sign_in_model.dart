@@ -1,14 +1,14 @@
 class SignInModel {
-  final String email;
+  final String phoneOrEmail;
   final String password;
 
   SignInModel({
-    required this.email,
+    required this.phoneOrEmail,
     required this.password,
   });
 
   Map<String, dynamic> toJson() => {
-        "email": email,
+        "username": phoneOrEmail,
         "password": password,
       };
 }

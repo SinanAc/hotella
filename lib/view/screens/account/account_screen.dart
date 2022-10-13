@@ -4,12 +4,15 @@ import 'package:premio_inn/utils/sizes.dart';
 import 'package:premio_inn/view/screens/account/widgets/account_grid_item.dart';
 import 'package:premio_inn/view/screens/account/widgets/profile_section.dart';
 import 'package:premio_inn/view/widgets/double_color_title.dart';
+import 'package:premio_inn/view_model/account/account_view_model.dart';
+import 'package:provider/provider.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final accountContoller = Provider.of<AccountViewModel>(context,listen: false);
     return SingleChildScrollView(
       child: Stack(
         children: [
@@ -75,7 +78,9 @@ class AccountScreen extends StatelessWidget {
                     AccountGridItem(
                       icon: Icons.logout,
                       title: 'Logout',
-                      onTap: (){},
+                      onTap: (){
+                        accountContoller.onLogoutButton(context);
+                      },
                     ),
                   ],
                 )

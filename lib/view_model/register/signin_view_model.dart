@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:premio_inn/model/sign_in/sign_in_model.dart';
-import 'package:premio_inn/model/sign_in/signin_response_model.dart';
-import 'package:premio_inn/services/sign_in_service.dart';
+import 'package:premio_inn/model/register/sign_in/sign_in_model.dart';
+import 'package:premio_inn/model/register/sign_in/signin_response_model.dart';
+import 'package:premio_inn/services/register/sign_in_service.dart';
 import 'package:premio_inn/utils/push_functions.dart';
+import 'package:premio_inn/utils/url.dart';
 import 'package:premio_inn/view/screens/main_page/main_page.dart';
-import 'package:premio_inn/view/widgets/show_popup.dart';
-
+import 'package:premio_inn/view/widgets/show_dialogs.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SigninViewModel extends ChangeNotifier {
   final signInFormKey = GlobalKey<FormState>();
-  final emailController = TextEditingController();
+  final phoneOrEmailController = TextEditingController();
   final passwordController = TextEditingController();
   bool isLoading = false;
 
   // make text obscure for passwords
-  bool _isObscure = false;
+  bool _isObscure = true;
   get isObscure => _isObscure;
   set isObscure(value) {
     _isObscure = value;
     notifyListeners();
   }
 
-  // to remember login info
+  // to remember login details
   bool _isRemember = true;
   get isRemember => _isRemember;
   set isRemember(value) {
@@ -29,37 +30,37 @@ class SigninViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  // sign in method
   void onSigninButton(context) async {
     if (signInFormKey.currentState!.validate()) {
       isLoading = true;
       notifyListeners();
-      final email = emailController.text.trim();
+      final phoneEmail = phoneOrEmailController.text.trim();
       final password = passwordController.text.trim();
-      final data = SignInModel(email: email, password: password);
+      final data = SignInModel(phoneOrEmail: phoneEmail, password: password);
 
       SignInResponseModel? signInResponse =
           await SignInService().signInRepo(data);
       if (signInResponse == null) {
         ScaffoldMessenger.of(context)
-            .showSnackBar(ShowDialogs.popUp('No Response'));
+            .showSnackBar(ShowDialogs.errorPopUp('No Response'));
         _isLoadingFalse();
         return;
-      } else if (signInResponse.message == "true") {
+      } else if (signInResponse.created == true) {
+        final pref = await SharedPreferences.getInstance();
+        await pref.setBool(Url.isLogggedIn, true);
+        _isLoadingFalse();
+        disposes();
         PushFunctions.push(context, const MainPage());
-        _isLoadingFalse();
-      } else if (signInResponse.message != "true") {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(ShowDialogs.popUp(signInResponse.message));
-        _isLoadingFalse();
-        return;
       } else {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(ShowDialogs.popUp('Something went wrong !!'));
+        ScaffoldMessenger.of(context).showSnackBar(ShowDialogs.errorPopUp(
+            signInResponse.message ?? 'Something went wrong !!'));
         _isLoadingFalse();
       }
     }
   }
 
+  // text field validation functions
   String? emailValidator(String? fieldContent) {
     if (fieldContent == null || fieldContent.isEmpty) {
       return 'Please fill the field';
@@ -77,7 +78,6 @@ class SigninViewModel extends ChangeNotifier {
     if (fieldContent!.isEmpty) {
       return 'Please enter your password';
     }
-
     return null;
   }
 
@@ -86,12 +86,13 @@ class SigninViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  // to dispose all the variables
   void disposes() {
     signInFormKey.currentState!.reset();
-    emailController.clear();
+    phoneOrEmailController.clear();
     passwordController.clear();
-    _isObscure = true;
-    _isRemember = true;
+    isRemember = true;
+    isObscure = true;
     isLoading = false;
     notifyListeners();
   }

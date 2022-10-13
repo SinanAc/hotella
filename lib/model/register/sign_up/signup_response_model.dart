@@ -1,17 +1,17 @@
 class SignUpResponseModel {
    String? message;
-   String? id;
-   String? token;
+   bool? created;
+   String? jwtKey;
 
   SignUpResponseModel({
     this.message,
-    this.id,
-    this.token,
+    this.created,
+    this.jwtKey,
   });
 
   factory SignUpResponseModel.fromJson(Map<String, dynamic> json) => SignUpResponseModel(
         message: json["message"] ?? "",
-        id: json["userId"] ?? "",
-        token: json["token"] ?? ""
+        created: json["created"] ?? false,
+        jwtKey: json["jwt_key"] ?? ""
       );
 }

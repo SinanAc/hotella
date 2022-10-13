@@ -1,6 +1,8 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
-import 'package:premio_inn/model/sign_in/sign_in_model.dart';
-import 'package:premio_inn/model/sign_in/signin_response_model.dart';
+import 'package:premio_inn/model/register/sign_in/sign_in_model.dart';
+import 'package:premio_inn/model/register/sign_in/signin_response_model.dart';
 import 'package:premio_inn/services/dio_service.dart';
 import 'package:premio_inn/services/internet_checker.dart';
 import 'package:premio_inn/utils/url.dart';
@@ -17,12 +19,11 @@ class SignInService {
           return SignInResponseModel.fromJson(response.data);
         }
       } on DioError catch (e) {
-        if (e.response!.statusCode == 401) {
-          return SignInResponseModel(message: "Email and password doesn't match !!");
-        }else{
           return SignInResponseModel.fromJson(e.response!.data);
-        }
-      } catch (e) {
+      }on SocketException catch (e) {
+        return SignInResponseModel(message: e.message);
+      }
+       catch (e) {
         return SignInResponseModel(message: e.toString());
       }
     } else {

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ShowDialogs {
-  static SnackBar popUp(String messege) {
+  // error popup to display error messages
+  static SnackBar errorPopUp(String messege) {
     return SnackBar(
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10))),

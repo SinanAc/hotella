@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:premio_inn/view/screens/main_page/main_page.dart';
-import 'package:premio_inn/view_model/food_item_view_model.dart';
-import 'package:premio_inn/view_model/main_page_view_model.dart';
-import 'package:premio_inn/view_model/register/number_verify.dart';
+import 'package:premio_inn/view/screens/splash/splash_screen.dart';
+import 'package:premio_inn/view_model/account/account_view_model.dart';
+import 'package:premio_inn/view_model/hotel_view_model.dart';
+import 'package:premio_inn/view_model/main_page/main_page_view_model.dart';
+import 'package:premio_inn/view_model/register/phone_number.dart';
 import 'package:premio_inn/view_model/register/signin_view_model.dart';
 import 'package:premio_inn/view_model/register/signup_viewmodel.dart';
+import 'package:premio_inn/view_model/splash/splash_view_model.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -17,11 +19,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context)=> MainPageViewModel()),
-        ChangeNotifierProvider(create: (context)=> SigninViewModel()),
-        ChangeNotifierProvider(create: (context)=> SignUpViewModel()),
-        ChangeNotifierProvider(create: (context)=> HotelViewModel()),
-        ChangeNotifierProvider(create: (context)=> NumVerifyViewModel()),
+        ChangeNotifierProvider(create: (_)=> MainPageViewModel()),
+        ChangeNotifierProvider(create: (_)=> SigninViewModel()),
+        ChangeNotifierProvider(create: (_)=> SignUpViewModel()),
+        ChangeNotifierProvider(create: (_)=> HotelViewModel()),
+        ChangeNotifierProvider(create: (_)=> PhoneNumberViewModel()),
+        ChangeNotifierProvider(create: (_)=> SplashViewModel()),
+        ChangeNotifierProvider(create: (_)=> AccountViewModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -33,7 +37,7 @@ class MyApp extends StatelessWidget {
         ),  
       ),
         ),
-        home: const MainPage(),
+        home: const SplashScreen(),
       ),
     );
   }

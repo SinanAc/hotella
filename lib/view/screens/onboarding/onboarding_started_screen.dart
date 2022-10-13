@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/push_functions.dart';
 import 'package:premio_inn/utils/sizes.dart';
-import 'package:premio_inn/view/screens/register/number_verify_screen.dart';
+import 'package:premio_inn/view/screens/register/phone_number_screen.dart';
 import 'package:premio_inn/view/widgets/button_widget.dart';
 import 'package:premio_inn/view/widgets/main_title.dart';
 
@@ -47,7 +47,7 @@ class OnboardingScreen extends StatelessWidget {
               ButtonWidget(
                 text: 'Get Started',
                 onTap: () {
-                  PushFunctions.push(context, const NumberVerifyScreen());
+                  PushFunctions.push(context, const PhoneNumberScreen());
                 },
                 width: size.width / 2.3,
               ),

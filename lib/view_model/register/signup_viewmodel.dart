@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:premio_inn/model/sign_up/signup_model.dart';
-import 'package:premio_inn/model/sign_up/signup_response_model.dart';
-import 'package:premio_inn/services/signup_service.dart';
+import 'package:premio_inn/model/register/sign_up/signup_model.dart';
+import 'package:premio_inn/model/register/sign_up/signup_response_model.dart';
+import 'package:premio_inn/services/register/signup_service.dart';
 import 'package:premio_inn/utils/push_functions.dart';
+import 'package:premio_inn/utils/url.dart';
 import 'package:premio_inn/view/screens/main_page/main_page.dart';
-import 'package:premio_inn/view/widgets/show_popup.dart';
+import 'package:premio_inn/view/widgets/show_dialogs.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpViewModel extends ChangeNotifier {
   final signUpKey = GlobalKey<FormState>();
@@ -23,43 +25,42 @@ class SignUpViewModel extends ChangeNotifier {
   }
 
   // signup method
-  void onSignupButton(context) async {
+  void onSignupButton(context, String phoneNum) async {
     if (signUpKey.currentState!.validate()) {
       isLoading = true;
       notifyListeners();
       final obj = SignUpModel(
-          name: nameController.text,
-          email: emailController.text,
-          password: passwordController.text,
-          confirmPassword: confirmPasswordController.text,
-          role: "ROLE_USER");
+        name: nameController.text.trim(),
+        phone: phoneNum,
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
       SignUpResponseModel? signUpResponse =
           await SignUpService().signUpRepo(obj);
       if (signUpResponse == null) {
         ScaffoldMessenger.of(context)
-            .showSnackBar(ShowDialogs.popUp('No Response'));
+            .showSnackBar(ShowDialogs.errorPopUp('No Response'));
         _isLoadingFalse();
         return;
-      } else if (signUpResponse.message == "true") {
+      } else if (signUpResponse.created == true) {
+        final pref = await SharedPreferences.getInstance();
+        await pref.setBool(Url.isLogggedIn, true);
         PushFunctions.push(context, const MainPage());
         _isLoadingFalse();
-      } else if (signUpResponse.message != "true") {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(ShowDialogs.popUp("${signUpResponse.message}"));
-        _isLoadingFalse();
-        return;
       } else {
         ScaffoldMessenger.of(context)
-            .showSnackBar(ShowDialogs.popUp('Something went wrong !!!'));
+            .showSnackBar(ShowDialogs.errorPopUp("${signUpResponse.message}"));
         _isLoadingFalse();
+        return;
       }
     }
   }
 
+  // text field validation functions
   String? nameValidator(String? fieldContent) {
     if (fieldContent!.isEmpty) {
       return 'Please enter your name';
-    }else if(fieldContent.length<4 || fieldContent.length>15){
+    } else if (fieldContent.length < 4 || fieldContent.length > 15) {
       return 'Name reqiures 4-15 characters';
     }
     return null;
@@ -101,6 +102,7 @@ class SignUpViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  // to dispose all the variables
   void disposes() {
     signUpKey.currentState!.reset();
     nameController.clear();

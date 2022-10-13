@@ -4,7 +4,7 @@ import 'package:premio_inn/utils/sizes.dart';
 import 'package:premio_inn/view/screens/hotel/widgets/food_title.dart';
 import 'package:premio_inn/view/widgets/button_widget.dart';
 import 'package:premio_inn/view/widgets/main_title.dart';
-import 'package:premio_inn/view_model/food_item_view_model.dart';
+import 'package:premio_inn/view_model/hotel_view_model.dart';
 import 'package:provider/provider.dart';
 
 class HotelScreen extends StatelessWidget {
