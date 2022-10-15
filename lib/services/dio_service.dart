@@ -11,8 +11,9 @@ class DioService {
   }
 
  
-  // static Future<void> getMethod() {
-  //   throw UnimplementedError();
-  // }
+  static Future<Response>getMethod(
+    {required String url})async {
+    return await dio.get(url).then((value)=>value);
+  }
 
 }

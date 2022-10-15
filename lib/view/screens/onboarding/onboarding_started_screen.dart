@@ -4,7 +4,7 @@ import 'package:premio_inn/utils/push_functions.dart';
 import 'package:premio_inn/utils/sizes.dart';
 import 'package:premio_inn/view/screens/register/phone_number_screen.dart';
 import 'package:premio_inn/view/widgets/button_widget.dart';
-import 'package:premio_inn/view/widgets/main_title.dart';
+import 'package:premio_inn/view/widgets/sub_title.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class OnboardingScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: size.height/10),              
-              const MainTitle(
+              const TitleWidget(
                 text: 'Welcome !',
                 fontSize: 30,
                 color: KColors.kThemeYellow,
@@ -35,7 +35,7 @@ class OnboardingScreen extends StatelessWidget {
               SizedBox(
                 height: 80,
                 width: size.width / 1.2,
-                child: const MainTitle(
+                child: const TitleWidget(
                   text:
                       'Get in to the largest collection of hotels, resorts, and home stays all over the world with all your favorite destinations',
                   fontSize: 20,

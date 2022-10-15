@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:premio_inn/view/screens/splash/splash_screen.dart';
 import 'package:premio_inn/view_model/account/account_view_model.dart';
+import 'package:premio_inn/view_model/home/home_view_model.dart';
 import 'package:premio_inn/view_model/hotel_view_model.dart';
 import 'package:premio_inn/view_model/main_page/main_page_view_model.dart';
 import 'package:premio_inn/view_model/register/phone_number.dart';
@@ -19,23 +20,24 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_)=> MainPageViewModel()),
-        ChangeNotifierProvider(create: (_)=> SigninViewModel()),
-        ChangeNotifierProvider(create: (_)=> SignUpViewModel()),
-        ChangeNotifierProvider(create: (_)=> HotelViewModel()),
-        ChangeNotifierProvider(create: (_)=> PhoneNumberViewModel()),
-        ChangeNotifierProvider(create: (_)=> SplashViewModel()),
-        ChangeNotifierProvider(create: (_)=> AccountViewModel()),
+        ChangeNotifierProvider(create: (_) => MainPageViewModel()),
+        ChangeNotifierProvider(create: (_) => SigninViewModel()),
+        ChangeNotifierProvider(create: (_) => SignUpViewModel()),
+        ChangeNotifierProvider(create: (_) => HotelViewModel()),
+        ChangeNotifierProvider(create: (_) => PhoneNumberViewModel()),
+        ChangeNotifierProvider(create: (_) => SplashViewModel()),
+        ChangeNotifierProvider(create: (_) => AccountViewModel()),
+        ChangeNotifierProvider(create: (_) => HomeViewModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-      inputDecorationTheme: const InputDecorationTheme(
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(width: 0, color: Colors.transparent),
-          borderRadius: BorderRadius.all(Radius.circular(15.0)),
-        ),  
-      ),
+          inputDecorationTheme: const InputDecorationTheme(
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(width: 0, color: Colors.transparent),
+              borderRadius: BorderRadius.all(Radius.circular(15.0)),
+            ),
+          ),
         ),
         home: const SplashScreen(),
       ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:premio_inn/view/widgets/single_color_title.dart';
+import 'package:premio_inn/view/widgets/sub_title.dart';
 
 class CategoryCard extends StatelessWidget {
   const CategoryCard({
@@ -32,7 +32,7 @@ class CategoryCard extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 1.5),
-        SingleColorTitle(
+        TitleWidget(
           text: title,
           fontSize: 14,
           color: const Color.fromARGB(184, 255, 253, 253),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:premio_inn/utils/sizes.dart';
-import 'package:premio_inn/view/widgets/main_card.dart';
 
 class HistoryScreen extends StatelessWidget {
   const HistoryScreen({Key? key}) : super(key: key);
@@ -10,12 +9,13 @@ class HistoryScreen extends StatelessWidget {
     return ListView.separated(
         itemCount: 2,
         itemBuilder: ((context, index) {
-          return MainCard(
-            name: 'Vistara egmondo',
-            loaction: 'Genevia',
-            img: 'assets/images/hotel_dummy.jpg',
-            size: MediaQuery.of(context).size,
-          );
+          return const SizedBox();
+          // MainCard(
+          //   name: 'Vistara egmondo',
+          //   loaction: 'Genevia',
+          //   img: 'assets/images/hotel_dummy.jpg',
+          //   size: MediaQuery.of(context).size,
+          // );
         }),
         separatorBuilder: ((context, index) {
           return KSizedBox.kHeigh_10;

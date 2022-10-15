@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/sizes.dart';
-import 'package:premio_inn/view/widgets/main_title.dart';
+import 'package:premio_inn/view/widgets/sub_title.dart';
 
 class OrderFoodCard extends StatelessWidget {
   const OrderFoodCard({
@@ -27,13 +27,13 @@ class OrderFoodCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MainTitle(
+                  TitleWidget(
                     text: 'Chicken Burger',
                     fontSize: 16,
                     color: Colors.grey.shade700,
                   ),
-                  const MainTitle(text: '₹340', fontSize: 16),
-                  const MainTitle(text: 'Arriving today', fontSize: 16,color: KColors.kLiteGreen),
+                  const TitleWidget(text: '₹340', fontSize: 16),
+                  const TitleWidget(text: 'Arriving today', fontSize: 16,color: KColors.kLiteGreen),
                 ],
               ),
             ],

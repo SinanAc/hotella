@@ -6,9 +6,11 @@ class PageIndicatorWidget extends StatelessWidget {
   const PageIndicatorWidget({
     Key? key,
     required this.controller,
+    required this.count
   }) : super(key: key);
 
   final PageController controller;
+  final int count;
 
   @override
   Widget build(BuildContext context) {

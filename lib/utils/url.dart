@@ -5,6 +5,7 @@ class Url {
   static const String otpVerify = 'otp_verify';
   static const String login = 'login_user';
   static const String signup = 'user_signup';
+  static const String getAllRooms = 'getRoom';
 
   // global shared_preferences key words
   static const String isLogggedIn = 'isLogggedIn';

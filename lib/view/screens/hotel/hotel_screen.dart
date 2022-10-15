@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:premio_inn/model/home/all_rooms_model/all_rooms.dart';
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/sizes.dart';
-import 'package:premio_inn/view/screens/hotel/widgets/food_title.dart';
+import 'package:premio_inn/view/screens/hotel/widgets/hotel_photos.dart';
 import 'package:premio_inn/view/widgets/button_widget.dart';
-import 'package:premio_inn/view/widgets/main_title.dart';
+import 'package:premio_inn/view/widgets/sub_title.dart';
 import 'package:premio_inn/view_model/hotel_view_model.dart';
 import 'package:provider/provider.dart';
 
 class HotelScreen extends StatelessWidget {
-  const HotelScreen({Key? key}) : super(key: key);
+  const HotelScreen({Key? key, required this.hotel}) : super(key: key);
+  final AllRoomssModel? hotel;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -19,24 +21,25 @@ class HotelScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              HotelTitle(size: size),
+              HotelPhotos(size: size,hotel: hotel),
               Padding(
                 padding: const EdgeInsets.all(18.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const MainTitle(
-                              text: "KFC Restaurant",
+                            TitleWidget(
+                              text: '${hotel?.property?.propertyName}',
                               fontSize: 20,
                             ),
                             KSizedBox.kHeigh_5,
-                            MainTitle(
-                              text: "Ramanattukara, Calicut",
+                            TitleWidget(
+                              text: '${hotel?.property?.landmark}',
                               fontSize: 18,
                               color: Colors.grey.shade700,
                             ),
@@ -54,20 +57,14 @@ class HotelScreen extends StatelessWidget {
                       ],
                     ),
                     KSizedBox.kHeigh_10,
-                    const MainTitle(text: "Description", fontSize: 18),
+                    const TitleWidget(text: "Description", fontSize: 18),
                     KSizedBox.kHeigh_5,
-                    MainTitle(
-                      text:
-                          "KFC, a subsidiary of Yum! Brands, Inc. (NYSE: YUM.), is a global quick service restaurant brand with a rich, decades-long history of success and innovation. It all started with one cook, Colonel Harland Sanders, who created a finger lickin' good recipe more than 75 years ago, a list of secret herbs and spices scratched out on the back of the door to his kitchen. It all started with one cook, Colonel Harland Sanders, who created a finger lickin' good recipe more than 75 years ago, a list of secret herbs.",
-                      fontSize: 17,
-                      textAlign: TextAlign.left,
+                    TitleWidget(
+                      text: '${hotel?.property?.propertyDetails}',
+                      fontSize: 15,
                       color: Colors.grey.shade600,
                     ),
                     KSizedBox.kHeigh_10,
-                    ButtonWidget(
-                        text: 'Add to cart ',
-                        onTap: () {},
-                        color: KColors.kThemeGreen)
                   ],
                 ),
               ),
@@ -75,6 +72,12 @@ class HotelScreen extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        child: ButtonWidget(
+            text: 'Add to cart ', onTap: () {}, color: KColors.kThemeGreen),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

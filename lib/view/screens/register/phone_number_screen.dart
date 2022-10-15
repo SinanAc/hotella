@@ -6,7 +6,7 @@ import 'package:premio_inn/view/screens/register/sign_in_screen.dart';
 import 'package:premio_inn/view/screens/register/widgets/text_button.dart';
 import 'package:premio_inn/view/widgets/button_widget.dart';
 import 'package:premio_inn/view/widgets/loading_indicator.dart';
-import 'package:premio_inn/view/widgets/single_color_title.dart';
+import 'package:premio_inn/view/widgets/sub_title.dart';
 import 'package:premio_inn/view/widgets/text_field_widget.dart';
 import 'package:premio_inn/view_model/register/phone_number.dart';
 import 'package:provider/provider.dart';
@@ -29,12 +29,12 @@ class PhoneNumberScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SingleColorTitle(
+                  const TitleWidget(
                     text: "Let's Register",
                     color: KColors.kWhiteColor,
                   ),
                   KSizedBox.kHeigh_5,
-                  const SingleColorTitle(
+                  const TitleWidget(
                     text: 'Hotella',
                     color: KColors.kThemeYellow,
                   ),
@@ -55,9 +55,9 @@ class PhoneNumberScreen extends StatelessWidget {
                             : ButtonWidget(
                                 text: 'Get OTP',
                                 onTap: () {
-                                  // numberVerifyController
-                                  //     .numVerifyFormKey.currentState!
-                                  //     .validate();
+                                  numberVerifyController
+                                      .numVerifyFormKey.currentState!
+                                      .validate();
                                   numberVerifyController
                                       .onGetOtpButton(context);
                                 },

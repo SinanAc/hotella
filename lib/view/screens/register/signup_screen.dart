@@ -4,7 +4,7 @@ import 'package:premio_inn/utils/sizes.dart';
 import 'package:premio_inn/view/widgets/button_widget.dart';
 import 'package:premio_inn/view/widgets/loading_indicator.dart';
 import 'package:premio_inn/view/widgets/password_textfield_widget.dart';
-import 'package:premio_inn/view/widgets/single_color_title.dart';
+import 'package:premio_inn/view/widgets/sub_title.dart';
 import 'package:premio_inn/view/widgets/text_field_widget.dart';
 import 'package:premio_inn/view_model/register/signup_viewmodel.dart';
 import 'package:provider/provider.dart';
@@ -28,12 +28,12 @@ class SignupScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SingleColorTitle(
+                    const TitleWidget(
                       text: 'Sign up to',
                       color: KColors.kWhiteColor,
                     ),
                     KSizedBox.kHeigh_5,
-                    const SingleColorTitle(
+                    const TitleWidget(
                       text: 'Eat 24',
                       color: KColors.kThemeYellow,
                     ),

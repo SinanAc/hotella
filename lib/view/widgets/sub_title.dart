@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
-class SingleColorTitle extends StatelessWidget {
+class TitleWidget extends StatelessWidget {
   final String text;
   final Color color;
   final double fontSize;
-  const SingleColorTitle({
+  final FontWeight weight;
+  const TitleWidget({
     Key? key,
     required this.text,
     this.color = Colors.black,
     this.fontSize = 20,
+    this.weight = FontWeight.w100,
   }) : super(key: key);
 
   @override

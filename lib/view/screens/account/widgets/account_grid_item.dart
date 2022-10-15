@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:premio_inn/utils/colors.dart';
-import 'package:premio_inn/view/widgets/main_title.dart';
+import 'package:premio_inn/view/widgets/sub_title.dart';
 
 class AccountGridItem extends StatelessWidget {
   const AccountGridItem({
@@ -46,7 +46,7 @@ class AccountGridItem extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(left:8.0),
-              child: MainTitle(text: title, fontSize: 20),
+              child: TitleWidget(text: title, fontSize: 20),
             )
           ],
         ),

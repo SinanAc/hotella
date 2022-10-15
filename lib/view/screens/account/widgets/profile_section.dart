@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/sizes.dart';
-import 'package:premio_inn/view/widgets/main_title.dart';
+import 'package:premio_inn/view/widgets/sub_title.dart';
 
 class ProfileSection extends StatelessWidget {
   const ProfileSection({
@@ -26,12 +26,12 @@ class ProfileSection extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const MainTitle(
+                  const TitleWidget(
                     text: 'Muhammad Sinan',
                     fontSize: 20,
                   ),
                   KSizedBox.kHeigh_5,
-                  MainTitle(
+                  TitleWidget(
                     text: '+91 9744875629',
                     fontSize: 16,
                     color: Colors.grey.shade600,

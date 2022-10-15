@@ -6,7 +6,7 @@ import 'package:premio_inn/utils/push_functions.dart';
 import 'package:premio_inn/utils/sizes.dart';
 import 'package:premio_inn/view/widgets/button_widget.dart';
 import 'package:premio_inn/view/widgets/loading_indicator.dart';
-import 'package:premio_inn/view/widgets/single_color_title.dart';
+import 'package:premio_inn/view/widgets/sub_title.dart';
 import 'package:premio_inn/view_model/register/phone_number.dart';
 import 'package:provider/provider.dart';
 
@@ -69,7 +69,7 @@ class _ShowBottomSheet extends State<ShowBottomSheet> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Column(children: [
-          const SingleColorTitle(
+          const TitleWidget(
             text: 'Verify otp',
             color: KColors.kThemeGreen,
           ),
@@ -97,7 +97,7 @@ class _ShowBottomSheet extends State<ShowBottomSheet> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-               const SingleColorTitle(text: 'Times up !!!', fontSize: 20,color: KColors.kRedColor,),
+               const TitleWidget(text: 'Times up !!!', fontSize: 20,color: KColors.kRedColor,),
                KSizedBox.kWidth_10,
                ButtonWidget(text: 'Go back', onTap: (){
                 PushFunctions.pop(context);
@@ -107,10 +107,10 @@ class _ShowBottomSheet extends State<ShowBottomSheet> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SingleColorTitle(text: 'You have  ', fontSize: 16),
-              SingleColorTitle(
+              const TitleWidget(text: 'You have  ', fontSize: 16),
+              TitleWidget(
                   text: '$_start', fontSize: 20, color: KColors.kLiteGreen),
-              const SingleColorTitle(text: '  Seconds remaining', fontSize: 16),
+              const TitleWidget(text: '  Seconds remaining', fontSize: 16),
             ],
           ),
           const Spacer(),
