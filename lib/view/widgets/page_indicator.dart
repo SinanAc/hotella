@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:premio_inn/utils/colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class PageIndicatorWidget extends StatelessWidget {
@@ -16,10 +15,10 @@ class PageIndicatorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SmoothPageIndicator(
       controller: controller,
-      count: 3,
-      effect: const ExpandingDotsEffect(
-        activeDotColor: KColors.kLiteGreen,
-        dotColor: Color.fromARGB(77, 15, 102, 87),
+      count: count,
+      effect:  const ExpandingDotsEffect(
+        activeDotColor: Colors.white,
+        dotColor: Colors.white70,
         dotHeight: 7,
         dotWidth: 7,
       ),

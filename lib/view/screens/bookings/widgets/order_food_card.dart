@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/sizes.dart';
-import 'package:premio_inn/view/widgets/sub_title.dart';
+import 'package:premio_inn/view/widgets/title_widget.dart';
 
 class OrderFoodCard extends StatelessWidget {
   const OrderFoodCard({

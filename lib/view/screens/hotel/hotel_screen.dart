@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:premio_inn/model/home/all_rooms_model/all_rooms.dart';
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/sizes.dart';
+import 'package:premio_inn/view/screens/hotel/widgets/amenities.dart';
+import 'package:premio_inn/view/screens/hotel/widgets/booking_details.dart';
+import 'package:premio_inn/view/screens/hotel/widgets/bottom_button.dart';
 import 'package:premio_inn/view/screens/hotel/widgets/hotel_photos.dart';
-import 'package:premio_inn/view/widgets/button_widget.dart';
-import 'package:premio_inn/view/widgets/sub_title.dart';
-import 'package:premio_inn/view_model/hotel_view_model.dart';
+import 'package:premio_inn/view/widgets/text_widget.dart';
+import 'package:premio_inn/view/widgets/title_widget.dart';
+import 'package:premio_inn/view_model/hotel/hotel_view_model.dart';
 import 'package:provider/provider.dart';
 
 class HotelScreen extends StatelessWidget {
@@ -15,15 +18,15 @@ class HotelScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: KColors.kThemeBackground,
       appBar: AppBar(toolbarHeight: 0, backgroundColor: KColors.kThemeGreen),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              HotelPhotos(size: size,hotel: hotel),
+              HotelPhotos(size: size, hotel: hotel),
               Padding(
-                padding: const EdgeInsets.all(18.0),
+                padding: const EdgeInsets.only(
+                    left: 18.0, right: 18.0, top: 20.0, bottom: 80),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -34,15 +37,16 @@ class HotelScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             TitleWidget(
-                              text: '${hotel?.property?.propertyName}',
-                              fontSize: 20,
+                              text:
+                                  hotel?.property?.propertyName ?? 'Hotel name',
+                              fontSize: 27,
                             ),
-                            KSizedBox.kHeigh_5,
-                            TitleWidget(
-                              text: '${hotel?.property?.landmark}',
-                              fontSize: 18,
-                              color: Colors.grey.shade700,
-                            ),
+                            KSizedBox.kHeigh_10,
+                            SizedBox(
+                                width: size.width / 1.5,
+                                child: TextWidget(
+                                    text: hotel?.property?.address ??
+                                        'No address provided')),
                           ],
                         ),
                         const Spacer(),
@@ -56,15 +60,94 @@ class HotelScreen extends StatelessWidget {
                         })
                       ],
                     ),
+                    KSizedBox.kHeigh_25,
+                    const TitleWidget(
+                        text: "Your booking details", fontSize: 20),
                     KSizedBox.kHeigh_10,
-                    const TitleWidget(text: "Description", fontSize: 18),
-                    KSizedBox.kHeigh_5,
-                    TitleWidget(
-                      text: '${hotel?.property?.propertyDetails}',
-                      fontSize: 15,
-                      color: Colors.grey.shade600,
+                    Card(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                          side: const BorderSide(
+                            color: Colors.black26,
+                          ),
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 12),
+                        child: Column(children: [
+                          const BookingDetailsWidget(
+                            icon: Icons.calendar_today_outlined,
+                            title: 'Dates',
+                            value: 'Sun, 16 Oct - Mon, 17 Oct',
+                          ),
+                          KSizedBox.kHeigh_5,
+                          SizedBox(
+                            width: size.width / 1.6,
+                            child: const Divider(
+                              thickness: 1.5,
+                            ),
+                          ),
+                          KSizedBox.kHeigh_5,
+                          const BookingDetailsWidget(
+                            icon: Icons.group_add_outlined,
+                            title: 'Guests',
+                            value: '1 Room, 2 Guests',
+                          ),
+                        ]),
+                      ),
                     ),
+                    KSizedBox.kHeigh_30,
+                    const TitleWidget(text: "Amenities", fontSize: 20),
+                    KSizedBox.kHeigh_15,
+                    const AmenitiesWidget(icon: Icons.wifi, title: 'Free Wifi'),
                     KSizedBox.kHeigh_10,
+                    const AmenitiesWidget(icon: Icons.tv, title: 'TV'),
+                    KSizedBox.kHeigh_10,
+                    const AmenitiesWidget(
+                        icon: Icons.power_settings_new, title: 'Power backup'),
+                    KSizedBox.kHeigh_30,
+                    const TitleWidget(text: "House policies", fontSize: 20),
+                    KSizedBox.kHeigh_15,
+                    Row(
+                      children: [
+                        const Icon(Icons.vpn_key_outlined),
+                        KSizedBox.kWidth_20,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const TextWidget(text: 'Check-in', size: 18),
+                            KSizedBox.kHeigh_5,
+                            TextWidget(
+                              text: hotel?.checkinTime ?? '12PM',
+                              size: 19,
+                              color: Colors.grey.shade700,
+                            ),
+                          ],
+                        ),
+                        const Spacer(),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const TextWidget(text: 'Checkout', size: 18),
+                            KSizedBox.kHeigh_5,
+                            TextWidget(
+                              text: hotel?.checkinTime ?? '12PM',
+                              size: 19,
+                              color: Colors.grey.shade700,
+                            ),
+                          ],
+                        ),
+                        KSizedBox.kWidth_30,
+                      ],
+                    ),
+                    KSizedBox.kHeigh_30,
+                    const TitleWidget(text: "About", fontSize: 20),
+                    KSizedBox.kHeigh_10,
+                    TextWidget(
+                        text: hotel?.property?.propertyDetails ??
+                            'No description provided'),
+                    KSizedBox.kHeigh_30,
                   ],
                 ),
               ),
@@ -72,12 +155,9 @@ class HotelScreen extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        child: ButtonWidget(
-            text: 'Add to cart ', onTap: () {}, color: KColors.kThemeGreen),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton:
+          BottomButtonWidget(price: '₹${hotel?.price.toString() ?? ''}'),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

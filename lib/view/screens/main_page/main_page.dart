@@ -12,7 +12,6 @@ class MainPage extends StatelessWidget {
     final mainPageController = Provider.of<MainPageViewModel>(context);
     return Scaffold(
       appBar: AppBar(toolbarHeight: 0, backgroundColor: KColors.kThemeGreen),
-      backgroundColor:  KColors.kThemeBackground,
       body: SafeArea(child: MainPageViewModel.screenList[mainPageController.bottomNavIndex]),
       bottomNavigationBar: BottomNavyBar(
         selectedIndex: mainPageController.bottomNavIndex,

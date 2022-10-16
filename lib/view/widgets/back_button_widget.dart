@@ -5,10 +5,11 @@ import 'package:premio_inn/utils/push_functions.dart';
 class BackButtonWidget extends StatelessWidget {
   const BackButtonWidget({
     Key? key,
-    this.color = KColors.kThemeBackground,
+    this.buttonColor = KColors.kThemeGreen,
+    this.iconColor = KColors.kWhiteColor,
   }) : super(key: key);
-
-  final Color color;
+  final Color buttonColor;
+  final Color iconColor;
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +18,15 @@ class BackButtonWidget extends StatelessWidget {
         PushFunctions.pop(context);
       },
       child: Card(
-        color: color,
+        color: buttonColor,
         margin: const EdgeInsets.only(left: 20, top: 15),
-        child: const Padding(
-          padding: EdgeInsets.only(left: 8, top: 4, bottom: 4),
-          child: Icon(Icons.arrow_back_ios, color: Colors.black54,size: 20),
+        child:  Padding(
+          padding: const EdgeInsets.only(left: 12, top: 6, bottom: 6, right: 2),
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: iconColor,
+            size: 20,
+          ),
         ),
       ),
     );

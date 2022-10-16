@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:premio_inn/view/widgets/sub_title.dart';
+import 'package:premio_inn/view/widgets/title_widget.dart';
 
 class CategoryCard extends StatelessWidget {
   const CategoryCard({

@@ -6,7 +6,7 @@ import 'package:premio_inn/view/screens/register/widgets/text_button.dart';
 import 'package:premio_inn/view/widgets/button_widget.dart';
 import 'package:premio_inn/view/widgets/loading_indicator.dart';
 import 'package:premio_inn/view/widgets/password_textfield_widget.dart';
-import 'package:premio_inn/view/widgets/sub_title.dart';
+import 'package:premio_inn/view/widgets/title_widget.dart';
 import 'package:premio_inn/view/widgets/text_field_widget.dart';
 import 'package:premio_inn/view_model/register/signin_view_model.dart';
 import 'package:provider/provider.dart';

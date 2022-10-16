@@ -4,7 +4,7 @@ import 'package:premio_inn/utils/push_functions.dart';
 import 'package:premio_inn/utils/sizes.dart';
 import 'package:premio_inn/view/screens/register/phone_number_screen.dart';
 import 'package:premio_inn/view/widgets/button_widget.dart';
-import 'package:premio_inn/view/widgets/sub_title.dart';
+import 'package:premio_inn/view/widgets/title_widget.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({Key? key}) : super(key: key);

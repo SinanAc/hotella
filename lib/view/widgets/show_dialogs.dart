@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class ShowDialogs {
   // error popup to display error messages
-  static SnackBar errorPopUp(String messege) {
+  static SnackBar errorPopUp(String messege,{int seconds = 1}) {
     return SnackBar(
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10))),
-        duration: const Duration(seconds: 1),
+        duration:  Duration(seconds: seconds),
         behavior: SnackBarBehavior.floating,
         backgroundColor:  Colors.red,
         margin: const EdgeInsets.all(10),

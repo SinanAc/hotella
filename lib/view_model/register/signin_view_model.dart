@@ -3,7 +3,7 @@ import 'package:premio_inn/model/register/sign_in/sign_in_model.dart';
 import 'package:premio_inn/model/register/sign_in/signin_response_model.dart';
 import 'package:premio_inn/services/register/sign_in_service.dart';
 import 'package:premio_inn/utils/push_functions.dart';
-import 'package:premio_inn/utils/url.dart';
+import 'package:premio_inn/utils/strings.dart';
 import 'package:premio_inn/view/screens/main_page/main_page.dart';
 import 'package:premio_inn/view/widgets/show_dialogs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -48,7 +48,7 @@ class SigninViewModel extends ChangeNotifier {
         return;
       } else if (signInResponse.created == true) {
         final pref = await SharedPreferences.getInstance();
-        await pref.setBool(Url.isLogggedIn, true);
+        await pref.setBool(KStrings.isLogggedIn, true);
         _isLoadingFalse();
         disposes();
         PushFunctions.push(context, const MainPage());

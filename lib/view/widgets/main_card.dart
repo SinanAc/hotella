@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:premio_inn/model/home/all_rooms_model/all_rooms.dart';
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/push_functions.dart';
+import 'package:premio_inn/utils/strings.dart';
 import 'package:premio_inn/view/screens/hotel/hotel_screen.dart';
-import 'package:premio_inn/view/widgets/sub_title.dart';
+import 'package:premio_inn/view/widgets/title_widget.dart';
 
 class MainCard extends StatelessWidget {
   const MainCard({
@@ -16,8 +17,8 @@ class MainCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
-        PushFunctions.push(context,  HotelScreen(hotel: hotel));
+      onTap: () {
+        PushFunctions.push(context, HotelScreen(hotel: hotel));
       },
       child: Container(
         height: size.height / 3.7,
@@ -26,8 +27,8 @@ class MainCard extends StatelessWidget {
           color: Colors.black,
           borderRadius: BorderRadius.circular(10),
           image: DecorationImage(
-            image: NetworkImage('${hotel?.images?.first.first.url}'),
-            fit: BoxFit.fill,
+            image: NetworkImage(hotel?.images?.first.first.url??KStrings.dummyNetImage),
+            fit: BoxFit.cover,
           ),
         ),
         child: Padding(
@@ -36,27 +37,42 @@ class MainCard extends StatelessWidget {
             children: [
               const Spacer(),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Container(
-                    decoration:  BoxDecoration(
-                      color: const Color.fromARGB(123, 0, 0, 0),
-                      borderRadius: BorderRadius.circular(8)
-                    ),
-                    padding: const EdgeInsets.symmetric(horizontal:12,vertical: 8),
+                    decoration: BoxDecoration(
+                        color: const Color.fromARGB(123, 0, 0, 0),
+                        borderRadius: BorderRadius.circular(8)),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TitleWidget(
-                          text: '${hotel?.property?.propertyName}',
+                          text: hotel?.property?.propertyName ??
+                              'Hotel name is not available',
                           fontSize: 18,
                           color: KColors.kWhiteColor,
                         ),
                         TitleWidget(
-                          text: '${hotel?.property?.landmark}',
+                          text: hotel?.property?.landmark ?? '',
                           fontSize: 15,
                           color: KColors.kWhiteColor,
                         ),
                       ],
+                    ),
+                  ),
+                  const Spacer(),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: const Color.fromARGB(123, 0, 0, 0),
+                        borderRadius: BorderRadius.circular(8)),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    child: TitleWidget(
+                      text: '₹ ${hotel?.price.toString()}',
+                      fontSize: 18,
+                      color: KColors.kWhiteColor,
                     ),
                   ),
                 ],

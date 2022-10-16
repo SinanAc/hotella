@@ -15,4 +15,5 @@ class KSizedBox {
   static const kWidth_10 = SizedBox(width: 10);
   static const kWidth_15 = SizedBox(width: 15);
   static const kWidth_20 = SizedBox(width: 20);
+  static const kWidth_30 = SizedBox(width: 30);
 }

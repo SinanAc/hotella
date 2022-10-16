@@ -9,7 +9,7 @@ class ButtonWidget extends StatelessWidget {
   const ButtonWidget({
     Key? key,
     required this.text,
-    this.color=KColors.kThemeYellow,
+    this.color = KColors.kThemeYellow,
     required this.onTap,
     this.width = double.infinity,
   }) : super(key: key);
@@ -32,7 +32,7 @@ class ButtonWidget extends StatelessWidget {
         onPressed: () {
           onTap();
         },
-        child:  Text(
+        child: Text(
           text,
           style: const TextStyle(
             color: KColors.kWhiteColor,
