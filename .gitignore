@@ -33,7 +33,7 @@ migrate_working_dir/
 /build/
 
 # service related
-/lib/services/home
+/lib/services/home/
 
 # Symbolication related
 app.*.symbols
