@@ -30,7 +30,7 @@ class PhoneNumberViewModel extends ChangeNotifier {
             .showSnackBar(ShowDialogs.errorPopUp('Something went wrong !!'));
         _isLoadingFalse();
         return;
-      } else if (phoneResponse.created == true) {
+      } else if (phoneResponse.success == true) {
         hash = phoneResponse.hash ?? '';
         showModalBottomSheet(
             isDismissible: false,

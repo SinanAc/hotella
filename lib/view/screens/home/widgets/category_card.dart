@@ -34,7 +34,7 @@ class CategoryCard extends StatelessWidget {
         const SizedBox(height: 1.5),
         TitleWidget(
           text: title,
-          fontSize: 14,
+          fontSize: 16,
           color: const Color.fromARGB(184, 255, 253, 253),
         ),
       ],

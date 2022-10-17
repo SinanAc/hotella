@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:premio_inn/utils/colors.dart';
+import 'package:premio_inn/view/widgets/text_widget.dart';
 
 class LocationWidget extends StatelessWidget {
   const LocationWidget({
@@ -17,12 +18,11 @@ class LocationWidget extends StatelessWidget {
           size: 22,
         ),
         SizedBox(width: 2),
-        Text(
-          '507, BCK Kinfra, Calicut',
-          style: TextStyle(
-              color: Color.fromARGB(137, 255, 255, 255),
-              fontFamily: 'SubMainFont'),
-        ),
+        TextWidget(
+          text: '507, BCK Kinfra, Calicut',
+          color: Color.fromARGB(137, 255, 255, 255),
+          size: 15,
+          ),
       ],
     );
   }

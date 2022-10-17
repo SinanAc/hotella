@@ -32,9 +32,6 @@ migrate_working_dir/
 .pub/
 /build/
 
-# service related
-/lib/services/home
-
 # Symbolication related
 app.*.symbols
 

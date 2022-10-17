@@ -16,10 +16,14 @@ class PhoneNumberService {
     if (await internetCheck()) {
       try {
         final response =
-            await DioService.postMethod(url: Url.sendOtp, value: data.toJson());
+            await DioService.postMethod(url: Url.sendOtp, value: data.toJson()).timeout(const Duration(seconds: 30),onTimeout: (){
+              return null;});
         if (response.statusCode >= 200 || response.statusCode <= 299) {
           return PhoneNumberResponseModel.fromJson(response.data);
-        } else {
+        }else if(response==null) {
+          return null;
+        } 
+        else  {
           return PhoneNumberResponseModel.fromJson(response.data);
         }
       } on DioError catch (e) {

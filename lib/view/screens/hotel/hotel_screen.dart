@@ -43,10 +43,11 @@ class HotelScreen extends StatelessWidget {
                             ),
                             KSizedBox.kHeigh_10,
                             SizedBox(
-                                width: size.width / 1.5,
-                                child: TextWidget(
-                                    text: hotel?.property?.address ??
-                                        'No address provided')),
+                              width: size.width / 1.5,
+                              child: TextWidget(
+                                  text: hotel?.property?.address ??
+                                      'No address provided'),
+                            ),
                           ],
                         ),
                         const Spacer(),

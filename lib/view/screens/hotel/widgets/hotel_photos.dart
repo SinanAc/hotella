@@ -36,8 +36,11 @@ class HotelPhotos extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Container(
                   decoration: const BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage(KStrings.dummyAssetImage))),
+                    image: DecorationImage(
+                      image: AssetImage(KStrings.dummyAssetImage),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                   child: Image.network(
                     hotel?.images?.first[index].url ?? KStrings.dummyNetImage,
                     height: size.height / 2.7,
@@ -53,14 +56,14 @@ class HotelPhotos extends StatelessWidget {
           iconColor: KColors.kThemeGreen,
         ),
         Positioned(
-            bottom: 10.0,
-            right: 150,
-            left: 150,
+          bottom: 10.0,
+          right: 150,
+          left: 150,
           child: PageIndicatorWidget(
             controller: hotelProvider.pController,
             count: hotel?.images?.first.length ?? 1,
           ),
-        )
+        ),
       ],
     );
   }

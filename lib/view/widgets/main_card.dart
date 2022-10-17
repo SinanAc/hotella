@@ -27,7 +27,7 @@ class MainCard extends StatelessWidget {
           color: Colors.black,
           borderRadius: BorderRadius.circular(10),
           image: DecorationImage(
-            image: NetworkImage(hotel?.images?.first.first.url??KStrings.dummyNetImage),
+            image: NetworkImage(hotel?.images?.first[0].url??KStrings.dummyNetImage),
             fit: BoxFit.cover,
           ),
         ),
@@ -51,13 +51,13 @@ class MainCard extends StatelessWidget {
                         TitleWidget(
                           text: hotel?.property?.propertyName ??
                               'Hotel name is not available',
-                          fontSize: 18,
+                          fontSize: 20,
                           color: KColors.kWhiteColor,
                         ),
                         TitleWidget(
                           text: hotel?.property?.landmark ?? '',
-                          fontSize: 15,
-                          color: KColors.kWhiteColor,
+                          fontSize: 16,
+                          color: Colors.white70,
                         ),
                       ],
                     ),

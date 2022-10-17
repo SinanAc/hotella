@@ -8,7 +8,7 @@ class KColors {
   static const Color kThemeBackground = Color(0xffE8E8E8);
   static const Color kTabBarColor = Color(0xffD9D9D9);
   static const Color kIconColor = Color(0xff333333);
-  static const kGreyColor = Color(0xFFBDBDBD);
+  static const kGreyColor = Colors.grey;
   static const kLightGreyColor = Color(0xFFE0E0E0);
   static const kRedColor = Color(0xFFD32F2F);
   static const Color kWhiteColor = Colors.white;

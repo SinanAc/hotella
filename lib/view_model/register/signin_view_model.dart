@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:premio_inn/model/register/sign_in/sign_in_model.dart';
 import 'package:premio_inn/model/register/sign_in/signin_response_model.dart';
 import 'package:premio_inn/services/register/sign_in_service.dart';
@@ -13,6 +14,7 @@ class SigninViewModel extends ChangeNotifier {
   final phoneOrEmailController = TextEditingController();
   final passwordController = TextEditingController();
   bool isLoading = false;
+  final storage = const FlutterSecureStorage();
 
   // make text obscure for passwords
   bool _isObscure = true;
@@ -49,6 +51,7 @@ class SigninViewModel extends ChangeNotifier {
       } else if (signInResponse.created == true) {
         final pref = await SharedPreferences.getInstance();
         await pref.setBool(KStrings.isLogggedIn, true);
+        storage.write(key: "token", value: signInResponse.jwtKey);
         _isLoadingFalse();
         disposes();
         PushFunctions.push(context, const MainPage());

@@ -43,7 +43,7 @@ class HomeScreen extends StatelessWidget {
                     text2: 'ella',
                     firstColor: KColors.kWhiteColor,
                     gap: 2,
-                    textSize: 25,
+                    textSize: 27,
                   ),
                 ),
                 KSizedBox.kHeigh_5,
