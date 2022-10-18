@@ -3,13 +3,14 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:premio_inn/model/register/sign_up/signup_model.dart';
 import 'package:premio_inn/model/register/sign_up/signup_response_model.dart';
 import 'package:premio_inn/services/register/signup_service.dart';
-import 'package:premio_inn/utils/push_functions.dart';
+import 'package:premio_inn/utils/navigations.dart';
 import 'package:premio_inn/utils/strings.dart';
 import 'package:premio_inn/view/screens/main_page/main_page.dart';
 import 'package:premio_inn/view/widgets/show_dialogs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpViewModel extends ChangeNotifier {
+  // variables
   final signUpKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final emailController = TextEditingController();
@@ -27,7 +28,7 @@ class SignUpViewModel extends ChangeNotifier {
   }
 
   // signup method
-  void onSignupButton(context, String phoneNum) async {
+  Future<void> onSignupButton(String phoneNum) async {
     if (signUpKey.currentState!.validate()) {
       isLoading = true;
       notifyListeners();
@@ -40,19 +41,17 @@ class SignUpViewModel extends ChangeNotifier {
       SignUpResponseModel? signUpResponse =
           await SignUpService().signUpRepo(obj);
       if (signUpResponse == null) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(ShowDialogs.errorPopUp('No Response'));
+       ShowDialogs.popUp('No Response');
         _isLoadingFalse();
         return;
       } else if (signUpResponse.created == true) {
         final pref = await SharedPreferences.getInstance();
         await pref.setBool(KStrings.isLogggedIn, true);
         storage.write(key: "token", value: signUpResponse.jwtKey);
-        PushFunctions.push(context, const MainPage());
+        Navigations.push(const MainPage());
         _isLoadingFalse();
       } else {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(ShowDialogs.errorPopUp("${signUpResponse.message}"));
+        ShowDialogs.popUp("${signUpResponse.message}");
         _isLoadingFalse();
         return;
       }
@@ -100,6 +99,7 @@ class SignUpViewModel extends ChangeNotifier {
     return null;
   }
 
+  // to make isLoading false
   void _isLoadingFalse() {
     isLoading = false;
     notifyListeners();

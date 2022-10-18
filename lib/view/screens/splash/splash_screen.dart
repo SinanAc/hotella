@@ -12,7 +12,7 @@ class SplashScreen extends StatelessWidget {
     final splashController = Provider.of<SplashViewModel>(context,listen: false);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Timer(const Duration(seconds: 2), () {
-         splashController.checkLogin(context);
+         splashController.checkLogin();
       });
     });
     return Scaffold(

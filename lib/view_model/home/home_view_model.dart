@@ -9,26 +9,35 @@ class HomeViewModel extends ChangeNotifier {
   List<AllRoomssModel> allRooms = [];
   bool isLoading = false;
 
+  // constructor to fetch hotel details in the initial stage
+  HomeViewModel() {
+    getAllRoom();
+  }
+
   // function to fetch all rooms
-  Future<List<AllRoomssModel>> getAllRooms(context) async {
+  Future<void> getAllRoom() async {
     isLoading = true;
     notifyListeners();
     AllRoomsResponse? roomResponse = await GetAllRoomsService().getAllRooms();
-    if (roomResponse == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          ShowDialogs.errorPopUp('Please check your internet connection !',seconds: 2));
+     if (roomResponse == null) {
+      ShowDialogs.popUp(
+          'Please check your internet connection !',
+          milliSec: 2000);
       _isLoadingFalse();
-      return [];
+      return;
     } else if (roomResponse.isFailed == true) {
-      ScaffoldMessenger.of(context).showSnackBar(ShowDialogs.errorPopUp(
-          roomResponse.errormessage ?? 'Something went wrong !!',seconds: 2));
+     ShowDialogs.popUp(
+          roomResponse.errormessage ?? 'Something went wrong !!',
+          milliSec: 2000);
       _isLoadingFalse();
-      return [];
-    } else {
+      return;
+    } else if(roomResponse.dataList != null){
       allRooms.clear();
       allRooms.addAll(roomResponse.dataList ?? []);
       _isLoadingFalse();
-      return allRooms;
+      return;
+    }else{
+      return;
     }
   }
 

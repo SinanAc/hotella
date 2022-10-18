@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:premio_inn/utils/colors.dart';
-import 'package:premio_inn/utils/push_functions.dart';
+import 'package:premio_inn/utils/navigations.dart';
 import 'package:premio_inn/utils/sizes.dart';
+import 'package:premio_inn/view/screens/register/phone_number_screen.dart';
 import 'package:premio_inn/view/screens/register/widgets/text_button.dart';
 import 'package:premio_inn/view/widgets/button_widget.dart';
 import 'package:premio_inn/view/widgets/loading_indicator.dart';
@@ -72,10 +73,9 @@ class SignInScreen extends StatelessWidget {
                                       text: 'Sign in',
                                       onTap: () {
                                         signinController
-                                            .signInFormKey.currentState!
-                                            .validate();
-                                        signinController
-                                            .onSigninButton(context);
+                                            .signInFormKey.currentState
+                                            ?.validate();
+                                        signinController.onSigninButton();
                                       },
                                     ),
                             ],
@@ -95,8 +95,8 @@ class SignInScreen extends StatelessWidget {
         text: "Don't have an account?",
         buttonText: 'Register',
         onTap: () {
-          PushFunctions.pop(context);
           signinController.disposes();
+          Navigations.pushReplace(const PhoneNumberScreen());
         },
       ),
       resizeToAvoidBottomInset: false,

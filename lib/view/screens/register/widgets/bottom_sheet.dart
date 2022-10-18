@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:premio_inn/utils/colors.dart';
-import 'package:premio_inn/utils/push_functions.dart';
+import 'package:premio_inn/utils/navigations.dart';
 import 'package:premio_inn/utils/sizes.dart';
 import 'package:premio_inn/view/widgets/button_widget.dart';
 import 'package:premio_inn/view/widgets/loading_indicator.dart';
@@ -10,27 +10,27 @@ import 'package:premio_inn/view/widgets/title_widget.dart';
 import 'package:premio_inn/view_model/register/phone_number.dart';
 import 'package:provider/provider.dart';
 
-class ShowBottomSheet extends StatefulWidget {
-  const ShowBottomSheet({Key? key, required this.size}) : super(key: key);
+class OtpBottomSheet extends StatefulWidget {
+  const OtpBottomSheet({Key? key, required this.size}) : super(key: key);
   final Size size;
 
   @override
-  State<ShowBottomSheet> createState() => _ShowBottomSheet();
+  State<OtpBottomSheet> createState() => _OtpBottomSheet();
 }
 
-class _ShowBottomSheet extends State<ShowBottomSheet> {
-  bool isTimesUp = false;
+class _OtpBottomSheet extends State<OtpBottomSheet> {
+  bool _isTimesUp = false;
   Timer? _timer;
   int _start = 40;
 
   void startTimer() {
-    const oneSec = Duration(seconds: 1);
+    const oneSecond = Duration(seconds: 1);
     _timer = Timer.periodic(
-      oneSec,
+      oneSecond,
       (Timer timer) {
         if (_start == 0) {
           setState(() {
-            isTimesUp = true;
+            _isTimesUp = true;
             timer.cancel();
           });
         } else {
@@ -51,7 +51,6 @@ class _ShowBottomSheet extends State<ShowBottomSheet> {
   @override
   void dispose() {
     _timer?.cancel();
-    Provider.of<PhoneNumberViewModel>(context, listen: false).mobileNumberController.clear();
     super.dispose();
   }
 
@@ -59,75 +58,77 @@ class _ShowBottomSheet extends State<ShowBottomSheet> {
   Widget build(BuildContext context) {
     final numberVerifyController =
         Provider.of<PhoneNumberViewModel>(context, listen: false);
-    return Container(
-      padding: const EdgeInsets.all(30),
-      height: widget.size.height / 1.45,
-      decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30), topRight: Radius.circular(30))),
+    return SizedBox(
+      height: widget.size.height / 1.5,
       child: Scaffold(
+        extendBody: true,
         backgroundColor: Colors.transparent,
-        body: Column(children: [
-          const TitleWidget(
-            text: 'Verify otp',
-            color: KColors.kThemeGreen,
-          ),
-          KSizedBox.kHeigh_20,
-          PinCodeTextField(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            autoDisposeControllers: false,
-            length: 6,
-            obscureText: false,
-            animationType: AnimationType.fade,
-            pinTheme: PinTheme(
-              shape: PinCodeFieldShape.box,
-              borderRadius: BorderRadius.circular(5),
-              fieldHeight: 50,
-              fieldWidth: 40,
-              activeFillColor: Colors.white,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal:16.0,vertical: 10.0),
+          child: Column(
+            children: [
+              KSizedBox.kHeigh_10,
+            const TitleWidget(
+              text: 'Verify otp',
+              color: KColors.kThemeGreen,
             ),
-            animationDuration: const Duration(milliseconds: 300),
-            controller: numberVerifyController.otpController,
-            onChanged: (value) {},
-            appContext: context,
-            readOnly: isTimesUp?true:false,
-          ),
-          isTimesUp?
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-               const TitleWidget(text: 'Times up !!!', fontSize: 20,color: KColors.kRedColor,),
-               KSizedBox.kWidth_10,
-               ButtonWidget(text: 'Go back', onTap: (){
-                PushFunctions.pop(context);
-               },width: 150,color: KColors.kThemeGreen,)
-            ],
-          ):
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const TitleWidget(text: 'You have  ', fontSize: 16),
-              TitleWidget(
-                  text: '$_start', fontSize: 20, color: KColors.kLiteGreen),
-              const TitleWidget(text: '  Seconds remaining', fontSize: 16),
-            ],
-          ),
-          const Spacer(),
-          Consumer<PhoneNumberViewModel>(
-            builder: (context, value, _) => value.isLoading
-                ? const LoadingIndicator(
-                    color: KColors.kThemeGreen,
-                  )
-                : ButtonWidget(
-                    text: 'Verify',
-                    onTap: () {
-                      value.onOtpVerifyButton(context);
-                    },
-                    color: KColors.kThemeGreen,
-                  ),
-          )
-        ]),
+            KSizedBox.kHeigh_20,
+            PinCodeTextField(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              autoDisposeControllers: false,
+              length: 6,
+              obscureText: false,
+              animationType: AnimationType.fade,
+              pinTheme: PinTheme(
+                shape: PinCodeFieldShape.box,
+                borderRadius: BorderRadius.circular(5),
+                fieldHeight: 50,
+                fieldWidth: 40,
+                activeFillColor: Colors.white,
+              ),
+              animationDuration: const Duration(milliseconds: 300),
+              controller: numberVerifyController.otpController,
+              onChanged: (value) {},
+              appContext: context,
+              readOnly: _isTimesUp?true:false,
+            ),
+            _isTimesUp?
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                 const TitleWidget(text: 'Times up !!!', fontSize: 20,color: KColors.kRedColor,),
+                 KSizedBox.kWidth_10,
+                 ButtonWidget(text: 'Go back', onTap: (){
+                  Navigations.pop();
+                 },width: 150,color: KColors.kThemeGreen,)
+              ],
+            ):
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const TitleWidget(text: 'You have  ', fontSize: 16),
+                TitleWidget(
+                    text: '$_start', fontSize: 20, color: KColors.kLiteGreen),
+                const TitleWidget(text: '  Seconds remaining', fontSize: 16),
+              ],
+            ),
+            const Spacer(),
+            Selector<PhoneNumberViewModel,bool>(
+              selector: (context, obj) => obj.isLoading,
+              builder: (context, isLoading, _) => isLoading
+                  ? const LoadingIndicator(
+                      color: KColors.kThemeGreen,
+                    )
+                  : ButtonWidget(
+                      text: 'Verify',
+                      onTap: () {
+                        numberVerifyController.onOtpVerifyButton();
+                      },
+                      color: KColors.kThemeGreen,
+                    ),
+            )
+          ]),
+        ),
       ),
     );
   }

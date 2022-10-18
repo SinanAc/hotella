@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:premio_inn/utils/colors.dart';
-import 'package:premio_inn/utils/push_functions.dart';
+import 'package:premio_inn/utils/navigations.dart';
 import 'package:premio_inn/utils/sizes.dart';
 import 'package:premio_inn/view/screens/register/sign_in_screen.dart';
 import 'package:premio_inn/view/screens/register/widgets/text_button.dart';
@@ -16,8 +16,9 @@ class PhoneNumberScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final numberVerifyController =
-        Provider.of<PhoneNumberViewModel>(context, listen: false);
+        Provider.of<PhoneNumberViewModel>(context);
     return Scaffold(
+      key: numberVerifyController.scaffoldKey,
       backgroundColor: KColors.kThemeGreen,
       body: SafeArea(
         child: Center(
@@ -56,10 +57,10 @@ class PhoneNumberScreen extends StatelessWidget {
                                 text: 'Get OTP',
                                 onTap: () {
                                   numberVerifyController
-                                      .numVerifyFormKey.currentState!
-                                      .validate();
+                                      .numVerifyFormKey.currentState
+                                      ?.validate();
                                   numberVerifyController
-                                      .onGetOtpButton(context);
+                                      .onGetOtpButton();
                                 },
                               ),
                       ),
@@ -76,7 +77,7 @@ class PhoneNumberScreen extends StatelessWidget {
         buttonText: 'Sign in',
         onTap: () {
           numberVerifyController.disposes();
-          PushFunctions.push(context, const SignInScreen());
+          Navigations.pushReplace(const SignInScreen());
         },
       ),
       resizeToAvoidBottomInset: false,

@@ -24,6 +24,7 @@ class GetAllRoomsService {
         return AllRoomsResponse(isFailed: true, errormessage: ApiExceptions.handleError(e));
       }
     } else {
+      await Future.delayed(const Duration(seconds: 1));
       return null;
     }
   }

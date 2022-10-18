@@ -1,22 +1,40 @@
 import 'package:flutter/material.dart';
 
 class ShowDialogs {
-  // error popup to display error messages
-  static SnackBar errorPopUp(String messege,{int seconds = 1}) {
-    return SnackBar(
+
+    static final GlobalKey<ScaffoldMessengerState>  rootScaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+
+  static popUp( 
+    String messege, 
+    {
+      Color color = Colors.red,
+      int milliSec = 1500
+    }) {
+    // Size size =
+    //     MediaQuery.of(rootScaffoldMessengerKey.currentState!.context).size;
+    rootScaffoldMessengerKey.currentState?.showSnackBar(
+      SnackBar(
         shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10))),
-        duration:  Duration(seconds: seconds),
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
+          ),
+        ),
+        duration:  Duration(milliseconds: milliSec),
         behavior: SnackBarBehavior.floating,
-        backgroundColor:  Colors.red,
-        margin: const EdgeInsets.all(10),
+        backgroundColor: color,
         content: Padding(
           padding: const EdgeInsets.symmetric(vertical: 6),
           child: Text(
             messege,
             style: const TextStyle(
-                letterSpacing: 2, fontWeight: FontWeight.w500, fontSize: 16),
+              letterSpacing: 1,
+              fontWeight: FontWeight.w500,
+              fontSize: 16,
+            ),
           ),
-        ));
+        ),
+      ),
+    );
   }
+
 }

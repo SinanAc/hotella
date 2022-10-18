@@ -14,4 +14,19 @@ class KColors {
   static const Color kWhiteColor = Colors.white;
   static const Color kBlackColor = Colors.black;
   static const Color kTextFieldColor = Color.fromARGB(255, 229, 229, 229);
+
+// primary swatch color
+  static MaterialColor primarySwatchColor = 
+  const MaterialColor(0xff0F6657, {
+    50: kThemeGreen,
+    100: kThemeGreen,
+    200: kThemeGreen,
+    300: kThemeGreen,
+    400: kThemeGreen,
+    500: kThemeGreen,
+    600: kThemeGreen,
+    700: kThemeGreen,
+    800: kThemeGreen,
+    900: kThemeGreen,
+  });
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:premio_inn/utils/colors.dart';
-import 'package:premio_inn/utils/push_functions.dart';
+import 'package:premio_inn/utils/navigations.dart';
 
 class BackButtonWidget extends StatelessWidget {
   const BackButtonWidget({
@@ -15,7 +15,7 @@ class BackButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        PushFunctions.pop(context);
+        Navigations.pop();
       },
       child: Card(
         color: buttonColor,

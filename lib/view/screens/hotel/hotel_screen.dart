@@ -80,7 +80,7 @@ class HotelScreen extends StatelessWidget {
                           const BookingDetailsWidget(
                             icon: Icons.calendar_today_outlined,
                             title: 'Dates',
-                            value: 'Sun, 16 Oct - Mon, 17 Oct',
+                            value: 'Tue, 18 Oct - Wed, 19 Oct',
                           ),
                           KSizedBox.kHeigh_5,
                           SizedBox(

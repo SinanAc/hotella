@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:premio_inn/model/home/all_rooms_model/all_rooms.dart';
 import 'package:premio_inn/utils/colors.dart';
-import 'package:premio_inn/utils/push_functions.dart';
+import 'package:premio_inn/utils/navigations.dart';
 import 'package:premio_inn/utils/strings.dart';
 import 'package:premio_inn/view/screens/hotel/hotel_screen.dart';
 import 'package:premio_inn/view/widgets/title_widget.dart';
@@ -18,7 +18,7 @@ class MainCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        PushFunctions.push(context, HotelScreen(hotel: hotel));
+        Navigations.push(HotelScreen(hotel: hotel));
       },
       child: Container(
         height: size.height / 3.7,
