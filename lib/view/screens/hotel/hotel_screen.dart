@@ -69,10 +69,11 @@ class HotelScreen extends StatelessWidget {
                       color: Theme.of(context).scaffoldBackgroundColor,
                       elevation: 0,
                       shape: RoundedRectangleBorder(
-                          side: const BorderSide(
-                            color: Colors.black26,
-                          ),
-                          borderRadius: BorderRadius.circular(10)),
+                        side: const BorderSide(
+                          color: Colors.black26,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16.0, vertical: 12),
