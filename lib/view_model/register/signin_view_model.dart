@@ -45,7 +45,7 @@ class SigninViewModel extends ChangeNotifier {
         storage.write(key: "token", value: signInResponse.jwtKey);
         _isLoadingFalse();
         disposes();
-        Navigations.push(const MainPage());
+        Navigations.pushRemoveUntil(const MainPage());
       } else {
         ShowDialogs.popUp(
             signInResponse.message ?? 'Something went wrong !!');

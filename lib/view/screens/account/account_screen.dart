@@ -79,7 +79,7 @@ class AccountScreen extends StatelessWidget {
                       icon: Icons.logout,
                       title: 'Logout',
                       onTap: (){
-                        accountContoller.onLogoutButton();
+                        accountContoller.onLogoutButton(context);
                       },
                     ),
                   ],

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -5,7 +6,8 @@ import 'package:premio_inn/model/register/otp/otp_model.dart';
 import 'package:premio_inn/model/register/otp/otp_response_model.dart';
 import 'package:premio_inn/model/register/phone_number/phone_number_model.dart';
 import 'package:premio_inn/model/register/phone_number/phone_number_response_model.dart';
-import 'package:premio_inn/services/dio_service.dart';
+import 'package:premio_inn/services/dio/api_exceptions.dart';
+import 'package:premio_inn/services/dio/dio_service.dart';
 import 'package:premio_inn/services/internet_checker.dart';
 import 'package:premio_inn/utils/url.dart';
 
@@ -16,22 +18,17 @@ class PhoneNumberService {
     if (await internetCheck()) {
       try {
         final response =
-            await DioService.postMethod(url: Url.sendOtp, value: data.toJson()).timeout(const Duration(seconds: 30),onTimeout: (){
-              return null;});
+            await DioService.postMethod(url: Url.sendOtp, value: data.toJson())
+                .timeout(const Duration(seconds: 30), onTimeout: () {
+          return null;
+        });
         if (response.statusCode >= 200 || response.statusCode <= 299) {
           return PhoneNumberResponseModel.fromJson(response.data);
-        }else if(response==null) {
+        } else {
           return null;
-        } 
-        else  {
-          return PhoneNumberResponseModel.fromJson(response.data);
         }
-      } on DioError catch (e) {
-        return PhoneNumberResponseModel.fromJson(e.response!.data);
-      } on SocketException catch (e) {
-        return PhoneNumberResponseModel(message: e.message);
       } catch (e) {
-        return PhoneNumberResponseModel(message: e.toString());
+        return PhoneNumberResponseModel(message: ApiExceptions.handleError(e));
       }
     } else {
       return PhoneNumberResponseModel(message: "No Internet !!");
@@ -49,12 +46,18 @@ class PhoneNumberService {
         } else {
           return OtpResponseModel.fromJson(response.data);
         }
+      } on TimeoutException catch (_) {
+        return OtpResponseModel(message: 'Connection timed out !!');
       } on DioError catch (e) {
+        if (e.type == DioErrorType.connectTimeout ||
+            e.type == DioErrorType.receiveTimeout ||
+            e.type == DioErrorType.sendTimeout) {
+          return OtpResponseModel(message: 'Connection timed out !!');
+        }
         return OtpResponseModel.fromJson(e.response!.data);
-      }on SocketException catch (e) {
+      } on SocketException catch (e) {
         return OtpResponseModel(message: e.message);
-      }  
-      catch (e) {
+      } catch (e) {
         return OtpResponseModel(message: e.toString());
       }
     } else {
