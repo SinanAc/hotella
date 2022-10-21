@@ -1,6 +1,6 @@
 
-class AllRoomssModel {
-    AllRoomssModel({
+class AllRoomsModel {
+    AllRoomsModel({
         this.id,
         this.property,
         this.category,
@@ -46,7 +46,7 @@ class AllRoomssModel {
     int? v;
     String? message;
 
-    factory AllRoomssModel.fromJson(Map<String, dynamic> json) => AllRoomssModel(
+    factory AllRoomsModel.fromJson(Map<String, dynamic> json) => AllRoomsModel(
         id: json["_id"],
         property: Property.fromJson(json["property"]),
         category: Category.fromJson(json["category"]),

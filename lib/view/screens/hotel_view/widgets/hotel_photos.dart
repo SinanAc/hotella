@@ -14,7 +14,7 @@ class HotelPhotos extends StatelessWidget {
     required this.hotel,
   }) : super(key: key);
   final Size size;
-  final AllRoomssModel? hotel;
+  final AllRoomsModel? hotel;
 
   @override
   Widget build(BuildContext context) {

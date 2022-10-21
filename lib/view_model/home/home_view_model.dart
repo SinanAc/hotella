@@ -8,7 +8,7 @@ import 'package:premio_inn/view/widgets/show_dialogs.dart';
 
 class HomeViewModel extends ChangeNotifier {
   // -->> variables
-  List<AllRoomssModel> allRooms = [];
+  List<AllRoomsModel> allRooms = [];
   bool isLoading = false;
   List<String> allCities = [];
 
@@ -46,7 +46,7 @@ class HomeViewModel extends ChangeNotifier {
       ShowDialogs.popUp('Properties are not availabe at this moment !!');
       return;
     } else {
-      List<AllRoomssModel> hotelList = [];
+      List<AllRoomsModel> hotelList = [];
       for (int i = 0; i < allRooms.length; i++) {
         if (allRooms[i].category?.category?.toLowerCase().trim() == 'hotels') {
           hotelList.add(allRooms[i]);
@@ -66,7 +66,7 @@ class HomeViewModel extends ChangeNotifier {
       ShowDialogs.popUp('Properties are not availabe at this moment !!');
       return;
     } else {
-      List<AllRoomssModel> homeStayList = [];
+      List<AllRoomsModel> homeStayList = [];
       for (int i = 0; i < allRooms.length; i++) {
         if (allRooms[i].category?.category?.toLowerCase().trim() ==
             'homestay') {
@@ -88,7 +88,7 @@ class HomeViewModel extends ChangeNotifier {
       ShowDialogs.popUp('Properties are not availabe at this moment !!');
       return;
     } else {
-      List<AllRoomssModel> resortList = [];
+      List<AllRoomsModel> resortList = [];
       for (int i = 0; i < allRooms.length; i++) {
         if (allRooms[i].category?.category?.toLowerCase().trim() == 'resort') {
           resortList.add(allRooms[i]);

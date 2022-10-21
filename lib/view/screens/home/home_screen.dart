@@ -47,7 +47,7 @@ class HomeScreen extends StatelessWidget {
                 KSizedBox.kHeigh_5,
                 const LocationWidget(),
                 KSizedBox.kHeigh_15,
-                const SearchField(isHome: true),
+                const SearchField(),
                 KSizedBox.kHeigh_15,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -77,52 +77,53 @@ class HomeScreen extends StatelessWidget {
                 ),
                 KSizedBox.kHeigh_15,
                 Selector<HomeViewModel, bool>(
-                    selector: (context, obj) => obj.isLoading,
-                    builder: ((context, isLoading, _) {
-                      return homeProvider.isLoading
-                          ? Column(
-                              children: [
-                                ShimmerSkelton(
-                                  height: size.height / 3.7,
-                                  width: double.infinity,
-                                ),
-                                KSizedBox.kHeigh_20,
-                                const LoadingIndicator(
-                                  color: KColors.kThemeGreen,
-                                )
-                              ],
-                            )
-                          : homeProvider.allRooms.isEmpty
-                              ? Column(
-                                  children: [
-                                    ShimmerSkelton(
-                                      height: size.height / 3.7,
-                                      width: double.infinity,
-                                    ),
-                                    KSizedBox.kHeigh_20,
-                                    ElevatedButton.icon(
-                                      label: const Text('Tap to refresh'),
-                                      icon: const Icon(Icons.refresh),
-                                      onPressed: () {
-                                        homeProvider.getAllRoom();
-                                      },
-                                    ),
-                                  ],
-                                )
-                              : ListView.separated(
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemCount: homeProvider.allRooms.length,
-                                  itemBuilder: ((context, index) {
-                                    return MainCard(
-                                      hotel: homeProvider.allRooms[index],
-                                    );
-                                  }),
-                                  separatorBuilder: ((context, index) {
-                                    return KSizedBox.kHeigh_10;
-                                  }),
-                                );
-                    }))
+                  selector: (context, obj) => obj.isLoading,
+                  builder: ((context, isLoading, _) {
+                    return homeProvider.isLoading
+                        ? Column(
+                            children: [
+                              ShimmerSkelton(
+                                height: size.height / 3.7,
+                                width: double.infinity,
+                              ),
+                              KSizedBox.kHeigh_20,
+                              const LoadingIndicator(
+                                color: KColors.kThemeGreen,
+                              )
+                            ],
+                          )
+                        : homeProvider.allRooms.isEmpty
+                            ? Column(
+                                children: [
+                                  ShimmerSkelton(
+                                    height: size.height / 3.7,
+                                    width: double.infinity,
+                                  ),
+                                  KSizedBox.kHeigh_20,
+                                  ElevatedButton.icon(
+                                    label: const Text('Tap to refresh'),
+                                    icon: const Icon(Icons.refresh),
+                                    onPressed: () {
+                                      homeProvider.getAllRoom();
+                                    },
+                                  ),
+                                ],
+                              )
+                            : ListView.separated(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: homeProvider.allRooms.length,
+                                itemBuilder: ((context, index) {
+                                  return MainCard(
+                                    hotel: homeProvider.allRooms[index],
+                                  );
+                                }),
+                                separatorBuilder: ((context, index) {
+                                  return KSizedBox.kHeigh_10;
+                                }),
+                              );
+                  }),
+                )
               ],
             ),
           ),

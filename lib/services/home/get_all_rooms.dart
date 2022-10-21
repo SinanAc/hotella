@@ -14,7 +14,7 @@ class GetAllRoomsService {
         final Response response = await DioService.getMethod(url: Url.getAllRooms);
         if (response.statusCode! >= 200 || response.statusCode! <= 299) {
            final dataList = (response.data as List).map((e) {
-          return AllRoomssModel.fromJson(e);
+          return AllRoomsModel.fromJson(e);
         }).toList();
         return AllRoomsResponse(dataList: dataList);
         } else {

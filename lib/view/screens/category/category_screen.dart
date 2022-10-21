@@ -13,7 +13,7 @@ class CategoryScreen extends StatelessWidget {
     required this.roomsList,
     });
   final String categoryName;
-  final List<AllRoomssModel> roomsList;
+  final List<AllRoomsModel> roomsList;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;

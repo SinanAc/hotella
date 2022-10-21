@@ -13,7 +13,7 @@ import 'package:provider/provider.dart';
 
 class HotelScreen extends StatelessWidget {
   const HotelScreen({Key? key, required this.hotel}) : super(key: key);
-  final AllRoomssModel? hotel;
+  final AllRoomsModel? hotel;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;

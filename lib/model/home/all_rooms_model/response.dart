@@ -7,14 +7,14 @@ class AllRoomsResponse {
     this.isFailed,
   });
 
-  List<AllRoomssModel>? dataList;
+  List<AllRoomsModel>? dataList;
   String? errormessage;
   bool? isFailed;
 
   factory AllRoomsResponse.fromJson(Map<String, dynamic> json){
     return AllRoomsResponse(
         dataList:  (json as List).map((e) {
-          return AllRoomssModel.fromJson(e);
+          return AllRoomsModel.fromJson(e);
         }).toList(),
         isFailed: false,
       );
