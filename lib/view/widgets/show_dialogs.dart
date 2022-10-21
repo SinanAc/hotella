@@ -8,7 +8,7 @@ class ShowDialogs {
     String messege, 
     {
       Color color = Colors.red,
-      int milliSec = 1500
+      int milliSec = 2000
     }) {
     // Size size =
     //     MediaQuery.of(rootScaffoldMessengerKey.currentState!.context).size;

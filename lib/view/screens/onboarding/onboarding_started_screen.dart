@@ -40,7 +40,6 @@ class OnboardingScreen extends StatelessWidget {
                       'Get in to the largest collection of hotels, resorts, and home stays all over the world with all your favorite destinations',
                   fontSize: 20,
                   color: Colors.white70,
-                  weight: FontWeight.normal,
                 ),
               ),
               KSizedBox.kHeigh_5,

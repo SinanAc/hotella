@@ -3,19 +3,18 @@ import 'package:premio_inn/model/home/all_rooms_model/all_rooms.dart';
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/navigations.dart';
 import 'package:premio_inn/utils/strings.dart';
-import 'package:premio_inn/view/screens/hotel/hotel_screen.dart';
+import 'package:premio_inn/view/screens/hotel_view/hotel_screen.dart';
 import 'package:premio_inn/view/widgets/title_widget.dart';
 
 class MainCard extends StatelessWidget {
   const MainCard({
     Key? key,
     required this.hotel,
-    required this.size,
   }) : super(key: key);
   final AllRoomssModel? hotel;
-  final Size size;
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return InkWell(
       onTap: () {
         Navigations.push(HotelScreen(hotel: hotel));
@@ -48,14 +47,17 @@ class MainCard extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TitleWidget(
-                          text: hotel?.property?.propertyName ??
-                              'Hotel name is not available',
-                          fontSize: 20,
-                          color: KColors.kWhiteColor,
+                        SizedBox(
+                          width: size.width/1.8,
+                          child: TitleWidget(
+                            text: hotel?.property?.propertyName ??
+                                'Hotel name is not available',
+                            fontSize: 18,
+                            color: KColors.kWhiteColor,
+                          ),
                         ),
                         TitleWidget(
-                          text: hotel?.property?.landmark ?? '',
+                          text: hotel?.property?.city ?? '',
                           fontSize: 16,
                           color: Colors.white70,
                         ),

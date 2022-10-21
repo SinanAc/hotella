@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:premio_inn/model/home/all_rooms_model/all_rooms.dart';
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/sizes.dart';
-import 'package:premio_inn/view/screens/hotel/widgets/amenities.dart';
-import 'package:premio_inn/view/screens/hotel/widgets/booking_details.dart';
-import 'package:premio_inn/view/screens/hotel/widgets/bottom_button.dart';
-import 'package:premio_inn/view/screens/hotel/widgets/hotel_photos.dart';
+import 'package:premio_inn/view/screens/hotel_view/widgets/amenities.dart';
+import 'package:premio_inn/view/screens/hotel_view/widgets/booking_details.dart';
+import 'package:premio_inn/view/screens/hotel_view/widgets/bottom_button.dart';
+import 'package:premio_inn/view/screens/hotel_view/widgets/hotel_photos.dart';
 import 'package:premio_inn/view/widgets/text_widget.dart';
 import 'package:premio_inn/view/widgets/title_widget.dart';
 import 'package:premio_inn/view_model/hotel/hotel_view_model.dart';
@@ -36,14 +36,17 @@ class HotelScreen extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            TitleWidget(
-                              text:
-                                  hotel?.property?.propertyName ?? 'Hotel name',
-                              fontSize: 27,
+                            SizedBox(
+                              width: size.width/1.6,
+                              child: TitleWidget(
+                                text:
+                                    hotel?.property?.propertyName ?? 'Hotel name',
+                                fontSize: 24,
+                              ),
                             ),
                             KSizedBox.kHeigh_10,
                             SizedBox(
-                              width: size.width / 1.5,
+                              width: size.width / 1.6,
                               child: TextWidget(
                                   text: hotel?.property?.address ??
                                       'No address provided'),

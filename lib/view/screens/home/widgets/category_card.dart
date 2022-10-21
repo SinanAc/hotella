@@ -26,12 +26,12 @@ class CategoryCard extends StatelessWidget {
             padding: const EdgeInsets.all(15),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: const Color.fromARGB(52, 6, 0, 0),
+             color: const Color.fromARGB(52, 6, 0, 0),
             ),
             child: Image.asset(img),
           ),
         ),
-        const SizedBox(height: 1.5),
+        const SizedBox(height: 2),
         TitleWidget(
           text: title,
           fontSize: 16,

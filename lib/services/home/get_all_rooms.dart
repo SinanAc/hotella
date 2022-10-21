@@ -4,7 +4,7 @@ import 'package:premio_inn/model/home/all_rooms_model/all_rooms.dart';
 import 'package:premio_inn/model/home/all_rooms_model/response.dart';
 import 'package:premio_inn/services/dio/dio_service.dart';
 import 'package:premio_inn/services/dio/api_exceptions.dart';
-import 'package:premio_inn/services/internet_checker.dart';
+import 'package:premio_inn/services/dio/internet_checker.dart';
 import 'package:premio_inn/utils/url.dart';
 
 class GetAllRoomsService {

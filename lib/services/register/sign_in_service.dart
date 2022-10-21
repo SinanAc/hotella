@@ -1,9 +1,8 @@
-import 'dart:io';
-import 'package:dio/dio.dart';
 import 'package:premio_inn/model/register/sign_in/sign_in_model.dart';
 import 'package:premio_inn/model/register/sign_in/signin_response_model.dart';
+import 'package:premio_inn/services/dio/api_exceptions.dart';
 import 'package:premio_inn/services/dio/dio_service.dart';
-import 'package:premio_inn/services/internet_checker.dart';
+import 'package:premio_inn/services/dio/internet_checker.dart';
 import 'package:premio_inn/utils/url.dart';
 
 class SignInService {
@@ -17,18 +16,8 @@ class SignInService {
         } else {
           return SignInResponseModel.fromJson(response.data);
         }
-      } on DioError catch (e) {
-        if (e.type == DioErrorType.connectTimeout ||
-            e.type == DioErrorType.receiveTimeout ||
-            e.type == DioErrorType.sendTimeout) {
-          return SignInResponseModel(message: 'Connection timed out !!');
-        } else {
-          return SignInResponseModel.fromJson(e.response!.data);
-        }
-      } on SocketException catch (e) {
-        return SignInResponseModel(message: e.message);
       } catch (e) {
-        return SignInResponseModel(message: e.toString());
+        return SignInResponseModel(message: ApiExceptions.handleError(e));
       }
     } else {
       return SignInResponseModel(message: "No Internet !!");

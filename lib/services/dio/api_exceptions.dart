@@ -28,6 +28,6 @@ class ApiExceptions {
     } else {
       return defaultErrorMsg;
     }
-    return networkErrorMsg;
+    return defaultErrorMsg;
   }
 }

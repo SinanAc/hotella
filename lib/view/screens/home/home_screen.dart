@@ -47,7 +47,7 @@ class HomeScreen extends StatelessWidget {
                 KSizedBox.kHeigh_5,
                 const LocationWidget(),
                 KSizedBox.kHeigh_15,
-                SearchField(size: size),
+                const SearchField(isHome: true),
                 KSizedBox.kHeigh_15,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,17 +55,23 @@ class HomeScreen extends StatelessWidget {
                     CategoryCard(
                       img: 'assets/images/hotel_icon.png',
                       title: 'Hotel',
-                      onTap: () {},
+                      onTap: () {
+                        homeProvider.onHotelButton();
+                      },
+                    ),
+                    CategoryCard(
+                      img: 'assets/images/home_stay_icon.png',
+                      title: 'Home stay',
+                      onTap: () {
+                        homeProvider.onHomeStayButton();
+                      },
                     ),
                     CategoryCard(
                       img: 'assets/images/resort_icon.png',
                       title: 'Resort',
-                      onTap: () {},
-                    ),
-                    CategoryCard(
-                      img: 'assets/images/home_stay_icon.png',
-                      title: 'Home Stay',
-                      onTap: () {},
+                      onTap: () {
+                        homeProvider.onResortButton();
+                      },
                     ),
                   ],
                 ),
@@ -110,7 +116,6 @@ class HomeScreen extends StatelessWidget {
                                   itemBuilder: ((context, index) {
                                     return MainCard(
                                       hotel: homeProvider.allRooms[index],
-                                      size: size,
                                     );
                                   }),
                                   separatorBuilder: ((context, index) {
