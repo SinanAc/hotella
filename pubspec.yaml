@@ -34,9 +34,11 @@ dependencies:
   dio: 4.0.6
   flutter:
     sdk: flutter
-  flutter_secure_storage:
+  flutter_secure_storage: null
   flutter_svg: 1.1.5
-  internet_connection_checker: 
+  geocoding: 2.0.5
+  geolocator: 9.0.2
+  internet_connection_checker: null
   pin_code_fields: 7.4.0
   provider: 6.0.3
   shared_preferences: 2.0.15
@@ -44,7 +46,7 @@ dependencies:
   smooth_page_indicator: 1.0.0+2
 
 dev_dependencies:
-  flutter_lints: 
+  flutter_lints: null
   flutter_test:
     sdk: flutter
 

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:premio_inn/model/home/all_rooms_model/all_rooms.dart';
 import 'package:premio_inn/model/home/all_rooms_model/response.dart';
 import 'package:premio_inn/services/home/get_all_rooms.dart';
@@ -10,11 +12,13 @@ class HomeViewModel extends ChangeNotifier {
   // -->> variables
   List<AllRoomsModel> allRooms = [];
   bool isLoading = false;
+  String userLocation = '';
+  bool isLocationLoading = false;
   List<String> allCities = [];
 
-  // -->>  constructor to fetch hotel details in the initial stage
+  // -->> constructor to fetch all the in the initial stage
   HomeViewModel() {
-    getAllRoom();
+    initMethod();
   }
 
   // -->> function to fetch all rooms
@@ -36,6 +40,44 @@ class HomeViewModel extends ChangeNotifier {
       _isLoadingFalse();
       return;
     } else {
+      return;
+    }
+  }
+
+  // -->> fuction to get user's current location
+  Future<void> getUserLocation() async {
+    isLocationLoading = true;
+    notifyListeners();
+    final bool isLocationEnabled = await Geolocator.isLocationServiceEnabled();
+    if (isLocationEnabled) {
+      LocationPermission permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        _isLocationLoadingFalse();
+        return;
+      } else if (permission == LocationPermission.deniedForever) {
+        ShowDialogs.popUp(
+            'Location permission denied, please enable from settings');
+        _isLocationLoadingFalse();
+        return;
+      } else if (permission == LocationPermission.always ||
+          permission == LocationPermission.whileInUse) {
+        Position position = await Geolocator.getCurrentPosition(
+            desiredAccuracy: LocationAccuracy.high);
+        await placemarkFromCoordinates(position.latitude, position.longitude)
+            .then((List<Placemark> placemarks) {
+          Placemark place = placemarks[0];
+          userLocation =
+              '${place.subAdministrativeArea}, ${place.administrativeArea}';
+        });
+        _isLocationLoadingFalse();
+      } else {
+        _isLocationLoadingFalse();
+        return;
+      }
+    }else{
+      // 'Please allow location from settings to get your current location'
+     // await Geolocator.openAppSettings();
+      _isLocationLoadingFalse();
       return;
     }
   }
@@ -118,5 +160,15 @@ class HomeViewModel extends ChangeNotifier {
   void _isLoadingFalse() {
     isLoading = false;
     notifyListeners();
+  }
+
+  void _isLocationLoadingFalse() {
+    isLocationLoading = false;
+  }
+
+  Future<void> initMethod() async {
+    await getUserLocation().then((value) {
+      getAllRoom();
+    });
   }
 }

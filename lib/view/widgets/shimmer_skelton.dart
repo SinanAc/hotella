@@ -6,9 +6,13 @@ class ShimmerSkelton extends StatelessWidget {
     Key? key,
     required this.height,
     required this.width,
+    this.radius=10,
+    this.color = Colors.white,
   }) : super(key: key);
   final double height;
   final double width;
+  final double radius;
+  final Color color;
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
@@ -18,8 +22,8 @@ class ShimmerSkelton extends StatelessWidget {
         height: height,
         width: width,
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
+          color: color,
+          borderRadius: BorderRadius.circular(radius),
         ),
       ),
     );
