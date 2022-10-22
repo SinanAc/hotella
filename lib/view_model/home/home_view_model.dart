@@ -68,15 +68,23 @@ class HomeViewModel extends ChangeNotifier {
           Placemark place = placemarks[0];
           userLocation =
               '${place.subAdministrativeArea}, ${place.administrativeArea}';
+          notifyListeners();
         });
         _isLocationLoadingFalse();
       } else {
         _isLocationLoadingFalse();
         return;
       }
-    }else{
+    } else {
       // 'Please allow location from settings to get your current location'
-     // await Geolocator.openAppSettings();
+      // await Geolocator.openAppSettings();
+      // ShowDialogs.dialogBox(
+      //   messege: 'Please allow location access from settings to get your current location', 
+      //   goOn: ()async{
+      //     await Geolocator.openAppSettings();
+      //   });
+      ShowDialogs.popUp(
+            'Location permission denied, please enable from settings');
       _isLocationLoadingFalse();
       return;
     }

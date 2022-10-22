@@ -32,8 +32,8 @@ class ShowDialogs {
     );
   }
 
-  static dialogBox({required String messege, required Function goOn}) {
-    showDialog(
+  static void dialogBox({required String messege, required Function goOn})async {
+     showDialog(
         context: rootScaffoldMessengerKey.currentState!.context,
         builder: (ctx) {
           return AlertDialog(
@@ -44,7 +44,7 @@ class ShowDialogs {
             actions: [
               TextButton(
                 onPressed: () {
-                  Navigations.pop();
+                 // Navigations.pop();
                 },
                 child: const Text(
                   'Cancel',
