@@ -3,6 +3,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:premio_inn/model/home/all_rooms_model/all_rooms.dart';
 import 'package:premio_inn/model/home/all_rooms_model/response.dart';
+import 'package:premio_inn/services/dio/internet_checker.dart';
 import 'package:premio_inn/services/home/get_all_rooms.dart';
 import 'package:premio_inn/utils/navigations.dart';
 import 'package:premio_inn/view/screens/category/category_screen.dart';
@@ -23,44 +24,50 @@ class HomeViewModel extends ChangeNotifier {
 
   // -->> function to fetch all rooms
   Future<void> getAllRoom() async {
-    isLoading = true;
-    notifyListeners();
-    AllRoomsResponse? roomResponse = await GetAllRoomsService().getAllRooms();
-    if (roomResponse == null) {
-      ShowDialogs.popUp('Please check your internet connection !');
-      _isLoadingFalse();
-      return;
-    } else if (roomResponse.isFailed == true) {
-      ShowDialogs.popUp(roomResponse.errormessage ?? 'Something went wrong !!');
-      _isLoadingFalse();
-      return;
-    } else if (roomResponse.dataList != null) {
-      allRooms.clear();
-      allRooms.addAll(roomResponse.dataList ?? []);
-      _isLoadingFalse();
-      return;
+    if (await internetCheck()) {
+      isLoading = true;
+      notifyListeners();
+      AllRoomsResponse? roomResponse = await GetAllRoomsService().getAllRooms();
+      if (roomResponse == null) {
+        ShowDialogs.popUp('Please check your internet connection !');
+        _isLoadingFalse();
+        return;
+      } else if (roomResponse.isFailed == true) {
+        ShowDialogs.popUp(
+            roomResponse.errormessage ?? 'Something went wrong !!');
+        _isLoadingFalse();
+        return;
+      } else if (roomResponse.dataList != null) {
+        allRooms.clear();
+        allRooms.addAll(roomResponse.dataList ?? []);
+        _isLoadingFalse();
+        return;
+      } else {
+        return;
+      }
     } else {
-      return;
+      ShowDialogs.popUp('Please check your internet connection !');
     }
   }
 
   // -->> fuction to get user's current location
   Future<void> getUserLocation() async {
-    isLocationLoading = true;
-    notifyListeners();
     final bool isLocationEnabled = await Geolocator.isLocationServiceEnabled();
     if (isLocationEnabled) {
+      isLocationLoading = true;
+      notifyListeners();
       LocationPermission permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
         _isLocationLoadingFalse();
+        notifyListeners();
         return;
       } else if (permission == LocationPermission.deniedForever) {
         ShowDialogs.popUp(
             'Location permission denied, please enable from settings');
         _isLocationLoadingFalse();
+        notifyListeners();
         return;
-      } else if (permission == LocationPermission.always ||
-          permission == LocationPermission.whileInUse) {
+      } else {
         Position position = await Geolocator.getCurrentPosition(
             desiredAccuracy: LocationAccuracy.high);
         await placemarkFromCoordinates(position.latitude, position.longitude)
@@ -71,20 +78,14 @@ class HomeViewModel extends ChangeNotifier {
           notifyListeners();
         });
         _isLocationLoadingFalse();
-      } else {
-        _isLocationLoadingFalse();
+        notifyListeners();
         return;
       }
     } else {
-      // 'Please allow location from settings to get your current location'
-      // await Geolocator.openAppSettings();
-      // ShowDialogs.dialogBox(
-      //   messege: 'Please allow location access from settings to get your current location', 
-      //   goOn: ()async{
-      //     await Geolocator.openAppSettings();
-      //   });
       ShowDialogs.popUp(
-            'Location permission denied, please enable from settings');
+          'Device location is disabled, please enable from settings',
+          color: Colors.white,
+          textColor: Colors.grey.shade900);
       _isLocationLoadingFalse();
       return;
     }

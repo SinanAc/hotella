@@ -19,17 +19,17 @@ class CategoryScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
-        child: Stack(
-          children: [
-             SizedBox(
-            height: size.height / 5.8,
-            width: size.width,
-            child: const ColoredBox(
-              color: KColors.kThemeGreen,
+        child: SingleChildScrollView(
+          child: Stack(
+            children: [
+               SizedBox(
+              height: size.height / 5.8,
+              width: size.width,
+              child: const ColoredBox(
+                color: KColors.kThemeGreen,
+              ),
             ),
-          ),
-            SingleChildScrollView(
-              child: Column(
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                    Row(
@@ -62,8 +62,8 @@ class CategoryScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

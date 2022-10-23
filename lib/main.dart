@@ -6,6 +6,7 @@ import 'package:premio_inn/view/widgets/show_dialogs.dart';
 import 'package:premio_inn/view_model/providers.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(Providers.providers());
 }
 

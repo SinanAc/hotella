@@ -15,15 +15,15 @@ class Providers {
   static Widget providers() {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => MainPageViewModel()),
-        ChangeNotifierProvider(create: (_) => SigninViewModel()),
-        ChangeNotifierProvider(create: (_) => SignUpViewModel()),
-        ChangeNotifierProvider(create: (_) => HotelViewModel()),
-        ChangeNotifierProvider(create: (_) => PhoneNumberViewModel()),
-        ChangeNotifierProvider(create: (_) => SplashViewModel()),
-        ChangeNotifierProvider(create: (_) => AccountViewModel()),
-        ChangeNotifierProvider(create: (_) => HomeViewModel()),
-        ChangeNotifierProvider(create: (_) => SearchViewModel()),
+        ChangeNotifierProvider(create: (context) => MainPageViewModel()),
+        ChangeNotifierProvider(create: (context) => SigninViewModel()),
+        ChangeNotifierProvider(create: (context) => SignUpViewModel()),
+        ChangeNotifierProvider(create: (context) => HotelViewModel()),
+        ChangeNotifierProvider(create: (context) => PhoneNumberViewModel()),
+        ChangeNotifierProvider(create: (context) => SplashViewModel()),
+        ChangeNotifierProvider(create: (context) => AccountViewModel()),
+        ChangeNotifierProvider(create: (context) => HomeViewModel()),
+        ChangeNotifierProvider(create: (context) => SearchViewModel()),
       ],
       child: const MyApp(),
     );

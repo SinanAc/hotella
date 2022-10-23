@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:premio_inn/utils/colors.dart';
+import 'package:premio_inn/view/widgets/shimmer_skelton.dart';
 import 'package:premio_inn/view/widgets/text_widget.dart';
 import 'package:premio_inn/view_model/home/home_view_model.dart';
 import 'package:provider/provider.dart';
@@ -19,14 +20,14 @@ class LocationWidget extends StatelessWidget {
               size: 22,
             ),
             const SizedBox(width: 2),
-            // value.userLocation.isEmpty && value.isLocationLoading
-            //     ? const ShimmerSkelton(
-            //         height: 20,
-            //         width: 200,
-            //         radius: 5,
-            //         color: Color.fromARGB(77, 255, 255, 255),
-            //       )
-            //     :
+            value.userLocation.isEmpty && value.isLocationLoading
+                ? const ShimmerSkelton(
+                    height: 20,
+                    width: 200,
+                    radius: 5,
+                    color: Color.fromARGB(77, 255, 255, 255),
+                  )
+                :
             value.userLocation.isEmpty || value.userLocation.isEmpty
                 ? TextButton(
                     onPressed: () {
