@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/sizes.dart';
 import 'package:premio_inn/view/screens/home/widgets/category_card.dart';
-import 'package:premio_inn/view/screens/home/widgets/location_widget.dart';
 import 'package:premio_inn/view/screens/home/widgets/search_field.dart';
 import 'package:premio_inn/view/widgets/double_color_title.dart';
 import 'package:premio_inn/view/widgets/loading_indicator.dart';
@@ -45,8 +44,6 @@ class HomeScreen extends StatelessWidget {
                       textSize: 27,
                     ),
                   ),
-                  KSizedBox.kHeigh_5,
-                  const LocationWidget(),
                   KSizedBox.kHeigh_15,
                   const SearchField(),
                   KSizedBox.kHeigh_15,

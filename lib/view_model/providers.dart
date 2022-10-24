@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:premio_inn/main.dart';
 import 'package:premio_inn/view_model/account/account_view_model.dart';
+import 'package:premio_inn/view_model/category/category.dart';
 import 'package:premio_inn/view_model/home/home_view_model.dart';
 import 'package:premio_inn/view_model/hotel/hotel_view_model.dart';
 import 'package:premio_inn/view_model/main_page/main_page_view_model.dart';
@@ -24,6 +25,7 @@ class Providers {
         ChangeNotifierProvider(create: (context) => AccountViewModel()),
         ChangeNotifierProvider(create: (context) => HomeViewModel()),
         ChangeNotifierProvider(create: (context) => SearchViewModel()),
+        ChangeNotifierProvider(create: (context) => CategoryViewModel()),
       ],
       child: const MyApp(),
     );
