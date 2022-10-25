@@ -25,8 +25,10 @@ class MainCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.black,
           borderRadius: BorderRadius.circular(10),
-          image: DecorationImage(
-            image: NetworkImage(hotel?.images?.first[0].url??KStrings.dummyNetImage),
+          image:
+           DecorationImage(
+            image: NetworkImage(
+              hotel?.images?.first[0].url??KStrings.dummyNetImage),
             fit: BoxFit.cover,
           ),
         ),
