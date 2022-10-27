@@ -15,10 +15,7 @@ class PhoneNumberService {
     if (await internetCheck()) {
       try {
         final response =
-            await DioService.postMethod(url: Url.sendOtp, value: data.toJson())
-                .timeout(const Duration(seconds: 30), onTimeout: () {
-          return null;
-        });
+            await DioService.postMethod(url: Url.sendOtp, value: data.toJson());
         if (response.statusCode >= 200 || response.statusCode <= 299) {
           return PhoneNumberResponseModel.fromJson(response.data);
         } else {

@@ -9,7 +9,7 @@ import 'package:premio_inn/utils/url.dart';
 
 class GetAllRoomsService {
   Future<AllRoomsResponse?> getAllRooms() async {
-    if (await internetCheck()) {
+    if (await internetCheck()) { 
       try {
         final Response response = await DioService.getMethod(url: Url.getAllRooms);
         if (response.statusCode! >= 200 || response.statusCode! <= 299) {
