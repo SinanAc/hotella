@@ -27,8 +27,10 @@ class MainCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           image:
            DecorationImage(
-            image: NetworkImage(
+            image:
+             NetworkImage(
               hotel?.images?.first[0].url??KStrings.dummyNetImage),
+
             fit: BoxFit.cover,
           ),
         ),
@@ -44,13 +46,13 @@ class MainCard extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: const Color.fromARGB(123, 0, 0, 0),
                         borderRadius: BorderRadius.circular(8)),
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 12, vertical: 8),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          width: size.width/1.8,
+                          width: size.width / 1.8,
                           child: TitleWidget(
                             text: hotel?.property?.propertyName ??
                                 'Hotel name is not available',
@@ -71,8 +73,8 @@ class MainCard extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: const Color.fromARGB(123, 0, 0, 0),
                         borderRadius: BorderRadius.circular(8)),
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 12, vertical: 8),
                     child: TitleWidget(
                       text: '₹ ${hotel?.price.toString()}',
                       fontSize: 18,
@@ -88,3 +90,15 @@ class MainCard extends StatelessWidget {
     );
   }
 }
+
+
+//  CachedNetworkImage(
+//               //fit: BoxFit.contain,
+//               imageUrl: hotel?.images?.first[0].url ?? KStrings.dummyNetImage,
+//               placeholder: (context, url) => ShimmerSkelton(
+//                 height: size.height / 3.7,
+//                 width: double.infinity,
+//               ),
+//               errorWidget: (context, url, error) =>
+//                   Image.asset(KStrings.noInterNetImage),
+//             ),
