@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:premio_inn/model/home/all_rooms_model/all_rooms.dart';
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/sizes.dart';
@@ -17,6 +18,7 @@ class HotelScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final hotelPro = Provider.of<HotelViewModel>(context);
     return Scaffold(
       appBar: AppBar(toolbarHeight: 0, backgroundColor: KColors.kThemeGreen),
       body: SafeArea(
@@ -37,10 +39,10 @@ class HotelScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
-                              width: size.width/1.6,
+                              width: size.width / 1.6,
                               child: TitleWidget(
-                                text:
-                                    hotel?.property?.propertyName ?? 'Hotel name',
+                                text: hotel?.property?.propertyName ??
+                                    'Hotel name',
                                 fontSize: 24,
                               ),
                             ),
@@ -81,10 +83,14 @@ class HotelScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16.0, vertical: 12),
                         child: Column(children: [
-                          const BookingDetailsWidget(
+                          BookingDetailsWidget(
                             icon: Icons.calendar_today_outlined,
                             title: 'Dates',
-                            value: 'Tue, 18 Oct - Wed, 19 Oct',
+                            value:
+                                '${DateFormat('EEE, MMM d').format(hotelPro.selectedDates.start)} - ${DateFormat('EEE, MMM d').format(hotelPro.selectedDates.end)}',
+                            onTap: () {
+                              hotelPro.selectDate(context);
+                            },
                           ),
                           KSizedBox.kHeigh_5,
                           SizedBox(
@@ -94,10 +100,11 @@ class HotelScreen extends StatelessWidget {
                             ),
                           ),
                           KSizedBox.kHeigh_5,
-                          const BookingDetailsWidget(
+                          BookingDetailsWidget(
                             icon: Icons.group_add_outlined,
                             title: 'Guests',
                             value: '1 Room, 2 Guests',
+                            onTap: () {},
                           ),
                         ]),
                       ),

@@ -7,11 +7,13 @@ class BookingDetailsWidget extends StatelessWidget {
     Key? key,
     required this.icon,
     required this.title,
-    required this.value
+    required this.value,
+    required this.onTap,
   }) : super(key: key);
   final IconData icon;
   final String title;
   final String value;
+  final Function onTap;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -26,7 +28,9 @@ class BookingDetailsWidget extends StatelessWidget {
         ),
         const Spacer(),
          TextButton(
-          onPressed: (){},
+          onPressed: (){
+            onTap();
+          },
           child: Text(
             value,
             style: const TextStyle(
