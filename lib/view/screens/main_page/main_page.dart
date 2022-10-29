@@ -10,7 +10,7 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final mainPageController = Provider.of<MainPageViewModel>(context);
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(toolbarHeight: 0),
       body: SafeArea(
         child: MainPageViewModel.screenList[mainPageController.bottomNavIndex],
       ),

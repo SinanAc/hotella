@@ -36,10 +36,12 @@ class HotelViewModel extends ChangeNotifier {
           // builder: (context, child) {
           //   return Padding(
           //     padding: const EdgeInsets.all(40.0),
-          //     child: SizedBox(
+          //     child: Scaffold(
           //       // height: MediaQuery.of(ctx).size.height/1.4,
           //       // width: double.infinity,
-          //       child: child,
+          //       appBar: AppBar(
+          //         toolbarHeight: 100,
+          //       ),
           //     ),
           //   );
           // },

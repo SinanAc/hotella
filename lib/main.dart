@@ -28,7 +28,6 @@ class MyApp extends StatelessWidget {
         ),
          appBarTheme: const AppBarTheme(
       backgroundColor: KColors.kThemeGreen,
-      toolbarHeight: 0,
       elevation: 0,
     ),
       ),

@@ -1,9 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:premio_inn/model/home/all_rooms_model/all_rooms.dart';
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/navigations.dart';
 import 'package:premio_inn/utils/strings.dart';
 import 'package:premio_inn/view/screens/hotel_view/hotel_screen.dart';
+import 'package:premio_inn/view/widgets/shimmer_skelton.dart';
 import 'package:premio_inn/view/widgets/title_widget.dart';
 
 class MainCard extends StatelessWidget {
@@ -25,80 +27,79 @@ class MainCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.black,
           borderRadius: BorderRadius.circular(10),
-          image:
-           DecorationImage(
-            image:
-             NetworkImage(
-              hotel?.images?.first[0].url??KStrings.dummyNetImage),
-
-            fit: BoxFit.cover,
-          ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-          child: Column(
-            children: [
-              const Spacer(),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
+        child: Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10.0),
+              child: CachedNetworkImage(
+                height: size.height / 3.7,
+                width: double.infinity,
+                fit: BoxFit.cover,
+                imageUrl: hotel?.images?.first[0].url ?? KStrings.dummyNetImage,
+                placeholder: (context, url) => ShimmerSkelton(
+                  height: size.height / 3.7,
+                  width: double.infinity,
+                ),
+                errorWidget: (context, url, error) =>
+                    Image.asset(KStrings.noInterNetImage),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              child: Column(
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        color: const Color.fromARGB(123, 0, 0, 0),
-                        borderRadius: BorderRadius.circular(8)),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 8),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: size.width / 1.8,
-                          child: TitleWidget(
-                            text: hotel?.property?.propertyName ??
-                                'Hotel name is not available',
-                            fontSize: 18,
-                            color: KColors.kWhiteColor,
-                          ),
-                        ),
-                        TitleWidget(
-                          text: hotel?.property?.city ?? '',
-                          fontSize: 16,
-                          color: Colors.white70,
-                        ),
-                      ],
-                    ),
-                  ),
                   const Spacer(),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: const Color.fromARGB(123, 0, 0, 0),
-                        borderRadius: BorderRadius.circular(8)),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 8),
-                    child: TitleWidget(
-                      text: '₹ ${hotel?.price.toString()}',
-                      fontSize: 18,
-                      color: KColors.kWhiteColor,
-                    ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                            color: const Color.fromARGB(123, 0, 0, 0),
+                            borderRadius: BorderRadius.circular(8)),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: size.width / 1.8,
+                              child: TitleWidget(
+                                text: hotel?.property?.propertyName ??
+                                    'Hotel name is not available',
+                                fontSize: 18,
+                                color: KColors.kWhiteColor,
+                              ),
+                            ),
+                            TitleWidget(
+                              text: hotel?.property?.city ?? '',
+                              fontSize: 16,
+                              color: Colors.white70,
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Spacer(),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: const Color.fromARGB(123, 0, 0, 0),
+                            borderRadius: BorderRadius.circular(8)),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 8),
+                        child: TitleWidget(
+                          text: '₹ ${hotel?.price.toString()}',
+                          fontSize: 18,
+                          color: KColors.kWhiteColor,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
   }
 }
-
-
-//  CachedNetworkImage(
-//               //fit: BoxFit.contain,
-//               imageUrl: hotel?.images?.first[0].url ?? KStrings.dummyNetImage,
-//               placeholder: (context, url) => ShimmerSkelton(
-//                 height: size.height / 3.7,
-//                 width: double.infinity,
-//               ),
-//               errorWidget: (context, url, error) =>
-//                   Image.asset(KStrings.noInterNetImage),
-//             ),
