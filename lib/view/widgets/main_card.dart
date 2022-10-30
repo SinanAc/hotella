@@ -7,6 +7,8 @@ import 'package:premio_inn/utils/strings.dart';
 import 'package:premio_inn/view/screens/hotel_view/hotel_screen.dart';
 import 'package:premio_inn/view/widgets/shimmer_skelton.dart';
 import 'package:premio_inn/view/widgets/title_widget.dart';
+import 'package:premio_inn/view_model/hotel/hotel_view_model.dart';
+import 'package:provider/provider.dart';
 
 class MainCard extends StatelessWidget {
   const MainCard({
@@ -19,6 +21,7 @@ class MainCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return InkWell(
       onTap: () {
+        Provider.of<HotelViewModel>(context, listen: false).onInit();
         Navigations.push(HotelScreen(hotel: hotel));
       },
       child: Container(

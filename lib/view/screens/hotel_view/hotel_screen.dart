@@ -6,6 +6,7 @@ import 'package:premio_inn/utils/sizes.dart';
 import 'package:premio_inn/view/screens/hotel_view/widgets/amenities.dart';
 import 'package:premio_inn/view/screens/hotel_view/widgets/booking_details.dart';
 import 'package:premio_inn/view/screens/hotel_view/widgets/bottom_button.dart';
+import 'package:premio_inn/view/screens/hotel_view/widgets/bottom_sheet.dart';
 import 'package:premio_inn/view/screens/hotel_view/widgets/hotel_photos.dart';
 import 'package:premio_inn/view/widgets/text_widget.dart';
 import 'package:premio_inn/view/widgets/title_widget.dart';
@@ -15,11 +16,13 @@ import 'package:provider/provider.dart';
 class HotelScreen extends StatelessWidget {
   const HotelScreen({Key? key, required this.hotel}) : super(key: key);
   final AllRoomsModel? hotel;
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final hotelPro = Provider.of<HotelViewModel>(context);
     return Scaffold(
+      key: hotelPro.scaffoldKey,
       appBar: AppBar(toolbarHeight: 0, backgroundColor: KColors.kThemeGreen),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -89,7 +92,10 @@ class HotelScreen extends StatelessWidget {
                             value:
                                 '${DateFormat('EEE, MMM d').format(hotelPro.selectedDates.start)} - ${DateFormat('EEE, MMM d').format(hotelPro.selectedDates.end)}',
                             onTap: () {
-                              hotelPro.selectDate(context);
+                              hotelPro.selectDate(
+                                  context,
+                                  hotelPro
+                                      .totalAmount(hotel?.price ?? 0));
                             },
                           ),
                           KSizedBox.kHeigh_5,
@@ -103,8 +109,25 @@ class HotelScreen extends StatelessWidget {
                           BookingDetailsWidget(
                             icon: Icons.group_add_outlined,
                             title: 'Guests',
-                            value: '1 Room, 2 Guests',
-                            onTap: () {},
+                            value:
+                                '${hotelPro.rooms} Room, ${hotelPro.guests} Guests',
+                            onTap: () {
+                              showModalBottomSheet<RoomsAndGuestsBottomSheet>(
+                                isDismissible: false,
+                                isScrollControlled: true,
+                                backgroundColor: Colors.white,
+                                context: context,
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(15),
+                                  topRight: Radius.circular(15),
+                                )),
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                builder: (_) {
+                                  return const RoomsAndGuestsBottomSheet();
+                                },
+                              );
+                            },
                           ),
                         ]),
                       ),
@@ -159,7 +182,6 @@ class HotelScreen extends StatelessWidget {
                     TextWidget(
                         text: hotel?.property?.propertyDetails ??
                             'No description provided'),
-                    KSizedBox.kHeigh_30,
                   ],
                 ),
               ),
@@ -167,8 +189,8 @@ class HotelScreen extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton:
-          BottomButtonWidget(price: '₹${hotel?.price.toString() ?? ''}'),
+      floatingActionButton: BottomButtonWidget(
+          price: '₹${hotelPro.totalAmount(hotel?.price ?? 0)}'),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
