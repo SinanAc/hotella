@@ -4,6 +4,7 @@ import 'package:premio_inn/utils/sizes.dart';
 import 'package:premio_inn/view/screens/account/widgets/account_grid_item.dart';
 import 'package:premio_inn/view/screens/account/widgets/profile_section.dart';
 import 'package:premio_inn/view/widgets/double_color_title.dart';
+import 'package:premio_inn/view/widgets/show_dialogs.dart';
 import 'package:premio_inn/view_model/account/account_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -12,7 +13,8 @@ class AccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final accountContoller = Provider.of<AccountViewModel>(context,listen: false);
+    final accountContoller =
+        Provider.of<AccountViewModel>(context, listen: false);
     return SingleChildScrollView(
       child: Stack(
         children: [
@@ -30,8 +32,8 @@ class AccountScreen extends StatelessWidget {
               children: [
                 KSizedBox.kHeigh_10,
                 const Padding(
-                  padding:  EdgeInsets.only(left:8.0),
-                  child:  DoubleColorTitle(
+                  padding: EdgeInsets.only(left: 8.0),
+                  child: DoubleColorTitle(
                     text1: 'My',
                     text2: 'Account',
                     firstColor: KColors.kWhiteColor,
@@ -49,37 +51,42 @@ class AccountScreen extends StatelessWidget {
                     crossAxisSpacing: 10,
                     childAspectRatio: 1.2,
                   ),
-                  children:  [
+                  children: [
                     AccountGridItem(
                       icon: Icons.manage_accounts,
                       title: 'Edit Profile',
-                      onTap: (){},
+                      onTap: () {},
                     ),
                     AccountGridItem(
                       icon: Icons.info,
                       title: 'About',
-                      onTap: (){},
+                      onTap: () {},
                     ),
                     AccountGridItem(
                       icon: Icons.headset_mic,
                       title: 'Contact us',
-                      onTap: (){},
+                      onTap: () {},
                     ),
                     AccountGridItem(
                       icon: Icons.share_outlined,
                       title: 'Share',
-                      onTap: (){},
+                      onTap: () {},
                     ),
                     AccountGridItem(
                       icon: Icons.security,
                       title: 'Privacy ',
-                      onTap: (){},
+                      onTap: () {},
                     ),
                     AccountGridItem(
                       icon: Icons.logout,
                       title: 'Logout',
-                      onTap: (){
-                        accountContoller.onLogoutButton(context);
+                      onTap: () {
+                        ShowDialogs.dialogBox(
+                            title: 'Logout !!',
+                            messege: 'Are you sure to want to logout?',
+                            goOn: () {
+                              accountContoller.onLogoutButton(context);
+                            });
                       },
                     ),
                   ],

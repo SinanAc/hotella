@@ -22,12 +22,12 @@ class ShowDialogs {
         duration: Duration(milliseconds: milliSec),
         behavior: SnackBarBehavior.floating,
         backgroundColor: color,
-        margin: const EdgeInsets.symmetric(vertical: 16,horizontal: 16),
+        margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
         content: Padding(
           padding: const EdgeInsets.symmetric(vertical: 6),
           child: Text(
             messege,
-            style:  TextStyle(
+            style: TextStyle(
               letterSpacing: 1,
               fontWeight: FontWeight.w500,
               fontSize: 16,
@@ -40,31 +40,37 @@ class ShowDialogs {
   }
 
   static void dialogBox(
-      {required String messege, required Function goOn}) async {
+      {required String title,
+      required String messege,
+      required Function goOn}) async {
     await showDialog(
         context: Navigations.navigatorKey.currentContext!,
         builder: (ctx) {
           return AlertDialog(
-            title: const Text(
-              'Permission !',
+            title: Text(
+              title,
             ),
+            titleTextStyle: const TextStyle(fontSize: 24, color: Colors.black),
             content: Text(messege),
+            contentTextStyle:
+                const TextStyle(fontSize: 18, color: Colors.black),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigations.pop();
                 },
                 child: const Text(
-                  'Cancel',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  'No',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
               ),
               TextButton(
                 onPressed: () {
                   goOn();
                 },
-                child: const Text('Go on',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
+                child: const Text('Yes',
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
               ),
             ],
           );

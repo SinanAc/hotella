@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:premio_inn/utils/colors.dart';
-import 'package:premio_inn/utils/navigations.dart';
+import 'package:premio_inn/view/screens/hotel_view/widgets/bottom_sheet.dart';
 import 'package:premio_inn/view/widgets/show_dialogs.dart';
 
 class HotelViewModel extends ChangeNotifier {
-  // -->> constructor to get initial values
+  // -->> initial values
+  void onInit() {
+    selectedDates = DateTimeRange(
+        start: DateTime.now(),
+        end: DateTime.now().add(const Duration(days: 1)));
+    guests = 1;
+    rooms = 1;
+    days = 1;
+    notifyListeners();
+  }
 
-  // HotelViewModel() {
-  //   selectedDates = DateTimeRange(
-  //       start: DateTime.now(),
-  //       end: DateTime.now().add(const Duration(days: 1)));
-  //   guests = 1;
-  //   rooms = 1;
-  //   notifyListeners();
-  // }
-  
   // -->> vaiables
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   DateTimeRange selectedDates = DateTimeRange(
@@ -60,7 +60,7 @@ class HotelViewModel extends ChangeNotifier {
         guests++;
       }
     } else {
-      ShowDialogs.popUp('You can only book 10 rooms at a time');
+      ShowDialogs.popUp('10 rooms are alloweded at a time !!',color: Colors.black87);
     }
     notifyListeners();
   }
@@ -70,10 +70,10 @@ class HotelViewModel extends ChangeNotifier {
     if (rooms > 1) {
       rooms--;
       if (guests > rooms * 2) {
-        guests--;
+        guests = guests - 2;
       }
     } else {
-      ShowDialogs.popUp('At least one room needed');
+      ShowDialogs.popUp('At least one room is needed !!',color: Colors.black87);
     }
     notifyListeners();
   }
@@ -83,7 +83,7 @@ class HotelViewModel extends ChangeNotifier {
     if (guests < rooms * 2) {
       guests++;
     } else {
-      ShowDialogs.popUp('You can only add two guests per one room');
+      ShowDialogs.popUp('Only two guests are allowed in a room!!',color: Colors.black87);
     }
     notifyListeners();
   }
@@ -96,7 +96,7 @@ class HotelViewModel extends ChangeNotifier {
         rooms--;
       }
     } else {
-      ShowDialogs.popUp('At least one guest needed');
+      ShowDialogs.popUp('At least one guest is needed !!',color: Colors.black87);
     }
     notifyListeners();
   }
@@ -106,7 +106,6 @@ class HotelViewModel extends ChangeNotifier {
     guests = 1;
     rooms = 1;
     notifyListeners();
-    Navigations.pop();
   }
 
   // -->> function to get the total days selected
@@ -121,8 +120,27 @@ class HotelViewModel extends ChangeNotifier {
   // -->> function to get the total amount to be paid
   int totalAmount(int amount) {
     final int total = rooms * days * amount;
-    notifyListeners();
     return total;
+  }
+
+  // -->> to get bottom sheet
+  void selectRoomsAndGuests(double height) {
+    showModalBottomSheet<RoomsAndGuestsBottomSheet>(
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+      context: scaffoldKey.currentState!.context,
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(15),
+        topRight: Radius.circular(15),
+      )),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      builder: (_) {
+        return SizedBox(
+            height: height,
+            child: const Scaffold(body: RoomsAndGuestsBottomSheet()));
+      },
+    );
   }
 
   // -->> add to favorite bool
@@ -130,16 +148,6 @@ class HotelViewModel extends ChangeNotifier {
   get isFav => _isFav;
   set isFav(value) {
     _isFav = value;
-    notifyListeners();
-  }
-
-  // -->> to clear all data
-  void onInit() {
-    selectedDates = DateTimeRange(
-        start: DateTime.now(),
-        end: DateTime.now().add(const Duration(days: 1)));    
-    guests = 1;
-    rooms = 1;
     notifyListeners();
   }
 }

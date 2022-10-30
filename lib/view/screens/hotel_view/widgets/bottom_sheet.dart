@@ -16,19 +16,35 @@ class RoomsAndGuestsBottomSheet extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final hotelPro = Provider.of<HotelViewModel>(context);
     return SizedBox(
-      height: size.height / 2.3,
+      height: size.height / 2,
       child: Scaffold(
         extendBody: true,
         backgroundColor: Colors.transparent,
         body: Padding(
-          padding: const EdgeInsets.only(top: 22, left: 15, right: 15,bottom: 5),
+          padding:
+              const EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 5),
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const TitleWidget(
-                  text: 'Select rooms & guests',
-                  fontSize: 22,
+                Row(
+                  children: [
+                    const TitleWidget(
+                      text: 'Select rooms & guests',
+                      fontSize: 22,
+                    ),
+                    const Spacer(),
+                    IconButton(
+                      onPressed: () {
+                        hotelPro.resetCount();
+                        Navigations.pop();
+                      },
+                      icon: const Icon(
+                        Icons.clear,
+                        color: Colors.black54,
+                      ),
+                    ),
+                  ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
