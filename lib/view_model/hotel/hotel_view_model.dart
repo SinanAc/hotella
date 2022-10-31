@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:premio_inn/utils/colors.dart';
+import 'package:premio_inn/utils/strings.dart';
 import 'package:premio_inn/view/screens/hotel_view/widgets/bottom_sheet.dart';
 import 'package:premio_inn/view/widgets/show_dialogs.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
@@ -157,15 +158,16 @@ class HotelViewModel extends ChangeNotifier {
   }
 
   // ==================== PAYMENT SECTION ====================
-  final Razorpay razorPay = Razorpay();
+  Razorpay razorPay = Razorpay();
 
   void payment(){
+    razorPay = Razorpay();
     razorPay.on(Razorpay.EVENT_PAYMENT_SUCCESS, handlerPaymentSuccess);
     razorPay.on(Razorpay.EVENT_PAYMENT_ERROR, handlerErrorFailure);
     razorPay.on(Razorpay.EVENT_EXTERNAL_WALLET, handlerExternalWallet);
   }
 
-  void disposed(){
+  void disposes(){
     razorPay.clear();
   }
 
@@ -174,16 +176,16 @@ class HotelViewModel extends ChangeNotifier {
   }
 
     void handlerErrorFailure(){
-    log('Payment failed');
+    log('Payment error');
   }
 
     void handlerExternalWallet(){
-    log('Payment success');
+    log('handlerExternalWallet');
   }
 
   void onBookNow(int amount){
     final Map<String, dynamic> options = {
-    "key":"rzp_test_bUU2Ih47FlPRLD",
+    "key":KStrings.razorKey,
     "amount":amount,
     "name":"Hotella",
     "description":"Payment to book your selected room via Hotella",
@@ -192,13 +194,12 @@ class HotelViewModel extends ChangeNotifier {
       "email":"sinanac124@gmail.com"
     },
     "external":{
-      "wallets":[
-        "paytm"
-      ]
+      "wallets":["paytm"]
     }
   };
   try{
     razorPay.open(options);
+    notifyListeners();
   }catch(e){
     log(e.toString());
   }

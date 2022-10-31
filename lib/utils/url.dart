@@ -6,5 +6,5 @@ class Url {
   static const String login = 'loginUser';
   static const String signup = 'userSignup';
   static const String getAllRooms = 'getRoom';
-
+  
 }
