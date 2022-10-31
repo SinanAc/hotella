@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/view/screens/hotel_view/widgets/bottom_sheet.dart';
 import 'package:premio_inn/view/widgets/show_dialogs.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class HotelViewModel extends ChangeNotifier {
   // -->> initial values
@@ -26,6 +29,7 @@ class HotelViewModel extends ChangeNotifier {
   int guests = 1;
   int rooms = 1;
   int days = 1;
+  int amount = 0;
   final Icon notFavIcon = Icon(
     Icons.favorite_border,
     size: 32,
@@ -120,6 +124,7 @@ class HotelViewModel extends ChangeNotifier {
   // -->> function to get the total amount to be paid
   int totalAmount(int amount) {
     final int total = rooms * days * amount;
+    this.amount = amount;
     return total;
   }
 
@@ -150,4 +155,53 @@ class HotelViewModel extends ChangeNotifier {
     _isFav = value;
     notifyListeners();
   }
+
+  // ==================== PAYMENT SECTION ====================
+  final Razorpay razorPay = Razorpay();
+
+  void payment(){
+    razorPay.on(Razorpay.EVENT_PAYMENT_SUCCESS, handlerPaymentSuccess);
+    razorPay.on(Razorpay.EVENT_PAYMENT_ERROR, handlerErrorFailure);
+    razorPay.on(Razorpay.EVENT_EXTERNAL_WALLET, handlerExternalWallet);
+  }
+
+  void disposed(){
+    razorPay.clear();
+  }
+
+  void handlerPaymentSuccess(){
+    log('Payment success');
+  }
+
+    void handlerErrorFailure(){
+    log('Payment failed');
+  }
+
+    void handlerExternalWallet(){
+    log('Payment success');
+  }
+
+  void onBookNow(int amount){
+    final Map<String, dynamic> options = {
+    "key":"rzp_test_bUU2Ih47FlPRLD",
+    "amount":amount,
+    "name":"Hotella",
+    "description":"Payment to book your selected room via Hotella",
+    "prefill":{
+      "contact":"9744875629",
+      "email":"sinanac124@gmail.com"
+    },
+    "external":{
+      "wallets":[
+        "paytm"
+      ]
+    }
+  };
+  try{
+    razorPay.open(options);
+  }catch(e){
+    log(e.toString());
+  }
+  }
+
 }

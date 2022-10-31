@@ -6,9 +6,11 @@ import 'package:premio_inn/view/widgets/title_widget.dart';
 class BottomButtonWidget extends StatelessWidget {
   const BottomButtonWidget({
     Key? key,
-    required this.price
+    required this.price,
+    required this.onTap
     }) : super(key: key);
   final String price;
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,9 @@ class BottomButtonWidget extends StatelessWidget {
                 ),
                 ButtonWidget(
                   text: 'Book now',
-                  onTap: () {},
+                  onTap: () {
+                    onTap();
+                  },
                   width: MediaQuery.of(context).size.width / 2.5,
                   color: KColors.kThemeGreen,
                 )
