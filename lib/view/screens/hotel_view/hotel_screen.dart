@@ -177,7 +177,7 @@ class HotelScreen extends StatelessWidget {
       floatingActionButton: BottomButtonWidget(
           price: '₹${hotelPro.totalAmount(hotel?.price ?? 0)}',
           onTap: (){
-            hotelPro.payment();
+            //hotelPro.payment();
             hotelPro.onBookNow(hotel?.price??0);
           },
           ),

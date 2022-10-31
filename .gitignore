@@ -44,4 +44,4 @@ app.*.map.json
 /android/app/release
 
 # Payment related
-lib/utils/strings.dart
+/lib/utils/strings.dart

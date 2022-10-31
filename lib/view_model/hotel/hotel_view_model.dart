@@ -1,11 +1,8 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:premio_inn/utils/colors.dart';
-import 'package:premio_inn/utils/strings.dart';
 import 'package:premio_inn/view/screens/hotel_view/widgets/bottom_sheet.dart';
 import 'package:premio_inn/view/widgets/show_dialogs.dart';
-import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class HotelViewModel extends ChangeNotifier {
   // -->> initial values
@@ -158,18 +155,18 @@ class HotelViewModel extends ChangeNotifier {
   }
 
   // ==================== PAYMENT SECTION ====================
-  Razorpay razorPay = Razorpay();
+  // Razorpay razorPay = Razorpay();
 
-  void payment(){
-    razorPay = Razorpay();
-    razorPay.on(Razorpay.EVENT_PAYMENT_SUCCESS, handlerPaymentSuccess);
-    razorPay.on(Razorpay.EVENT_PAYMENT_ERROR, handlerErrorFailure);
-    razorPay.on(Razorpay.EVENT_EXTERNAL_WALLET, handlerExternalWallet);
-  }
+  // void payment(){
+  //   razorPay = Razorpay();
+  //   razorPay.on(Razorpay.EVENT_PAYMENT_SUCCESS, handlerPaymentSuccess);
+  //   razorPay.on(Razorpay.EVENT_PAYMENT_ERROR, handlerErrorFailure);
+  //   razorPay.on(Razorpay.EVENT_EXTERNAL_WALLET, handlerExternalWallet);
+  // }
 
-  void disposes(){
-    razorPay.clear();
-  }
+  // void disposes(){
+  //   razorPay.clear();
+  // }
 
   void handlerPaymentSuccess(){
     log('Payment success');
@@ -184,21 +181,21 @@ class HotelViewModel extends ChangeNotifier {
   }
 
   void onBookNow(int amount){
-    final Map<String, dynamic> options = {
-    "key":KStrings.razorKey,
-    "amount":amount,
-    "name":"Hotella",
-    "description":"Payment to book your selected room via Hotella",
-    "prefill":{
-      "contact":"9744875629",
-      "email":"sinanac124@gmail.com"
-    },
-    "external":{
-      "wallets":["paytm"]
-    }
-  };
+  //   final Map<String, dynamic> options = {
+  //   "key":KStrings.razorKey,
+  //   "amount":amount,
+  //   "name":"Hotella",
+  //   "description":"Payment to book your selected room via Hotella",
+  //   "prefill":{
+  //     "contact":"9744875629",
+  //     "email":"sinanac124@gmail.com"
+  //   },
+  //   "external":{
+  //     "wallets":["paytm"]
+  //   }
+  // };
   try{
-    razorPay.open(options);
+    //razorPay.open(options);
     notifyListeners();
   }catch(e){
     log(e.toString());
