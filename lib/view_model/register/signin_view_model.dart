@@ -40,7 +40,7 @@ class SigninViewModel extends ChangeNotifier {
       } else if (signInResponse.created == true) {
         final pref = await SharedPreferences.getInstance();
         await pref.setBool(KStrings.isLogggedIn, true);
-        await pref.setString(KStrings.isLogggedIn, signInResponse.jwtKey??'');
+        await pref.setString(KStrings.token, signInResponse.jwtKey??'');
         _isLoadingFalse();
         disposes();
         Navigations.pushRemoveUntil(const MainPage());

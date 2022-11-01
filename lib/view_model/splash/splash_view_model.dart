@@ -14,6 +14,6 @@ class SplashViewModel extends ChangeNotifier {
       Navigations.pushReplace(const PhoneNumberScreen());
     } else {
      Navigations.pushReplace(const MainPage());
-    }
-  }
+     }
+   }
 }
