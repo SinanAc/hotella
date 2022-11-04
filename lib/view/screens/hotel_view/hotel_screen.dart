@@ -91,8 +91,10 @@ class HotelScreen extends StatelessWidget {
                             value:
                                 '${DateFormat('EEE, MMM d').format(hotelPro.selectedDates.start)} - ${DateFormat('EEE, MMM d').format(hotelPro.selectedDates.end)}',
                             onTap: () {
-                              hotelPro.selectDate(context,
-                                  hotelPro.totalAmount(hotel?.price ?? 0));
+                              hotelPro.selectRoomsAndGuests(
+                                size.height/1.9,
+                                hotel?.price??0
+                              );
                             },
                           ),
                           KSizedBox.kHeigh_5,
@@ -110,7 +112,8 @@ class HotelScreen extends StatelessWidget {
                                 '${hotelPro.rooms} Room, ${hotelPro.guests} Guests',
                             onTap: () {
                               hotelPro.selectRoomsAndGuests(
-                                size.height/2.3
+                                size.height/1.9,
+                                hotel?.price??0
                               );
                             },
                           ),

@@ -112,9 +112,12 @@ class HotelViewModel extends ChangeNotifier {
   }
 
   // -->> function to reset rooms and guests count
-  void resetCount() {
+  void resetCountAndDate() {
     guests = 1;
     rooms = 1;
+    selectedDates = DateTimeRange(
+        start: DateTime.now(),
+        end: DateTime.now().add(const Duration(days: 1)));
     notifyListeners();
   }
 
@@ -135,7 +138,7 @@ class HotelViewModel extends ChangeNotifier {
   }
 
   // -->> to get bottom sheet
-  void selectRoomsAndGuests(double height) {
+  void selectRoomsAndGuests(double height,int amount) {
     showModalBottomSheet<RoomsAndGuestsBottomSheet>(
       isScrollControlled: true,
       backgroundColor: Colors.white,
@@ -149,7 +152,7 @@ class HotelViewModel extends ChangeNotifier {
       builder: (_) {
         return SizedBox(
             height: height,
-            child: const Scaffold(body: RoomsAndGuestsBottomSheet()));
+            child:  Scaffold(body: RoomsAndGuestsBottomSheet(amount: amount,)));
       },
     );
   }
