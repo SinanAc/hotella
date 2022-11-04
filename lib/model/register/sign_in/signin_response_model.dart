@@ -1,18 +1,39 @@
 class SignInResponseModel {
   SignInResponseModel({
-    this.message,
-    this.created,
-    this.jwtKey,
+   this.isSuccess,
+     this.profile,
+     this.message,
   });
 
+  bool? isSuccess;
+  Profile? profile;
   String? message;
-  bool? created;
-  String? jwtKey;
 
   factory SignInResponseModel.fromJson(Map<String, dynamic> json) =>
       SignInResponseModel(
-        message: json["message"] ?? "",
-        created: json["created"] ?? false,
-        jwtKey: json["jwt_key"] ?? ""
+        isSuccess: json["success"]??false,
+        profile: Profile.fromJson(json["profile"]??{}),
+        message: json["message"]??"",
+      );
+}
+
+class Profile {
+  Profile({
+     this.name,
+     this.email,
+    this.phone,
+    required this.token,
+  });
+
+  String? name;
+  String? email;
+  String? phone;
+  String? token;
+
+  factory Profile.fromJson(Map<String, dynamic> json) => Profile(
+        name: json["name"] ?? "",
+        email: json["email"] ?? "",
+        phone: json["phone"] ?? "",
+        token: json["token"] ?? "",
       );
 }

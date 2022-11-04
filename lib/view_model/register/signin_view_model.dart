@@ -37,10 +37,10 @@ class SigninViewModel extends ChangeNotifier {
         ShowDialogs.popUp('No Response');
         _isLoadingFalse();
         return;
-      } else if (signInResponse.created == true) {
+      } else if (signInResponse.isSuccess == true) {
         final pref = await SharedPreferences.getInstance();
         await pref.setBool(KStrings.isLogggedIn, true);
-        await pref.setString(KStrings.token, signInResponse.jwtKey??'');
+        await pref.setString(KStrings.token, signInResponse.profile?.token??'');
         _isLoadingFalse();
         disposes();
         Navigations.pushRemoveUntil(const MainPage());
