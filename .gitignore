@@ -1,3 +1,5 @@
+/lib/utils/url.dart
+lib/utils/url.dart
 # Miscellaneous
 *.class
 *.log
@@ -43,5 +45,3 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# url
-lib/utils/url.dart
