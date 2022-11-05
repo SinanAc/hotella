@@ -14,7 +14,7 @@ import 'package:provider/provider.dart';
 
 class HotelScreen extends StatelessWidget {
   const HotelScreen({Key? key, required this.hotel}) : super(key: key);
-  final AllRoomsModel? hotel;
+  final AllRoomsModel hotel;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class HotelScreen extends StatelessWidget {
                             SizedBox(
                               width: size.width / 1.6,
                               child: TitleWidget(
-                                text: hotel?.property?.propertyName ??
+                                text: hotel.property?.propertyName ??
                                     'Hotel name',
                                 fontSize: 24,
                               ),
@@ -52,7 +52,7 @@ class HotelScreen extends StatelessWidget {
                             SizedBox(
                               width: size.width / 1.6,
                               child: TextWidget(
-                                  text: hotel?.property?.address ??
+                                  text: hotel.property?.address ??
                                       'No address provided'),
                             ),
                           ],
@@ -93,7 +93,8 @@ class HotelScreen extends StatelessWidget {
                             onTap: () {
                               hotelPro.selectRoomsAndGuests(
                                 size.height/1.9,
-                                hotel?.price??0
+                                hotel.price??0,
+                                hotel
                               );
                             },
                           ),
@@ -113,7 +114,8 @@ class HotelScreen extends StatelessWidget {
                             onTap: () {
                               hotelPro.selectRoomsAndGuests(
                                 size.height/1.9,
-                                hotel?.price??0
+                                hotel.price??0,
+                                hotel
                               );
                             },
                           ),
@@ -142,7 +144,7 @@ class HotelScreen extends StatelessWidget {
                             const TextWidget(text: 'Check-in', size: 18),
                             KSizedBox.kHeigh_5,
                             TextWidget(
-                              text: hotel?.checkinTime ?? '12PM',
+                              text: hotel.checkinTime ?? '12PM',
                               size: 19,
                               color: Colors.grey.shade700,
                             ),
@@ -155,7 +157,7 @@ class HotelScreen extends StatelessWidget {
                             const TextWidget(text: 'Checkout', size: 18),
                             KSizedBox.kHeigh_5,
                             TextWidget(
-                              text: hotel?.checkinTime ?? '12PM',
+                              text: hotel.checkinTime ?? '12PM',
                               size: 19,
                               color: Colors.grey.shade700,
                             ),
@@ -168,7 +170,7 @@ class HotelScreen extends StatelessWidget {
                     const TitleWidget(text: "About", fontSize: 20),
                     KSizedBox.kHeigh_10,
                     TextWidget(
-                        text: hotel?.property?.propertyDetails ??
+                        text: hotel.property?.propertyDetails ??
                             'No description provided'),
                   ],
                 ),
@@ -178,10 +180,10 @@ class HotelScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: BottomButtonWidget(
-          price: '₹${hotelPro.totalAmount(hotel?.price ?? 0)}',
+          price: '₹${hotelPro.totalAmount(hotel.price ?? 0)}',
           onTap: (){
             //hotelPro.payment();
-            hotelPro.onBookNow(hotel?.price??0);
+            hotelPro.onBookNow(hotel.price??0);
           },
           ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

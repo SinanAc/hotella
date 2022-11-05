@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:premio_inn/model/home/all_rooms_model/all_rooms.dart';
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/navigations.dart';
 import 'package:premio_inn/utils/sizes.dart';
 import 'package:premio_inn/view/widgets/button_widget.dart';
+import 'package:premio_inn/view/widgets/loading_indicator.dart';
 import 'package:premio_inn/view/widgets/text_widget.dart';
 import 'package:premio_inn/view/widgets/title_widget.dart';
+import 'package:premio_inn/view_model/booking/room_availability.dart';
 import 'package:premio_inn/view_model/hotel/hotel_view_model.dart';
 import 'package:provider/provider.dart';
 
 class RoomsAndGuestsBottomSheet extends StatelessWidget {
-  const RoomsAndGuestsBottomSheet({Key? key,required this.amount}) : super(key: key);
+  const RoomsAndGuestsBottomSheet({Key? key,required this.amount,required this.hotel}) : super(key: key);
   final int amount;
+  final AllRoomsModel hotel;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final hotelPro = Provider.of<HotelViewModel>(context);
+    final roomAvailabilityPro = Provider.of<RoomAvailabilityViewModel>(context);
     return Scaffold(
       extendBody: true,
       backgroundColor: Colors.transparent,
@@ -34,7 +39,7 @@ class RoomsAndGuestsBottomSheet extends StatelessWidget {
                   const Spacer(),
                   IconButton(
                     onPressed: () {
-                      hotelPro.resetCountAndDate();
+                      hotelPro.onInit();
                       Navigations.pop();
                     },
                     icon: const Icon(
@@ -140,15 +145,20 @@ class RoomsAndGuestsBottomSheet extends StatelessWidget {
                   ButtonWidget(
                     text: 'Reset',
                     onTap: () {
-                      hotelPro.resetCountAndDate();
+                      hotelPro.onInit();
                     },
                     color: KColors.kRedColor,
                     width: size.width / 2.3,
                   ),
+                  roomAvailabilityPro.isLoading?
+                  const LoadingIndicator(
+                    color : KColors.kThemeGreen):
                   ButtonWidget(
                     text: 'Confirm',
                     onTap: () {
-                      Navigations.pop();
+                      roomAvailabilityPro.isRoomAvailable(
+                        hotelPro.selectedDates, hotel.id??'', hotelPro.rooms
+                        );
                     },
                     color: KColors.kThemeGreen,
                     width: size.width / 2.3,

@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:premio_inn/model/home/all_rooms_model/all_rooms.dart';
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/navigations.dart';
 import 'package:premio_inn/utils/strings.dart';
@@ -110,17 +111,6 @@ class HotelViewModel extends ChangeNotifier {
     }
     notifyListeners();
   }
-
-  // -->> function to reset rooms and guests count
-  void resetCountAndDate() {
-    guests = 1;
-    rooms = 1;
-    selectedDates = DateTimeRange(
-        start: DateTime.now(),
-        end: DateTime.now().add(const Duration(days: 1)));
-    notifyListeners();
-  }
-
   // -->> function to get the total days selected
   void daysBetween(DateTime from, DateTime to) {
     from = DateTime(from.year, from.month, from.day);
@@ -138,9 +128,10 @@ class HotelViewModel extends ChangeNotifier {
   }
 
   // -->> to get bottom sheet
-  void selectRoomsAndGuests(double height,int amount) {
+  void selectRoomsAndGuests(double height, int amount,AllRoomsModel hotel) {
     showModalBottomSheet<RoomsAndGuestsBottomSheet>(
-      isScrollControlled: true,
+      enableDrag: false,
+      isDismissible: false,
       backgroundColor: Colors.white,
       context: scaffoldKey.currentState!.context,
       shape: const RoundedRectangleBorder(
@@ -152,7 +143,10 @@ class HotelViewModel extends ChangeNotifier {
       builder: (_) {
         return SizedBox(
             height: height,
-            child:  Scaffold(body: RoomsAndGuestsBottomSheet(amount: amount,)));
+            child: Scaffold(
+                body: RoomsAndGuestsBottomSheet(
+              amount: amount,hotel: hotel,
+            )));
       },
     );
   }

@@ -15,7 +15,7 @@ class MainCard extends StatelessWidget {
     Key? key,
     required this.hotel,
   }) : super(key: key);
-  final AllRoomsModel? hotel;
+  final AllRoomsModel hotel;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -39,7 +39,7 @@ class MainCard extends StatelessWidget {
                 height: size.height / 3.7,
                 width: double.infinity,
                 fit: BoxFit.cover,
-                imageUrl: hotel?.images?.first[0].url ?? KStrings.dummyNetImage,
+                imageUrl: hotel.images?.first[0].url ?? KStrings.dummyNetImage,
                 placeholder: (context, url) => ShimmerSkelton(
                   height: size.height / 3.7,
                   width: double.infinity,
@@ -68,14 +68,14 @@ class MainCard extends StatelessWidget {
                             SizedBox(
                               width: size.width / 1.8,
                               child: TitleWidget(
-                                text: hotel?.property?.propertyName ??
+                                text: hotel.property?.propertyName ??
                                     'Hotel name is not available',
                                 fontSize: 18,
                                 color: KColors.kWhiteColor,
                               ),
                             ),
                             TitleWidget(
-                              text: hotel?.property?.city ?? '',
+                              text: hotel.property?.city ?? '',
                               fontSize: 16,
                               color: Colors.white70,
                             ),
@@ -90,7 +90,7 @@ class MainCard extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 12, vertical: 8),
                         child: TitleWidget(
-                          text: '₹ ${hotel?.price.toString()}',
+                          text: '₹ ${hotel.price.toString()}',
                           fontSize: 18,
                           color: KColors.kWhiteColor,
                         ),
