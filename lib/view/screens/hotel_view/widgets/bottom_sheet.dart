@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:premio_inn/model/home/all_rooms_model/all_rooms.dart';
+import 'package:premio_inn/model/home/all_rooms.dart';
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/navigations.dart';
 import 'package:premio_inn/utils/sizes.dart';
@@ -13,7 +13,9 @@ import 'package:premio_inn/view_model/hotel/hotel_view_model.dart';
 import 'package:provider/provider.dart';
 
 class RoomsAndGuestsBottomSheet extends StatelessWidget {
-  const RoomsAndGuestsBottomSheet({Key? key,required this.amount,required this.hotel}) : super(key: key);
+  const RoomsAndGuestsBottomSheet(
+      {Key? key, required this.amount, required this.hotel})
+      : super(key: key);
   final int amount;
   final AllRoomsModel hotel;
   @override
@@ -150,19 +152,23 @@ class RoomsAndGuestsBottomSheet extends StatelessWidget {
                     color: KColors.kRedColor,
                     width: size.width / 2.3,
                   ),
-                  roomAvailabilityPro.isLoading?
-                  const LoadingIndicator(
-                    color : KColors.kThemeGreen):
-                  ButtonWidget(
-                    text: 'Confirm',
-                    onTap: () {
-                      roomAvailabilityPro.isRoomAvailable(
-                        hotelPro.selectedDates, hotel.id??'', hotelPro.rooms
-                        );
-                    },
-                    color: KColors.kThemeGreen,
-                    width: size.width / 2.3,
-                  ),
+                  roomAvailabilityPro.isLoading
+                      ? const LoadingIndicator(color: KColors.kThemeGreen)
+                      : ButtonWidget(
+                          text: 'Confirm',
+                          onTap: () async {
+                            final isAvailable =
+                                await roomAvailabilityPro.isRoomAvailable(
+                                    hotelPro.selectedDates,
+                                    hotel.id ?? '',
+                                    hotelPro.rooms);
+                            if (isAvailable) {
+                              Navigations.pop();
+                            }
+                          },
+                          color: KColors.kThemeGreen,
+                          width: size.width / 2.3,
+                        ),
                 ],
               ),
             ]),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:premio_inn/model/home/all_rooms_model/all_rooms.dart';
+import 'package:premio_inn/model/home/all_rooms.dart';
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/strings.dart';
 import 'package:premio_inn/view/widgets/back_button_widget.dart';

@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:premio_inn/utils/navigations.dart';
 import 'package:premio_inn/utils/strings.dart';
 import 'package:premio_inn/view/screens/main_page/main_page.dart';

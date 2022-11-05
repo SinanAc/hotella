@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:premio_inn/model/home/all_rooms_model/all_rooms.dart';
+import 'package:premio_inn/model/home/all_rooms.dart';
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/sizes.dart';
 import 'package:premio_inn/view/screens/hotel_view/widgets/amenities.dart';
@@ -9,6 +9,7 @@ import 'package:premio_inn/view/screens/hotel_view/widgets/bottom_button.dart';
 import 'package:premio_inn/view/screens/hotel_view/widgets/hotel_photos.dart';
 import 'package:premio_inn/view/widgets/text_widget.dart';
 import 'package:premio_inn/view/widgets/title_widget.dart';
+import 'package:premio_inn/view_model/booking/room_availability.dart';
 import 'package:premio_inn/view_model/hotel/hotel_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -20,6 +21,7 @@ class HotelScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final hotelPro = Provider.of<HotelViewModel>(context);
+    final roomAvailabilityPro = Provider.of<RoomAvailabilityViewModel>(context);
     return Scaffold(
       key: hotelPro.scaffoldKey,
       appBar: AppBar(toolbarHeight: 0, backgroundColor: KColors.kThemeGreen),
@@ -182,8 +184,8 @@ class HotelScreen extends StatelessWidget {
       floatingActionButton: BottomButtonWidget(
           price: '₹${hotelPro.totalAmount(hotel.price ?? 0)}',
           onTap: (){
-            //hotelPro.payment();
-            hotelPro.onBookNow(hotel.price??0);
+            roomAvailabilityPro.isRoomAvailable(hotelPro.selectedDates, hotel.id??'', hotelPro.rooms);
+            //hotelPro.onBookNow(hotelPro.totalAmount(hotel.price ?? 0));
           },
           ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

@@ -1,4 +1,4 @@
-import 'package:premio_inn/model/home/all_rooms_model/all_rooms.dart';
+import 'package:premio_inn/model/home/all_rooms.dart';
 
 class AllRoomsResponse {
   AllRoomsResponse({

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:premio_inn/model/home/all_rooms_model/all_rooms.dart';
-import 'package:premio_inn/model/home/all_rooms_model/response.dart';
+import 'package:premio_inn/model/home/all_rooms.dart';
+import 'package:premio_inn/model/home/response.dart';
 import 'package:premio_inn/services/dio/internet_checker.dart';
 import 'package:premio_inn/services/home/get_all_rooms.dart';
 import 'package:premio_inn/utils/navigations.dart';

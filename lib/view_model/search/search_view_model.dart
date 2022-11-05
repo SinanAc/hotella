@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:premio_inn/model/home/all_rooms_model/all_rooms.dart';
+import 'package:flutter/material.dart';
+import 'package:premio_inn/model/home/all_rooms.dart';
 
 class SearchViewModel extends ChangeNotifier {
   // variables

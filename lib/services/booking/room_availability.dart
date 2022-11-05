@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:premio_inn/model/booking/room_availability/request.dart';
 import 'package:premio_inn/model/booking/room_availability/response.dart';
 import 'package:premio_inn/services/dio/api_exceptions.dart';
@@ -10,9 +11,9 @@ class RoomAvailabilityService {
   Future<RoomAvailabilityResponseModel?> isRoomAvailabileService(RoomAvailabiltyRequestModel data)async{
         if (await internetCheck()) {
       try {
-        final response =
+        final Response response =
             await DioService.postMethod(url: Url.isRoomAvailabile, value: data.toJson());
-        if (response.statusCode >= 200 || response.statusCode <= 299) {
+        if (response.statusCode! >= 200 || response.statusCode! <= 299) {
           return RoomAvailabilityResponseModel.fromJson(response.data);
         } else {
           return null;

@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:premio_inn/model/home/all_rooms_model/all_rooms.dart';
+import 'package:premio_inn/model/home/all_rooms.dart';
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/navigations.dart';
 import 'package:premio_inn/utils/strings.dart';
@@ -173,7 +173,6 @@ class HotelViewModel extends ChangeNotifier {
   }
 
   void handlerPaymentSuccess(PaymentSuccessResponse response) {
-    log('==========');
     Navigations.pushRemoveUntil(const MainPage());
     log('Payment success==============');
   }

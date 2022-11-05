@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:dio/dio.dart';
 import 'package:premio_inn/model/register/otp/otp_model.dart';
 import 'package:premio_inn/model/register/otp/otp_response_model.dart';
 import 'package:premio_inn/model/register/phone_number/phone_number_model.dart';
@@ -14,9 +15,9 @@ class PhoneNumberService {
       PhoneNumberModel data) async {
     if (await internetCheck()) {
       try {
-        final response =
+        final Response response =
             await DioService.postMethod(url: Url.sendOtp, value: data.toJson());
-        if (response.statusCode >= 200 || response.statusCode <= 299) {
+        if (response.statusCode! >= 200 || response.statusCode! <= 299) {
           return PhoneNumberResponseModel.fromJson(response.data);
         } else {
           return null;

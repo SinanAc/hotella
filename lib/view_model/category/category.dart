@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:premio_inn/model/home/all_rooms_model/all_rooms.dart';
+import 'package:premio_inn/model/home/all_rooms.dart';
 import 'package:premio_inn/view/widgets/text_widget.dart';
 import 'package:premio_inn/view_model/home/home_view_model.dart';
 import 'package:provider/provider.dart';
