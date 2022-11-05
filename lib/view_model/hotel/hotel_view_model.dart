@@ -1,11 +1,15 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:premio_inn/model/booking/room_availability/request.dart';
+import 'package:premio_inn/model/booking/room_availability/response.dart';
 import 'package:premio_inn/model/home/all_rooms.dart';
+import 'package:premio_inn/services/booking/room_availability.dart';
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/navigations.dart';
 import 'package:premio_inn/utils/strings.dart';
 import 'package:premio_inn/view/screens/hotel_view/widgets/bottom_sheet.dart';
 import 'package:premio_inn/view/screens/main_page/main_page.dart';
+import 'package:premio_inn/view/widgets/button_widget.dart';
 import 'package:premio_inn/view/widgets/show_dialogs.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
@@ -111,6 +115,7 @@ class HotelViewModel extends ChangeNotifier {
     }
     notifyListeners();
   }
+
   // -->> function to get the total days selected
   void daysBetween(DateTime from, DateTime to) {
     from = DateTime(from.year, from.month, from.day);
@@ -128,7 +133,7 @@ class HotelViewModel extends ChangeNotifier {
   }
 
   // -->> to get bottom sheet
-  void selectRoomsAndGuests(double height, int amount,AllRoomsModel hotel) {
+  void selectRoomsAndGuests(double height, int amount, AllRoomsModel hotel) {
     showModalBottomSheet<RoomsAndGuestsBottomSheet>(
       enableDrag: false,
       isDismissible: false,
@@ -145,7 +150,8 @@ class HotelViewModel extends ChangeNotifier {
             height: height,
             child: Scaffold(
                 body: RoomsAndGuestsBottomSheet(
-              amount: amount,hotel: hotel,
+              amount: amount,
+              hotel: hotel,
             )));
       },
     );
@@ -157,6 +163,41 @@ class HotelViewModel extends ChangeNotifier {
   set isFav(value) {
     _isFav = value;
     notifyListeners();
+  }
+
+    // variables
+  bool isLoading = false;
+  // -->> function to check is room available or not
+  Future<bool> isRoomAvailable(
+      DateTimeRange dateRange, String hotelId, int rooms) async {
+    isLoading = true;
+    notifyListeners();
+    final data = RoomAvailabiltyRequestModel(
+      dateTimeRange: dateRange,
+      hotelId: hotelId,
+      numberOfRooms: rooms,
+    );
+    final RoomAvailabilityResponseModel? isRoomAvailableResponse= await RoomAvailabilityService().isRoomAvailabileService(data);
+    if(isRoomAvailableResponse==null){
+      isLoading = false;
+      notifyListeners();
+      ShowDialogs.popUp('Something went wrong !!');
+      return false;  
+    }else if (isRoomAvailableResponse.isAvailable==false) {
+      isLoading = false;
+      notifyListeners();
+      ShowDialogs.popUp(isRoomAvailableResponse.message??'Rooms are not available on the selected range. Please try with other dates.',color: Colors.black87);
+      return false;  
+    }else if (isRoomAvailableResponse.isAvailable==true) {
+      isLoading = false;
+      notifyListeners();
+      return true;  
+    }else{
+      isLoading = false;
+      notifyListeners();
+      ShowDialogs.popUp(isRoomAvailableResponse.message??'Something went wrong !!');
+      return false;  
+    }
   }
 
   // ==================== PAYMENT SECTION ====================
@@ -185,7 +226,8 @@ class HotelViewModel extends ChangeNotifier {
     log('handlerExternalWallet');
   }
 
-  void onBookNow(int amount) {
+  // -->> function to pay online
+  void onPayNowButton(int amount) {
     final Map<String, dynamic> options = {
       "key": KStrings.razorKey,
       "amount": 100,
@@ -203,4 +245,35 @@ class HotelViewModel extends ChangeNotifier {
       log(e.toString());
     }
   }
+
+  // -->> popup to select payment options
+  Future<void> showPaymentOptions(
+      {required double width, required Function onTap}) async {
+    await showDialog(
+        context: Navigations.navigatorKey.currentContext!,
+        builder: (ctx) {
+          return AlertDialog(
+            content: Row(
+              children: [
+                ButtonWidget(
+                  text: 'Pay at hotel',
+                  width: width,
+                  onTap: () {},
+                ),
+                ButtonWidget(
+                  text: 'Pay now',
+                  color: KColors.kThemeGreen,
+                  width: width,
+                  onTap: () {
+                    onTap();
+                  },
+                ),
+              ],
+            ),
+          );
+        });
+  }
+
+  // -->> function to pay at hotel
+  void onPayAtHotelButton() {}
 }

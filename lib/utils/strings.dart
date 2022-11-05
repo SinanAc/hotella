@@ -10,4 +10,5 @@ class KStrings {
   static const String noInterNetImage = 'assets/images/no_internet.png';
   static const String dummyNetImage = 'https://i.pinimg.com/564x/8c/98/99/8c98994518b575bfd8c949e91d20548b.jpg'; 
 
+
 }
