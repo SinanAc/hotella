@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:premio_inn/model/booking/room_availability/request.dart';
 import 'package:premio_inn/model/booking/room_availability/response.dart';
 import 'package:premio_inn/model/home/all_rooms.dart';
-import 'package:premio_inn/services/booking/room_availability.dart';
+import 'package:premio_inn/services/booking/room_availability.dart'; 
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/navigations.dart';
 import 'package:premio_inn/utils/strings.dart';
 import 'package:premio_inn/view/screens/hotel_view/widgets/bottom_sheet.dart';
 import 'package:premio_inn/view/screens/main_page/main_page.dart';
-import 'package:premio_inn/view/widgets/button_widget.dart';
 import 'package:premio_inn/view/widgets/show_dialogs.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
@@ -244,34 +243,6 @@ class HotelViewModel extends ChangeNotifier {
     } catch (e) {
       log(e.toString());
     }
-  }
-
-  // -->> popup to select payment options
-  Future<void> showPaymentOptions(
-      {required double width, required Function onTap}) async {
-    await showDialog(
-        context: Navigations.navigatorKey.currentContext!,
-        builder: (ctx) {
-          return AlertDialog(
-            content: Row(
-              children: [
-                ButtonWidget(
-                  text: 'Pay at hotel',
-                  width: width,
-                  onTap: () {},
-                ),
-                ButtonWidget(
-                  text: 'Pay now',
-                  color: KColors.kThemeGreen,
-                  width: width,
-                  onTap: () {
-                    onTap();
-                  },
-                ),
-              ],
-            ),
-          );
-        });
   }
 
   // -->> function to pay at hotel
