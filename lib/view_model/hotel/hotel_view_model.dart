@@ -6,7 +6,7 @@ import 'package:premio_inn/model/home/all_rooms.dart';
 import 'package:premio_inn/services/booking/room_availability.dart'; 
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/navigations.dart';
-import 'package:premio_inn/utils/strings.dart';
+import 'package:premio_inn/utils/url.dart';
 import 'package:premio_inn/view/screens/hotel_view/widgets/bottom_sheet.dart';
 import 'package:premio_inn/view/screens/main_page/main_page.dart';
 import 'package:premio_inn/view/widgets/show_dialogs.dart';
@@ -228,7 +228,7 @@ class HotelViewModel extends ChangeNotifier {
   // -->> function to pay online
   void onPayNowButton(int amount) {
     final Map<String, dynamic> options = {
-      "key": KStrings.razorKey,
+      "key": Url.razorKey,
       "amount": 100,
       "name": "Hotella",
       "description": "Payment to book your selected room via Hotella",

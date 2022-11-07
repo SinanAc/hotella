@@ -11,9 +11,9 @@ class SignInResponseModel {
 
   factory SignInResponseModel.fromJson(Map<String, dynamic> json) =>
       SignInResponseModel(
-        isSuccess: json["success"]??false,
-        profile: Profile.fromJson(json["profile"]??{}),
-        message: json["message"]??"",
+        isSuccess: json["success"],
+        profile: Profile.fromJson(json["profile"]),
+        message: json["message"]
       );
 }
 

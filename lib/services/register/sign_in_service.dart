@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:premio_inn/model/register/sign_in/sign_in_model.dart';
 import 'package:premio_inn/model/register/sign_in/signin_response_model.dart';
@@ -8,10 +10,13 @@ import 'package:premio_inn/utils/url.dart';
 
 class SignInService {
   Future<SignInResponseModel?> signInRepo(SignInModel data) async {
+    log('==========');
     if (await internetCheck()) {
       try {
+        log('===');
         final Response response =
             await DioService.postMethod(url: Url.login, value: data.toJson());
+            log('#######');
         if (response.statusCode! >= 200 || response.statusCode! <= 299) {
           return SignInResponseModel.fromJson(response.data);
         } else {
