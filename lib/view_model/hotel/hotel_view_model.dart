@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:premio_inn/model/booking/room_availability/request.dart';
-import 'package:premio_inn/model/booking/room_availability/response.dart';
+import 'package:premio_inn/model/bookings/room_availability/request.dart';
+import 'package:premio_inn/model/bookings/room_availability/response.dart';
 import 'package:premio_inn/model/home/all_rooms.dart';
 import 'package:premio_inn/services/booking/room_availability.dart'; 
 import 'package:premio_inn/utils/colors.dart';
