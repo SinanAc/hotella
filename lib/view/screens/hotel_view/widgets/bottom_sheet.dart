@@ -32,8 +32,8 @@ class RoomsAndGuestsBottomSheet extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const TitleWidget(
-                    text: 'Select rooms & guests',
+                   TitleWidget(
+                    'Select rooms & guests',
                     fontSize: 22,
                   ),
                   const Spacer(),
@@ -52,7 +52,7 @@ class RoomsAndGuestsBottomSheet extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const TextWidget(text: 'Dates', size: 20),
+                   TextWidget( 'Dates', size: 20),
                   TextButton(
                     onPressed: () {
                       hotelPro.selectDate(context, amount);
@@ -70,7 +70,7 @@ class RoomsAndGuestsBottomSheet extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  const TextWidget(text: 'Rooms', size: 20),
+                   TextWidget( 'Rooms', size: 20),
                   Container(
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey),
@@ -87,7 +87,7 @@ class RoomsAndGuestsBottomSheet extends StatelessWidget {
                           ),
                         ),
                         KSizedBox.kWidth_15,
-                        TextWidget(text: '${hotelPro.rooms}', size: 20),
+                        TextWidget( '${hotelPro.rooms}', size: 20),
                         KSizedBox.kWidth_15,
                         IconButton(
                           onPressed: () {
@@ -106,7 +106,7 @@ class RoomsAndGuestsBottomSheet extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  const TextWidget(text: 'Guests', size: 20),
+                   TextWidget( 'Guests', size: 20),
                   Container(
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey),
@@ -123,7 +123,7 @@ class RoomsAndGuestsBottomSheet extends StatelessWidget {
                           ),
                         ),
                         KSizedBox.kWidth_15,
-                        TextWidget(text: '${hotelPro.guests}', size: 20),
+                        TextWidget('${hotelPro.guests}', size: 20),
                         KSizedBox.kWidth_15,
                         IconButton(
                           onPressed: () {

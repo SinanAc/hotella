@@ -28,11 +28,11 @@ class BottomButtonWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                      TitleWidget(
-                      text: price,
+                      price,
                       fontSize: 20,
                     ),
                     TitleWidget(
-                      text: 'Total amount',
+                      'Total amount',
                       fontSize: 18,
                       color: Colors.grey.shade700,
                     ),

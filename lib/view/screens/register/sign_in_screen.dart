@@ -30,13 +30,13 @@ class SignInScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const TitleWidget(
-                      text: 'Sign in to',
+                     TitleWidget(
+                       'Sign in to',
                       color: KColors.kWhiteColor,
                     ),
                     KSizedBox.kHeigh_5,
-                    const TitleWidget(
-                      text: 'Hotella',
+                     TitleWidget(
+                      'Hotella',
                       color: KColors.kThemeYellow,
                     ),
                     KSizedBox.kHeigh_15,

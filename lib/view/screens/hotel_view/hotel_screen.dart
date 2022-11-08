@@ -1,9 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:premio_inn/model/home/all_rooms.dart';
 import 'package:premio_inn/utils/colors.dart';
+import 'package:premio_inn/utils/navigations.dart';
 import 'package:premio_inn/utils/sizes.dart';
 import 'package:premio_inn/view/screens/hotel_view/widgets/amenities.dart';
 import 'package:premio_inn/view/screens/hotel_view/widgets/booking_details.dart';
@@ -50,7 +49,7 @@ class HotelScreen extends StatelessWidget {
                                 SizedBox(
                                   width: size.width / 1.6,
                                   child: TitleWidget(
-                                    text: hotel.property?.propertyName ??
+                                    hotel.property?.propertyName ??
                                         'Hotel name',
                                     fontSize: 24,
                                   ),
@@ -59,7 +58,7 @@ class HotelScreen extends StatelessWidget {
                                 SizedBox(
                                   width: size.width / 1.6,
                                   child: TextWidget(
-                                      text: hotel.property?.address ??
+                                      hotel.property?.address ??
                                           'No address provided'),
                                 ),
                               ],
@@ -78,8 +77,8 @@ class HotelScreen extends StatelessWidget {
                           ],
                         ),
                         KSizedBox.kHeigh_25,
-                        const TitleWidget(
-                            text: "Your booking details", fontSize: 20),
+                         TitleWidget(
+                            "Your booking details", fontSize: 20),
                         KSizedBox.kHeigh_10,
                         Card(
                           color: Theme.of(context).scaffoldBackgroundColor,
@@ -130,7 +129,7 @@ class HotelScreen extends StatelessWidget {
                           ),
                         ),
                         KSizedBox.kHeigh_30,
-                        const TitleWidget(text: "Amenities", fontSize: 20),
+                       TitleWidget("Amenities", fontSize: 20),
                         KSizedBox.kHeigh_15,
                         const AmenitiesWidget(
                             icon: Icons.wifi, title: 'Free Wifi'),
@@ -141,7 +140,7 @@ class HotelScreen extends StatelessWidget {
                             icon: Icons.power_settings_new,
                             title: 'Power backup'),
                         KSizedBox.kHeigh_30,
-                        const TitleWidget(text: "House policies", fontSize: 20),
+                         TitleWidget("House policies", fontSize: 20),
                         KSizedBox.kHeigh_15,
                         Row(
                           children: [
@@ -150,10 +149,10 @@ class HotelScreen extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const TextWidget(text: 'Check-in', size: 18),
+                                 TextWidget('Check-in', size: 18),
                                 KSizedBox.kHeigh_5,
                                 TextWidget(
-                                  text: hotel.checkinTime ?? '12PM',
+                                   hotel.checkinTime ?? '12PM',
                                   size: 19,
                                   color: Colors.grey.shade700,
                                 ),
@@ -163,10 +162,10 @@ class HotelScreen extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const TextWidget(text: 'Checkout', size: 18),
+                                 TextWidget('Checkout', size: 18),
                                 KSizedBox.kHeigh_5,
                                 TextWidget(
-                                  text: hotel.checkinTime ?? '12PM',
+                                   hotel.checkinTime ?? '12PM',
                                   size: 19,
                                   color: Colors.grey.shade700,
                                 ),
@@ -176,10 +175,10 @@ class HotelScreen extends StatelessWidget {
                           ],
                         ),
                         KSizedBox.kHeigh_30,
-                        const TitleWidget(text: "About", fontSize: 20),
+                        TitleWidget( "About", fontSize: 20),
                         KSizedBox.kHeigh_10,
                         TextWidget(
-                            text: hotel.property?.propertyDetails ??
+                           hotel.property?.propertyDetails ??
                                 'No description provided'),
                       ],
                     ),
@@ -194,15 +193,16 @@ class HotelScreen extends StatelessWidget {
               final bool isRoomAvailable = await hotelPro.isRoomAvailable(
                   hotelPro.selectedDates, hotel.id ?? '', hotelPro.rooms);
               if (isRoomAvailable) {
-                log('==============');
                 final String bookingId =
-                    await hotelPro.getBookingId(hotel.id ?? '', hotelPro.rooms);
-                    log('==######==');
+                    await hotelPro.getBookingId(hotel.id ?? '', hotelPro.rooms,hotelPro.selectedDates);
                 bookingId.isNotEmpty
                     ? showPaymentOptions(
                         width: size.width / 2,
                         onPayAtHotelButton: () {},
-                        onPayNowButton: () {},
+                        onPayNowButton: () {
+                          Navigations.pop();
+                          hotelPro.onPayNowButton(hotelPro.totalAmount(hotel.price??0));
+                        },
                         price: hotelPro.totalAmount(hotel.price ?? 0),
                       )
                     : null;
@@ -212,15 +212,23 @@ class HotelScreen extends StatelessWidget {
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
         ),
-        if (hotelPro.isLoading)
+        if (hotelPro.isLoading || hotelPro.isPaynowLoading)
           const Opacity(
             opacity: 0.8,
             child: ModalBarrier(dismissible: false, color: Colors.black),
           ),
-        if (hotelPro.isLoading)
-          const Center(
-            child: LoadingIndicator(),
-          ),
+        if (hotelPro.isLoading || hotelPro.isPaynowLoading)
+           Scaffold(
+            backgroundColor: Colors.transparent,
+             body: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const LoadingIndicator(),
+                KSizedBox.kHeigh_15,
+                TextWidget( 'Please wait...',color: Colors.white)
+                ],
+                     ),
+           ),
       ],
     );
   }

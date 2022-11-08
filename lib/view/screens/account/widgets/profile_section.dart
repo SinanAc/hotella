@@ -26,13 +26,13 @@ class ProfileSection extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const TitleWidget(
-                    text: 'Muhammad Sinan',
+                   TitleWidget(
+                    'Muhammad Sinan',
                     fontSize: 20,
                   ),
                   KSizedBox.kHeigh_5,
                   TitleWidget(
-                    text: '+91 9744875629',
+                    '+91 9744875629',
                     fontSize: 16,
                     color: Colors.grey.shade600,
                   ),

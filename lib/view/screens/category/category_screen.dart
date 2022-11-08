@@ -9,8 +9,6 @@ import 'package:premio_inn/view_model/category/category.dart';
 import 'package:premio_inn/view_model/home/home_view_model.dart';
 import 'package:provider/provider.dart';
 
-final List<String> list = ['Low to high', 'High to low'];
-
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({
     super.key,
@@ -46,13 +44,16 @@ class CategoryScreen extends StatelessWidget {
                       ),
                       KSizedBox.kWidth_15,
                       TitleWidget(
-                        text: categoryName,
+                        categoryName,
                         fontSize: 24,
                         color: KColors.kThemeYellow,
                       ),
                       const Spacer(),
                       DropdownButton(
-                        hint:  TextWidget(text: 'Price',color: Colors.grey.shade300,),
+                        hint: TextWidget(
+                          'Price',
+                          color: Colors.grey.shade300,
+                        ),
                         value: categoryPro.dropdownValue,
                         items: categoryPro.dropdownItems,
                         onChanged: (String? val) {

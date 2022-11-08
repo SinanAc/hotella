@@ -68,8 +68,8 @@ class _OtpBottomSheet extends State<OtpBottomSheet> {
           child: Column(
             children: [
               KSizedBox.kHeigh_10,
-            const TitleWidget(
-              text: 'Verify otp',
+             TitleWidget(
+               'Verify otp',
               color: KColors.kThemeGreen,
             ),
             KSizedBox.kHeigh_20,
@@ -96,7 +96,7 @@ class _OtpBottomSheet extends State<OtpBottomSheet> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                 const TitleWidget(text: 'Times up !!!', fontSize: 20,color: KColors.kRedColor,),
+                  TitleWidget('Times up !!!', fontSize: 20,color: KColors.kRedColor,),
                  KSizedBox.kWidth_10,
                  ButtonWidget(text: 'Go back', onTap: (){
                   Navigations.pop();
@@ -106,10 +106,10 @@ class _OtpBottomSheet extends State<OtpBottomSheet> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const TitleWidget(text: 'You have  ', fontSize: 16),
+                 TitleWidget('You have  ', fontSize: 16),
                 TitleWidget(
-                    text: '$_start', fontSize: 20, color: KColors.kLiteGreen),
-                const TitleWidget(text: '  Seconds remaining', fontSize: 16),
+                   '$_start', fontSize: 20, color: KColors.kLiteGreen),
+                 TitleWidget('  Seconds remaining', fontSize: 16),
               ],
             ),
             const Spacer(),

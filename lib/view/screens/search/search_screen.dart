@@ -35,7 +35,7 @@ class SearchScreen extends StatelessWidget {
                           return Padding(
                             padding: const EdgeInsets.all(4.0),
                             child: ListTile(
-                                title: TitleWidget(text: list[index]),
+                                title: TitleWidget(list[index]),
                                 tileColor: const Color.fromARGB(29, 3, 2, 0),
                                 onTap: () {
                                   searchProvider.getSearchResults(

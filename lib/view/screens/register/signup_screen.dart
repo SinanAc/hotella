@@ -28,13 +28,13 @@ class SignupScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const TitleWidget(
-                      text: 'Sign up to',
+                     TitleWidget(
+                      'Sign up to',
                       color: KColors.kWhiteColor,
                     ),
                     KSizedBox.kHeigh_5,
-                    const TitleWidget(
-                      text: 'Eat 24',
+                     TitleWidget(
+                      'Eat 24',
                       color: KColors.kThemeYellow,
                     ),
                     KSizedBox.kHeigh_15,

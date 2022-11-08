@@ -68,14 +68,14 @@ class MainCard extends StatelessWidget {
                             SizedBox(
                               width: size.width / 1.8,
                               child: TitleWidget(
-                                text: hotel.property?.propertyName ??
+                                hotel.property?.propertyName ??
                                     'Hotel name is not available',
                                 fontSize: 18,
                                 color: KColors.kWhiteColor,
                               ),
                             ),
                             TitleWidget(
-                              text: hotel.property?.city ?? '',
+                               hotel.property?.city ?? '',
                               fontSize: 16,
                               color: Colors.white70,
                             ),
@@ -90,7 +90,7 @@ class MainCard extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 12, vertical: 8),
                         child: TitleWidget(
-                          text: '₹ ${hotel.price.toString()}',
+                           '₹ ${hotel.price.toString()}',
                           fontSize: 18,
                           color: KColors.kWhiteColor,
                         ),

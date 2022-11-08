@@ -17,7 +17,7 @@ class AmenitiesWidget extends StatelessWidget {
       children: [
         Icon(icon),
         KSizedBox.kWidth_15,
-        TextWidget(text: title),
+        TextWidget( title),
       ],
     );
   }

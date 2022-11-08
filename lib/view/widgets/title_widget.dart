@@ -1,27 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:premio_inn/utils/colors.dart';
 
-class TitleWidget extends StatelessWidget {
-  final String text;
-  final Color color;
-  final double fontSize;
-  const TitleWidget({
+class TitleWidget extends Text {
+    TitleWidget(
+    super.data, {
     Key? key,
-    required this.text,
-    this.color = Colors.black,
-    this.fontSize = 20,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: TextStyle(
-        color: color, 
-        fontSize: fontSize, 
-        fontWeight: FontWeight.bold,
-        fontFamily: 'SubMainFont',
-        letterSpacing: 1,
-        ),
-    );
-  }
+    double fontSize = 16,
+    Color color = KColors.kBlackColor,
+  }) : super(
+          key: key,
+          style: TextStyle(
+            color: color,
+            fontSize: fontSize,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'SubMainFont',
+            wordSpacing: 1,
+          ),
+        );
 }

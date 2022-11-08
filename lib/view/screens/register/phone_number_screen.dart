@@ -30,13 +30,13 @@ class PhoneNumberScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const TitleWidget(
-                    text: "Let's Register",
+                   TitleWidget(
+                    "Let's Register",
                     color: KColors.kWhiteColor,
                   ),
                   KSizedBox.kHeigh_5,
-                  const TitleWidget(
-                    text: 'Hotella',
+                   TitleWidget(
+                     'Hotella',
                     color: KColors.kThemeYellow,
                   ),
                   KSizedBox.kHeigh_20,

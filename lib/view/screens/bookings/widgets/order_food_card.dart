@@ -28,12 +28,12 @@ class OrderFoodCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TitleWidget(
-                    text: 'Chicken Burger',
+                    'Chicken Burger',
                     fontSize: 16,
                     color: Colors.grey.shade700,
                   ),
-                  const TitleWidget(text: '₹340', fontSize: 16),
-                  const TitleWidget(text: 'Arriving today', fontSize: 16,color: KColors.kLiteGreen),
+                   TitleWidget('₹340', fontSize: 16),
+                   TitleWidget('Arriving today', fontSize: 16,color: KColors.kLiteGreen),
                 ],
               ),
             ],

@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:premio_inn/model/bookings/booking/booking_req.dart';
 import 'package:premio_inn/model/bookings/booking/booking_respo.dart';
@@ -11,10 +10,8 @@ import 'package:premio_inn/model/home/all_rooms.dart';
 import 'package:premio_inn/services/booking/booking_service.dart';
 import 'package:premio_inn/services/booking/paynow_service.dart';
 import 'package:premio_inn/services/booking/room_availability.dart';
-import 'package:premio_inn/services/dio/interceptor.dart'; 
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/navigations.dart';
-import 'package:premio_inn/utils/url.dart';
 import 'package:premio_inn/view/screens/hotel_view/widgets/bottom_sheet.dart';
 import 'package:premio_inn/view/screens/main_page/main_page.dart';
 import 'package:premio_inn/view/widgets/show_dialogs.dart';
@@ -207,12 +204,13 @@ class HotelViewModel extends ChangeNotifier {
     }
   }
 
-    Future<String> getBookingId(String hotelId, int rooms) async {
+    Future<String> getBookingId(String hotelId, int rooms,DateTimeRange dateRange) async {
     isLoading = true;
     notifyListeners();
     final data = BookingRequestModel(
       hotelId: hotelId,
       rooms: rooms,
+      dateTimeRange: dateRange
     );
     final BookingResponseModel? bookingResponse= await BookingService().bookingService(data);
     if(bookingResponse==null){
@@ -240,6 +238,7 @@ class HotelViewModel extends ChangeNotifier {
 
 
   // ==================== BOOKING SECTION ====================
+
   late Razorpay razorPay;
   HotelViewModel() {
     razorPay = Razorpay();
@@ -248,11 +247,12 @@ class HotelViewModel extends ChangeNotifier {
     razorPay.on(Razorpay.EVENT_EXTERNAL_WALLET, handlerExternalWallet);
   }
 
-  void disposes() {
-    razorPay.clear();
-  }
+  // void dispose() {
+  //   razorPay.clear();
+  // }
 
-  void handlerPaymentSuccess(PaymentSuccessResponse response) {
+  void handlerPaymentSuccess(PaymentSuccessResponse response)async {
+    log(response.signature.toString());
     Navigations.pushRemoveUntil(const MainPage());
     log('Payment success==============');
   }
@@ -262,7 +262,7 @@ class HotelViewModel extends ChangeNotifier {
   }
 
   void handlerExternalWallet(ExternalWalletResponse response) {
-    log('handlerExternalWallet');
+    log('');
   }
 
   // -->> function to pay online
@@ -272,21 +272,10 @@ class HotelViewModel extends ChangeNotifier {
       ShowDialogs.popUp('Oops!! Something went wrong. Please try again later');
       return;
     }
-    //final Map<String, dynamic> options = {
-      // "key": Url.razorKey,
-      // "amount": response.amount,
-
-      // "name": "Hotella",
-      // "description": "Payment to book your selected room via Hotella",
-      // "prefill": {"contact": "9744875629", "email": "sinanac124@gmail.com"},
-      // "external": {
-      //   "wallets": ["paytm"]
-      // }
-   //};
     RazorpayCheckoutModel options = RazorpayCheckoutModel(
       key: response.keyId,
       amount: response.amount.toString(),
-      currency: "INR",
+      currency: response.currency,
       name: "Hotella",
       description: "Payment to book your selected room via Hotella",
       orderId: response.id,
@@ -300,7 +289,9 @@ class HotelViewModel extends ChangeNotifier {
   }
 
 
-   // ===========================  ================================
+   // ===========================  ================================ //
+
+
     bool isPaynowLoading = false;
       Future<PayNowResponseModel?> getOnlinePaymentData(int amount) async {
     isPaynowLoading = true;

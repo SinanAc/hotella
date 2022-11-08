@@ -23,12 +23,12 @@ Future<void> showPaymentOptions({
             child:Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const TextWidget(
-                  text: 'Total amount to be paid',
+                 TextWidget(
+                'Total amount to be paid',
                 ),
                  KSizedBox.kHeigh_5,
                  TitleWidget(
-                  text: '₹$price',
+                  '₹$price',
                 ),
                 KSizedBox.kHeigh_20,
                 ButtonWidget(

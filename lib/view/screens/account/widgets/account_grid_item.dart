@@ -46,7 +46,7 @@ class AccountGridItem extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(left:8.0),
-              child: TitleWidget(text: title, fontSize: 20),
+              child: TitleWidget(title, fontSize: 20),
             )
           ],
         ),
