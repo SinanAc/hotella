@@ -63,7 +63,6 @@ class SignupScreen extends StatelessWidget {
                               KSizedBox.kHeigh_20,
                               PasswordTextFieldWidget(
                                 hintText: 'Password',
-                                icon: Icons.visibility,
                                 controller: signupController.passwordController,
                                 validator: signupController.passwordValidator,
                                 signPro: Provider.of<SignUpViewModel>(context,
@@ -72,7 +71,6 @@ class SignupScreen extends StatelessWidget {
                               KSizedBox.kHeigh_20,
                               PasswordTextFieldWidget(
                                 hintText: 'Confirm Password',
-                                icon: Icons.visibility,
                                 controller:
                                     signupController.confirmPasswordController,
                                 validator:
