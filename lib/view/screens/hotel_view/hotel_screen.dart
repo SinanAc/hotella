@@ -69,8 +69,7 @@ class HotelScreen extends StatelessWidget {
                               return IconButton(
                                 icon: val.isFav ? val.favIcon : val.notFavIcon,
                                 onPressed: () {
-                                  hotelPro.onPayNowButton(hotel.price??0);
-                                  //val.isFav = !val.isFav;
+                                  val.isFav = !val.isFav;
                                 },
                               );
                             })
