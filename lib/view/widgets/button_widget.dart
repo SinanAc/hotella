@@ -4,7 +4,7 @@ import 'package:premio_inn/utils/colors.dart';
 class ButtonWidget extends StatelessWidget {
   final String text;
   final Color color;
-  final Function onTap;
+  final VoidCallback onTap;
   final double width;
   const ButtonWidget({
     Key? key,
@@ -29,9 +29,7 @@ class ButtonWidget extends StatelessWidget {
           ),
           elevation: 0,
         ),
-        onPressed: () {
-          onTap();
-        },
+        onPressed: onTap,
         child: Text(
           text,
           style: const TextStyle(

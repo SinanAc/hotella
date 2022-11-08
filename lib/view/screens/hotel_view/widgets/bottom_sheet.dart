@@ -8,6 +8,7 @@ import 'package:premio_inn/view/widgets/button_widget.dart';
 import 'package:premio_inn/view/widgets/loading_indicator.dart';
 import 'package:premio_inn/view/widgets/text_widget.dart';
 import 'package:premio_inn/view/widgets/title_widget.dart';
+import 'package:premio_inn/view_model/hotel/booking_.dart';
 import 'package:premio_inn/view_model/hotel/hotel_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +22,7 @@ class RoomsAndGuestsBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final hotelPro = Provider.of<HotelViewModel>(context);
+    final bookingPro = Provider.of<BookingViewModel>(context);
     return Scaffold(
       extendBody: true,
       backgroundColor: Colors.transparent,
@@ -150,13 +152,13 @@ class RoomsAndGuestsBottomSheet extends StatelessWidget {
                     color: KColors.kRedColor,
                     width: size.width / 2.3,
                   ),
-                  hotelPro.isLoading
+                  bookingPro.isLoading
                       ? const LoadingIndicator(color: KColors.kThemeGreen)
                       : ButtonWidget(
                           text: 'Confirm',
                           onTap: () async {
                             final isAvailable =
-                                await hotelPro.isRoomAvailable(
+                                await bookingPro.isRoomAvailable(
                                     hotelPro.selectedDates,
                                     hotel.id ?? '',
                                     hotelPro.rooms);

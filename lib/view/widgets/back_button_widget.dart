@@ -14,9 +14,7 @@ class BackButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigations.pop();
-      },
+      onTap: Navigations.pop,
       child: Card(
         color: buttonColor,
         margin: const EdgeInsets.only(left: 20, top: 15),
