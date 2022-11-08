@@ -1,9 +1,17 @@
 import 'dart:developer';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:premio_inn/model/bookings/booking/booking_req.dart';
+import 'package:premio_inn/model/bookings/booking/booking_respo.dart';
+import 'package:premio_inn/model/bookings/payment/paynow_respo_model.dart';
+import 'package:premio_inn/model/bookings/payment/razorpay_checkout.dart';
 import 'package:premio_inn/model/bookings/room_availability/request.dart';
 import 'package:premio_inn/model/bookings/room_availability/response.dart';
 import 'package:premio_inn/model/home/all_rooms.dart';
-import 'package:premio_inn/services/booking/room_availability.dart'; 
+import 'package:premio_inn/services/booking/booking_service.dart';
+import 'package:premio_inn/services/booking/paynow_service.dart';
+import 'package:premio_inn/services/booking/room_availability.dart';
+import 'package:premio_inn/services/dio/interceptor.dart'; 
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/navigations.dart';
 import 'package:premio_inn/utils/url.dart';
@@ -199,7 +207,39 @@ class HotelViewModel extends ChangeNotifier {
     }
   }
 
-  // ==================== PAYMENT SECTION ====================
+    Future<String> getBookingId(String hotelId, int rooms) async {
+    isLoading = true;
+    notifyListeners();
+    final data = BookingRequestModel(
+      hotelId: hotelId,
+      rooms: rooms,
+    );
+    final BookingResponseModel? bookingResponse= await BookingService().bookingService(data);
+    if(bookingResponse==null){
+      isLoading = false;
+      notifyListeners();
+      ShowDialogs.popUp('Something went wrong !!');
+      return '';  
+    }else if (bookingResponse.success==false) {
+      isLoading = false;
+      notifyListeners();
+      ShowDialogs.popUp(bookingResponse.message??'Rooms are not available on the selected range. Please try with other dates.',color: Colors.black87);
+      return '';  
+    }else if (bookingResponse.success==true) {
+      isLoading = false;
+      notifyListeners();
+      return bookingResponse.response?.room??'';  
+    }else{
+      isLoading = false;
+      notifyListeners();
+      ShowDialogs.popUp(bookingResponse.message??'Something went wrong !!');
+      return '';  
+    }
+  }
+
+
+
+  // ==================== BOOKING SECTION ====================
   late Razorpay razorPay;
   HotelViewModel() {
     razorPay = Razorpay();
@@ -226,22 +266,60 @@ class HotelViewModel extends ChangeNotifier {
   }
 
   // -->> function to pay online
-  void onPayNowButton(int amount) {
-    final Map<String, dynamic> options = {
-      "key": Url.razorKey,
-      "amount": 100,
-      "name": "Hotella",
-      "description": "Payment to book your selected room via Hotella",
-      "prefill": {"contact": "9744875629", "email": "sinanac124@gmail.com"},
-      "external": {
-        "wallets": ["paytm"]
-      }
-    };
+  Future<void> onPayNowButton(int amount)async {
+    final PayNowResponseModel? response = await getOnlinePaymentData(amount);
+    if(response==null){
+      ShowDialogs.popUp('Oops!! Something went wrong. Please try again later');
+      return;
+    }
+    //final Map<String, dynamic> options = {
+      // "key": Url.razorKey,
+      // "amount": response.amount,
+
+      // "name": "Hotella",
+      // "description": "Payment to book your selected room via Hotella",
+      // "prefill": {"contact": "9744875629", "email": "sinanac124@gmail.com"},
+      // "external": {
+      //   "wallets": ["paytm"]
+      // }
+   //};
+    RazorpayCheckoutModel options = RazorpayCheckoutModel(
+      key: response.keyId,
+      amount: response.amount.toString(),
+      currency: "INR",
+      name: "Hotella",
+      description: "Payment to book your selected room via Hotella",
+      orderId: response.id,
+    );
     try {
-      razorPay.open(options);
+      razorPay.open(options.toJson());
       notifyListeners();
     } catch (e) {
       log(e.toString());
+    }
+  }
+
+
+   // ===========================  ================================
+    bool isPaynowLoading = false;
+      Future<PayNowResponseModel?> getOnlinePaymentData(int amount) async {
+    isPaynowLoading = true;
+    notifyListeners();
+    final PayNowResponseModel? response= await PayNowService().payNowService(amount);
+    if(response==null){
+      isPaynowLoading = false;
+      notifyListeners();
+      ShowDialogs.popUp('Something went wrong !!');
+      return null;  
+    }else if (response.id !=null) {
+      isPaynowLoading = false;
+      notifyListeners();
+      return response;  
+    }else{
+      isPaynowLoading = false;
+      notifyListeners();
+      ShowDialogs.popUp(response.message??'Something went wrong !!');
+      return null;  
     }
   }
 

@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:premio_inn/model/register/sign_in/sign_in_model.dart';
 import 'package:premio_inn/model/register/sign_in/signin_response_model.dart';

@@ -1,28 +1,27 @@
 import 'package:dio/dio.dart';
-import 'package:premio_inn/model/bookings/room_availability/request.dart';
-import 'package:premio_inn/model/bookings/room_availability/response.dart';
+import 'package:premio_inn/model/bookings/booking/booking_req.dart';
+import 'package:premio_inn/model/bookings/booking/booking_respo.dart';
 import 'package:premio_inn/services/dio/api_exceptions.dart';
-import 'package:premio_inn/services/dio/dio_service.dart';
+import 'package:premio_inn/services/dio/interceptor.dart';
 import 'package:premio_inn/services/dio/internet_checker.dart';
 import 'package:premio_inn/utils/url.dart';
 
 class BookingService {
-  // -->> api function to check is room available or not
-  Future<RoomAvailabilityResponseModel?> isRoomAvailabileService(RoomAvailabiltyRequestModel data)async{
+  Future<BookingResponseModel?> bookingService(BookingRequestModel data)async{
+    final Dio dios = await Interceptorapi.getApiUser();
         if (await internetCheck()) {
       try {
-        final Response response =
-            await DioService.postMethod(url: Url.isRoomAvailabile, value: data.toJson());
+        final Response response = await dios.post(Url.booking,data: data.toJson());
         if (response.statusCode! >= 200 || response.statusCode! <= 299) {
-          return RoomAvailabilityResponseModel.fromJson(response.data);
+          return BookingResponseModel.fromJson(response.data);
         } else {
           return null;
         }
       } catch (e) {
-        return RoomAvailabilityResponseModel(message: ApiExceptions.handleError(e));
+        return BookingResponseModel(message: ApiExceptions.handleError(e));
       }
     } else {
-      return RoomAvailabilityResponseModel(message: "No Internet !!");
+      return BookingResponseModel(message: "No Internet !!");
     }
   }
 }

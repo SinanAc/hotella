@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:premio_inn/model/home/all_rooms.dart';
@@ -23,10 +25,11 @@ class HotelScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final hotelPro = Provider.of<HotelViewModel>(context);
     return Stack(
-      children: 
-        [Scaffold(
+      children: [
+        Scaffold(
           key: hotelPro.scaffoldKey,
-          appBar: AppBar(toolbarHeight: 0, backgroundColor: KColors.kThemeGreen),
+          appBar:
+              AppBar(toolbarHeight: 0, backgroundColor: KColors.kThemeGreen),
           body: SafeArea(
             child: SingleChildScrollView(
               child: Column(
@@ -62,11 +65,13 @@ class HotelScreen extends StatelessWidget {
                               ],
                             ),
                             const Spacer(),
-                            Consumer<HotelViewModel>(builder: (context, val, _) {
+                            Consumer<HotelViewModel>(
+                                builder: (context, val, _) {
                               return IconButton(
                                 icon: val.isFav ? val.favIcon : val.notFavIcon,
                                 onPressed: () {
-                                  val.isFav = !val.isFav;
+                                  hotelPro.onPayNowButton(hotel.price??0);
+                                  //val.isFav = !val.isFav;
                                 },
                               );
                             })
@@ -96,7 +101,9 @@ class HotelScreen extends StatelessWidget {
                                     '${DateFormat('EEE, MMM d').format(hotelPro.selectedDates.start)} - ${DateFormat('EEE, MMM d').format(hotelPro.selectedDates.end)}',
                                 onTap: () {
                                   hotelPro.selectRoomsAndGuests(
-                                      size.height / 1.9, hotel.price ?? 0, hotel);
+                                      size.height / 1.9,
+                                      hotel.price ?? 0,
+                                      hotel);
                                 },
                               ),
                               KSizedBox.kHeigh_5,
@@ -114,7 +121,9 @@ class HotelScreen extends StatelessWidget {
                                     '${hotelPro.rooms} Room, ${hotelPro.guests} Guests',
                                 onTap: () {
                                   hotelPro.selectRoomsAndGuests(
-                                      size.height / 1.9, hotel.price ?? 0, hotel);
+                                      size.height / 1.9,
+                                      hotel.price ?? 0,
+                                      hotel);
                                 },
                               ),
                             ]),
@@ -123,12 +132,14 @@ class HotelScreen extends StatelessWidget {
                         KSizedBox.kHeigh_30,
                         const TitleWidget(text: "Amenities", fontSize: 20),
                         KSizedBox.kHeigh_15,
-                        const AmenitiesWidget(icon: Icons.wifi, title: 'Free Wifi'),
+                        const AmenitiesWidget(
+                            icon: Icons.wifi, title: 'Free Wifi'),
                         KSizedBox.kHeigh_10,
                         const AmenitiesWidget(icon: Icons.tv, title: 'TV'),
                         KSizedBox.kHeigh_10,
                         const AmenitiesWidget(
-                            icon: Icons.power_settings_new, title: 'Power backup'),
+                            icon: Icons.power_settings_new,
+                            title: 'Power backup'),
                         KSizedBox.kHeigh_30,
                         const TitleWidget(text: "House policies", fontSize: 20),
                         KSizedBox.kHeigh_15,
@@ -179,27 +190,37 @@ class HotelScreen extends StatelessWidget {
           ),
           floatingActionButton: BottomButtonWidget(
             price: '₹${hotelPro.totalAmount(hotel.price ?? 0)}',
-            onTap: () async{
-              final bool isRoomAvailable = await hotelPro.isRoomAvailable(hotelPro.selectedDates,hotel.id??'',hotelPro.rooms);
-              isRoomAvailable? showPaymentOptions(
-                  width: size.width / 2,
-                  onPayAtHotelButton: () {},
-                  onPayNowButton: () {},
-                  price: hotelPro.totalAmount(hotel.price ?? 0),
-                  ):null;
+            onTap: () async {
+              final bool isRoomAvailable = await hotelPro.isRoomAvailable(
+                  hotelPro.selectedDates, hotel.id ?? '', hotelPro.rooms);
+              if (isRoomAvailable) {
+                log('==============');
+                final String bookingId =
+                    await hotelPro.getBookingId(hotel.id ?? '', hotelPro.rooms);
+                    log('==######==');
+                bookingId.isNotEmpty
+                    ? showPaymentOptions(
+                        width: size.width / 2,
+                        onPayAtHotelButton: () {},
+                        onPayNowButton: () {},
+                        price: hotelPro.totalAmount(hotel.price ?? 0),
+                      )
+                    : null;
+              }
             },
           ),
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
         ),
-         if (hotelPro.isLoading)
-              const Opacity(
-                opacity: 0.8,
-                child: ModalBarrier(dismissible: false, color: Colors.black),
-              ),
-            if (hotelPro.isLoading)
-              const Center(
-                child: LoadingIndicator(),
-              ),
+        if (hotelPro.isLoading)
+          const Opacity(
+            opacity: 0.8,
+            child: ModalBarrier(dismissible: false, color: Colors.black),
+          ),
+        if (hotelPro.isLoading)
+          const Center(
+            child: LoadingIndicator(),
+          ),
       ],
     );
   }

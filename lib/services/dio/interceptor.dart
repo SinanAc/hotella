@@ -3,8 +3,8 @@ import 'package:premio_inn/utils/strings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Interceptorapi {
-  final Dio _dio = Dio();
-  Future<Dio> getApiUser() async {
+  static final  Dio _dio = Dio();
+  static Future<Dio> getApiUser() async {
     _dio.interceptors
         .add(InterceptorsWrapper(onRequest: (response, handler) async {
       final SharedPreferences pref = await SharedPreferences.getInstance();
