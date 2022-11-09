@@ -75,15 +75,16 @@ class CategoryScreen extends StatelessWidget {
                   ),
                   KSizedBox.kHeigh_5,
                   Consumer<HomeViewModel>(
-                    builder:(_,provider,__)=> ListView.separated(
+                    builder: (_, provider, __) => ListView.separated(
                       shrinkWrap: true,
                       padding: const EdgeInsets.all(10),
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: provider.categoryWiseList.length,
-                      itemBuilder: ((context, index) {
-                        return MainCard(hotel: provider.categoryWiseList[index]);
+                      itemBuilder: ((_, index) {
+                        return MainCard(
+                            hotel: provider.categoryWiseList[index]);
                       }),
-                      separatorBuilder: ((context, index) {
+                      separatorBuilder: ((_, __) {
                         return KSizedBox.kHeigh_10;
                       }),
                     ),

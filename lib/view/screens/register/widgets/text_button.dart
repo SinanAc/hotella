@@ -5,7 +5,7 @@ class TextButtonWidget extends StatelessWidget {
   final String text;
   final String buttonText;
   final Color color;
-  final Function onTap;
+  final VoidCallback onTap;
   const TextButtonWidget({
     Key? key,
     this.text = '',
@@ -26,9 +26,7 @@ class TextButtonWidget extends StatelessWidget {
           ),
         ),
         TextButton(
-          onPressed: () {
-            onTap();
-          },
+          onPressed: onTap,
           child: Text(
             buttonText,
             style:  TextStyle(

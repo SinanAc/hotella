@@ -111,12 +111,12 @@ class HomeScreen extends StatelessWidget {
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
                                   itemCount: homeProvider.allRooms.length,
-                                  itemBuilder: ((context, index) {
+                                  itemBuilder: ((_, index) {
                                     return MainCard(
                                       hotel: homeProvider.allRooms[index],
                                     );
                                   }),
-                                  separatorBuilder: ((context, index) {
+                                  separatorBuilder: ((_, __) {
                                     return KSizedBox.kHeigh_10;
                                   }),
                                 );

@@ -212,7 +212,7 @@ class HotelScreen extends StatelessWidget {
         ),
         Selector<BookingViewModel, bool>(
           selector: (_, provider) => provider.isLoading,
-          builder: (_, isLoading, child) {
+          builder: (_, isLoading, __) {
             return isLoading
                 ? const Opacity(
                     opacity: 0.7,
@@ -224,7 +224,7 @@ class HotelScreen extends StatelessWidget {
         ),
         Selector<BookingViewModel, bool>(
           selector: (_, provider) => provider.isLoading,
-          builder: (_, isLoading, child) {
+          builder: (_, isLoading, __) {
             return isLoading
                 ? Scaffold(
                     backgroundColor: Colors.transparent,

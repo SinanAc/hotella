@@ -8,7 +8,7 @@ class ComingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
         itemCount: 8,
-        itemBuilder: ((context, index) {
+        itemBuilder: ((_, index) {
           return const SizedBox();
           // MainCard(
           //   name: 'Vistara egmondo',
@@ -17,7 +17,7 @@ class ComingScreen extends StatelessWidget {
           //   size: MediaQuery.of(context).size,
           // );
         }),
-        separatorBuilder: ((context, index) {
+        separatorBuilder: ((_, __) {
           return KSizedBox.kHeigh_10;
         }));
   }

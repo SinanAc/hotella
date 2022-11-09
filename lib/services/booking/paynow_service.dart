@@ -8,7 +8,7 @@ import 'package:premio_inn/utils/url.dart';
 class PayNowService{
     // -->> api function to check is room available or not
   Future<PayNowResponseModel?> payNowService(int amount)async{
-    final Dio dio = await Interceptorapi.getApiUser();
+    final Dio dio = await InterceptorDio.getVerifiedUser();
         if (await internetCheck()) {
       try {
         final Response response = await dio.post(Url.paynow,data: {"price":amount});

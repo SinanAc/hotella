@@ -11,13 +11,12 @@ class AllRoomsResponse {
   String? errormessage;
   bool? isFailed;
 
-  factory AllRoomsResponse.fromJson(Map<String, dynamic> json){
+  factory AllRoomsResponse.fromJson(Map<String, dynamic> json) {
     return AllRoomsResponse(
-        dataList:  (json as List).map((e) {
-          return AllRoomsModel.fromJson(e);
-        }).toList(),
-        isFailed: false,
-      );
+      dataList: (json as List).map((e) {
+        return AllRoomsModel.fromJson(e);
+      }).toList(),
+      isFailed: false,
+    );
   }
-
 }

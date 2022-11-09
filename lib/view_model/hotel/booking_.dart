@@ -90,7 +90,7 @@ class BookingViewModel extends HotelViewModel {
     }
   }
 
-  // =========>>>>>  FUNCTION TO EXECUTE ON BOOKNOW BUTTON  <<<<<==========
+  // =========>>>>>  ON BOOKNOW BUTTON  <<<<<==========
   Future<void> onBookNowButton(AllRoomsModel hotel, double width) async {
     final bool isRoomAvailables =
         await isRoomAvailable(selectedDates, hotel.id ?? '', rooms);
@@ -136,7 +136,7 @@ class BookingViewModel extends HotelViewModel {
     razorPay.clear();
   }
 
-  // =========>>>>>  FUNCTION TO EXECUTE ON PAYNOW BUTTON  <<<<<==========
+  // =========>>>>>  ON PAYNOW BUTTON  <<<<<==========
   Future<void> onPayNowButton(int amount) async {
     final PayNowResponseModel? response = await _getOnlinePaymentData(amount);
     if (response == null) {
@@ -182,6 +182,6 @@ class BookingViewModel extends HotelViewModel {
     }
   }
 
-  // =========>>>>>  FUNCTION TO EXECUTE ON PAY AT HOTEL BUTTON  <<<<<==========
+  // =========>>>>>  ON PAY AT HOTEL BUTTON  <<<<<==========
   Future<void> onPayAtHotelButton() async {}
 }

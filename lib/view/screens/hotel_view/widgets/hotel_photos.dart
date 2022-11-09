@@ -14,7 +14,7 @@ class HotelPhotos extends StatelessWidget {
     required this.hotel,
   }) : super(key: key);
   final Size size;
-  final AllRoomsModel? hotel;
+  final AllRoomsModel hotel;
 
   @override
   Widget build(BuildContext context) {
@@ -42,14 +42,14 @@ class HotelPhotos extends StatelessWidget {
                     ),
                   ),
                   child: Image.network(
-                    hotel?.images?.first[index].url ?? KStrings.dummyNetImage,
+                    hotel.images?.first[index].url ?? KStrings.dummyNetImage,
                     height: size.height / 2.7,
                     width: size.width,
                     fit: BoxFit.cover,
                   ),
                 );
               },
-              itemCount: hotel?.images?.first.length ?? 1,
+              itemCount: hotel.images?.first.length ?? 1,
             )),
         const BackButtonWidget(
           buttonColor: KColors.kWhiteColor,
@@ -61,7 +61,7 @@ class HotelPhotos extends StatelessWidget {
           left: 150,
           child: PageIndicatorWidget(
             controller: hotelProvider.pController,
-            count: hotel?.images?.first.length ?? 1,
+            count: hotel.images?.first.length ?? 1,
           ),
         ),
       ],

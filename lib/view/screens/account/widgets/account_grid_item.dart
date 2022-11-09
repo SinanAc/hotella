@@ -11,13 +11,11 @@ class AccountGridItem extends StatelessWidget {
   }) : super(key: key);
   final IconData icon;
   final String title;
-  final Function onTap;
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        onTap();
-      },
+      onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 25),
         decoration: BoxDecoration(
@@ -34,18 +32,17 @@ class AccountGridItem extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: KColors.kWhiteColor,
-                  boxShadow:  [
+                  boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withOpacity(0.4),
-                      blurRadius: 5.0,
-                      spreadRadius: 1,
-                      offset: const Offset(0, 6)
-                    ),
+                        color: Colors.grey.withOpacity(0.4),
+                        blurRadius: 5.0,
+                        spreadRadius: 1,
+                        offset: const Offset(0, 6)),
                   ]),
-              child: Icon(icon,color: KColors.kIconColor),
+              child: Icon(icon, color: KColors.kIconColor),
             ),
             Padding(
-              padding: const EdgeInsets.only(left:8.0),
+              padding: const EdgeInsets.only(left: 8.0),
               child: TitleWidget(title, fontSize: 20),
             )
           ],

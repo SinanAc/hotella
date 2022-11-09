@@ -7,7 +7,6 @@ import 'package:premio_inn/view/widgets/button_widget.dart';
 import 'package:premio_inn/view/widgets/text_widget.dart';
 import 'package:premio_inn/view/widgets/title_widget.dart';
 
-
 Future<void> showPaymentOptions({
   required double width,
   required Function onPayAtHotelButton,
@@ -16,18 +15,18 @@ Future<void> showPaymentOptions({
 }) async {
   await showDialog(
       context: Navigations.navigatorKey.currentContext!,
-      builder: (ctx) {
+      builder: (_) {
         return AlertDialog(
           content: SizedBox(
             height: 200,
-            child:Column(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                 TextWidget(
-                'Total amount to be paid',
+                TextWidget(
+                  'Total amount to be paid',
                 ),
-                 KSizedBox.kHeigh_5,
-                 TitleWidget(
+                KSizedBox.kHeigh_5,
+                TitleWidget(
                   '₹$price',
                 ),
                 KSizedBox.kHeigh_20,

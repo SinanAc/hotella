@@ -9,7 +9,7 @@ import 'package:premio_inn/view/screens/bookings/booking_screen.dart';
 class MainPageViewModel extends ChangeNotifier {
   // ==========>>>>>  BOTTOM NAVIGATION INDEX  <<<<<==========
   int bottomNavIndex = 0;
-  void changeBottomIndex(int idx){
+  void changeBottomIndex(int idx) {
     bottomNavIndex = idx;
     notifyListeners();
   }
@@ -17,11 +17,12 @@ class MainPageViewModel extends ChangeNotifier {
   // ==========>>>>>  BOTTOM NAVIGATION BAR ITEM LIST  <<<<<==========
   static List<BottomNavyBarItem> bottomItems = [
     BottomNavyBarItem(
-        icon: const Icon(Icons.home),
-        title: const Text('Home'),
-        activeColor: KColors.kThemeGreen,
-        inactiveColor: Colors.grey,
-        textAlign: TextAlign.center),
+      icon: const Icon(Icons.home),
+      title: const Text('Home'),
+      activeColor: KColors.kThemeGreen,
+      inactiveColor: Colors.grey,
+      textAlign: TextAlign.center,
+    ),
     BottomNavyBarItem(
       icon: const Icon(Icons.card_travel),
       title: const Text('Bookings'),

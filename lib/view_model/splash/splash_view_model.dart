@@ -6,7 +6,7 @@ import 'package:premio_inn/view/screens/register/phone_number_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashViewModel extends ChangeNotifier {
-  // this function is to check wheather the user is logged in or not
+  // ==========>>>>>  TO CHECK, IS USER LOGGEDIN OR NOT  <<<<<==========
   Future<void> checkLogin() async {
     final pref = await SharedPreferences.getInstance();
     final isLogggedIn = pref.getBool(KStrings.isLogggedIn);

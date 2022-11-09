@@ -6,7 +6,7 @@ class AmenitiesWidget extends StatelessWidget {
   const AmenitiesWidget({
     Key? key,
     required this.icon,
-    required this.title
+    required this.title,
   }) : super(key: key);
   final IconData icon;
   final String title;
@@ -17,7 +17,7 @@ class AmenitiesWidget extends StatelessWidget {
       children: [
         Icon(icon),
         KSizedBox.kWidth_15,
-        TextWidget( title),
+        TextWidget(title),
       ],
     );
   }

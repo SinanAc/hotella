@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:premio_inn/model/home/all_rooms.dart';
 
 class SearchViewModel extends ChangeNotifier {
-  // variables
+  // ==========>>>>>  VARIABLES  <<<<<==========
   TextEditingController searchTextController = TextEditingController();
   List<AllRoomsModel> searchResultList = [];
   List<String> searchCityList = [];
 
-  // -->> function to get searching cities
+  // ==========>>>>>  TO GET SEARCHING CITIES  <<<<<==========
   void runSearchFilter(
       {required String enteredKeyword, required List<String> cities}) {
     if (enteredKeyword.isEmpty) {
@@ -24,7 +24,7 @@ class SearchViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // -->> function to get search results
+  // ==========>>>>>  SEARCH RESULTS  <<<<<==========
   void getSearchResults(
       {required String city, required List<AllRoomsModel> allRooms}) {
     searchResultList.clear();

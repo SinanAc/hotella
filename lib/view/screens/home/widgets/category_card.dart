@@ -10,16 +10,14 @@ class CategoryCard extends StatelessWidget {
   }) : super(key: key);
   final String img;
   final String title;
-  final Function onTap;
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Column(
       children: [
         InkWell(
-          onTap: () {
-            onTap();
-          },
+          onTap: onTap,
           child: Container(
             height: size.width / 4,
             width: size.width / 3.4,

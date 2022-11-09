@@ -10,7 +10,7 @@ import 'package:premio_inn/services/dio/internet_checker.dart';
 import 'package:premio_inn/utils/url.dart';
 
 class PhoneNumberService {
-  // phone number verify service
+  // ==========>>>>>  MOBILE NUMBER VERIFY SERVICE  <<<<<==========
   Future<PhoneNumberResponseModel?> phoneNumberRepo(
       PhoneNumberModel data) async {
     if (await internetCheck()) {

@@ -1,8 +1,8 @@
 class SignInResponseModel {
   SignInResponseModel({
-   this.isSuccess,
-     this.profile,
-     this.message,
+    this.isSuccess,
+    this.profile,
+    this.message,
   });
 
   bool? isSuccess;
@@ -11,16 +11,15 @@ class SignInResponseModel {
 
   factory SignInResponseModel.fromJson(Map<String, dynamic> json) =>
       SignInResponseModel(
-        isSuccess: json["success"],
-        profile: Profile.fromJson(json["profile"]),
-        message: json["message"]
-      );
+          isSuccess: json["success"],
+          profile: Profile.fromJson(json["profile"]),
+          message: json["message"]);
 }
 
 class Profile {
   Profile({
-     this.name,
-     this.email,
+    this.name,
+    this.email,
     this.phone,
     required this.token,
   });

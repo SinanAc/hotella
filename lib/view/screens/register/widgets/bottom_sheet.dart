@@ -11,7 +11,10 @@ import 'package:premio_inn/view_model/register/phone_number.dart';
 import 'package:provider/provider.dart';
 
 class OtpBottomSheet extends StatefulWidget {
-  const OtpBottomSheet({Key? key, required this.size}) : super(key: key);
+  const OtpBottomSheet({
+    Key? key,
+    required this.size,
+  }) : super(key: key);
   final Size size;
 
   @override
@@ -64,12 +67,11 @@ class _OtpBottomSheet extends State<OtpBottomSheet> {
         extendBody: true,
         backgroundColor: Colors.transparent,
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal:16.0,vertical: 10.0),
-          child: Column(
-            children: [
-              KSizedBox.kHeigh_10,
-             TitleWidget(
-               'Verify otp',
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+          child: Column(children: [
+            KSizedBox.kHeigh_10,
+            TitleWidget(
+              'Verify otp',
               color: KColors.kThemeGreen,
             ),
             KSizedBox.kHeigh_20,
@@ -90,32 +92,41 @@ class _OtpBottomSheet extends State<OtpBottomSheet> {
               controller: numberVerifyController.otpController,
               onChanged: (value) {},
               appContext: context,
-              readOnly: _isTimesUp?true:false,
+              readOnly: _isTimesUp ? true : false,
             ),
-            _isTimesUp?
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                  TitleWidget('Times up !!!', fontSize: 20,color: KColors.kRedColor,),
-                 KSizedBox.kWidth_10,
-                 ButtonWidget(text: 'Go back', onTap: (){
-                  Navigations.pop();
-                 },width: 150,color: KColors.kThemeGreen,)
-              ],
-            ):
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                 TitleWidget('You have  ', fontSize: 16),
-                TitleWidget(
-                   '$_start', fontSize: 20, color: KColors.kLiteGreen),
-                 TitleWidget('  Seconds remaining', fontSize: 16),
-              ],
-            ),
+            _isTimesUp
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TitleWidget(
+                        'Times up !!!',
+                        fontSize: 20,
+                        color: KColors.kRedColor,
+                      ),
+                      KSizedBox.kWidth_10,
+                      ButtonWidget(
+                        text: 'Go back',
+                        onTap: () {
+                          Navigations.pop();
+                        },
+                        width: 150,
+                        color: KColors.kThemeGreen,
+                      )
+                    ],
+                  )
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TitleWidget('You have  ', fontSize: 16),
+                      TitleWidget('$_start',
+                          fontSize: 20, color: KColors.kLiteGreen),
+                      TitleWidget('  Seconds remaining', fontSize: 16),
+                    ],
+                  ),
             const Spacer(),
-            Selector<PhoneNumberViewModel,bool>(
-              selector: (context, obj) => obj.isLoading,
-              builder: (context, isLoading, _) => isLoading
+            Selector<PhoneNumberViewModel, bool>(
+              selector: (_, obj) => obj.isLoading,
+              builder: (__, isLoading, _) => isLoading
                   ? const LoadingIndicator(
                       color: KColors.kThemeGreen,
                     )

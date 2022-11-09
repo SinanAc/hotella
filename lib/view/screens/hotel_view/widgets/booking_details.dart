@@ -17,29 +17,26 @@ class BookingDetailsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children:  [
+      children: [
         Icon(icon),
         KSizedBox.kWidth_15,
-         Text(
+        Text(
           title,
-          style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500),
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
         ),
         const Spacer(),
-         TextButton(
-          onPressed: (){
+        TextButton(
+          onPressed: () {
             onTap();
           },
           child: Text(
             value,
             style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: KColors.kBlueColor
-              ),
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: KColors.kBlueColor),
           ),
-         ) ,
+        ),
       ],
     );
   }

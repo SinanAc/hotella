@@ -31,7 +31,7 @@ class SearchScreen extends StatelessWidget {
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: list.length,
-                        itemBuilder: ((context, index) {
+                        itemBuilder: ((_, index) {
                           return Padding(
                             padding: const EdgeInsets.all(4.0),
                             child: ListTile(
@@ -59,7 +59,7 @@ class SearchScreen extends StatelessWidget {
                             itemBuilder: ((_, index) {
                               return MainCard(hotel: homePro.allRooms[index]);
                             }),
-                            separatorBuilder: (_, index) => KSizedBox.kHeigh_10,
+                            separatorBuilder: (_, __) => KSizedBox.kHeigh_10,
                           )
                         : ListView.separated(
                             physics: const NeverScrollableScrollPhysics(),
@@ -68,7 +68,7 @@ class SearchScreen extends StatelessWidget {
                             itemBuilder: ((_, index) {
                               return MainCard(hotel: list[index]);
                             }),
-                            separatorBuilder: (_, index) => KSizedBox.kHeigh_10,
+                            separatorBuilder: (_, __) => KSizedBox.kHeigh_10,
                           );
                   }),
                 ),

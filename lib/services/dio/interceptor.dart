@@ -1,10 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:premio_inn/utils/strings.dart';
+import 'package:premio_inn/utils/url.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Interceptorapi {
-  static final  Dio _dio = Dio();
-  static Future<Dio> getApiUser() async {
+class InterceptorDio {
+  static final  Dio _dio = Dio(BaseOptions(baseUrl: Url.baseUrl));
+  static Future<Dio> getVerifiedUser() async {
     _dio.interceptors
         .add(InterceptorsWrapper(onRequest: (response, handler) async {
       final SharedPreferences pref = await SharedPreferences.getInstance();

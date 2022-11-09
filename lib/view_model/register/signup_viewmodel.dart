@@ -9,7 +9,7 @@ import 'package:premio_inn/view/widgets/show_dialogs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpViewModel extends ChangeNotifier {
-  // variables
+  // ==========>>>>>  VARIABLES  <<<<<==========
   final signUpKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final emailController = TextEditingController();
@@ -17,7 +17,7 @@ class SignUpViewModel extends ChangeNotifier {
   final confirmPasswordController = TextEditingController();
   bool isLoading = false;
 
-  // make text obscure for passwords
+  // ==========>>>>>  TO MAKE PASSWORD OBSCURE  <<<<<==========
   bool _isObscure = true;
   get isObscure => _isObscure;
   set isObscure(value) {
@@ -25,7 +25,7 @@ class SignUpViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // signup method
+  // ==========>>>>>  SIGNUP  <<<<<==========
   Future<void> onSignupButton(String phoneNum) async {
     if (signUpKey.currentState!.validate()) {
       isLoading = true;
@@ -56,7 +56,7 @@ class SignUpViewModel extends ChangeNotifier {
     }
   }
 
-  // text field validation functions
+  // ==========>>>>>  TEXTFIELD VALIDATIONS  <<<<<==========
   String? nameValidator(String? fieldContent) {
     if (fieldContent!.isEmpty) {
       return 'Please enter your name';
@@ -97,13 +97,13 @@ class SignUpViewModel extends ChangeNotifier {
     return null;
   }
 
-  // to make isLoading false
+  // ==========>>>>>  TO MAKE LOADING FALSE  <<<<<==========
   void _isLoadingFalse() {
     isLoading = false;
     notifyListeners();
   }
 
-  // to dispose all the variables
+  // ==========>>>>> DISPOSE VARIABLES  <<<<<==========
   void disposes() {
     signUpKey.currentState!.reset();
     nameController.clear();

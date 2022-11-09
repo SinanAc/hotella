@@ -13,8 +13,7 @@ class AccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final accountContoller =
-        Provider.of<AccountViewModel>(context, listen: false);
+    final accountContoller = context.read<AccountViewModel>();
     return SingleChildScrollView(
       child: Stack(
         children: [

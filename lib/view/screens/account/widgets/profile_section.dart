@@ -26,7 +26,7 @@ class ProfileSection extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   TitleWidget(
+                  TitleWidget(
                     'Muhammad Sinan',
                     fontSize: 20,
                   ),

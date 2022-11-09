@@ -21,7 +21,7 @@ class BookingScreen extends StatelessWidget {
               children: [
                 KSizedBox.kHeigh_10,
                 const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 15,horizontal: 18),
+                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 18),
                   child: DoubleColorTitle(
                       text1: 'My', text2: 'Bookings', textSize: 24),
                 ),
@@ -44,14 +44,15 @@ class BookingScreen extends StatelessWidget {
           ),
           KSizedBox.kHeigh_10,
           const Expanded(
-            child:
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8),
-                  child: TabBarView(physics: NeverScrollableScrollPhysics(), children: [
-              ComingScreen(),
-              HistoryScreen(),
-            ]),
-                ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8),
+              child: TabBarView(
+                  physics: NeverScrollableScrollPhysics(),
+                  children: [
+                    ComingScreen(),
+                    HistoryScreen(),
+                  ]),
+            ),
           ),
         ],
       ),

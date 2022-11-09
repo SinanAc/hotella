@@ -8,7 +8,7 @@ import 'package:premio_inn/utils/url.dart';
 
 class BookingService {
   Future<BookingResponseModel?> bookingService(BookingRequestModel data)async{
-    final Dio dios = await Interceptorapi.getApiUser();
+    final Dio dios = await InterceptorDio.getVerifiedUser();
         if (await internetCheck()) {
       try {
         final Response response = await dios.post(Url.booking,data: data.toJson());

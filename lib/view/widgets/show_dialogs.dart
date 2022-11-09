@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/navigations.dart';
 
 class ShowDialogs {
@@ -7,9 +8,9 @@ class ShowDialogs {
 
   static popUp(
     String messege, {
-    Color color = Colors.red,
+    Color color = KColors.kRedColor,
     int milliSec = 2000,
-    Color textColor = Colors.white,
+    Color textColor = KColors.kWhiteColor,
   }) {
     rootScaffoldMessengerKey.currentState?.hideCurrentSnackBar();
     rootScaffoldMessengerKey.currentState?.showSnackBar(
@@ -50,10 +51,10 @@ class ShowDialogs {
             title: Text(
               title,
             ),
-            titleTextStyle: const TextStyle(fontSize: 24, color: Colors.black),
+            titleTextStyle: const TextStyle(fontSize: 24, color: KColors.kBlackColor),
             content: Text(messege),
             contentTextStyle:
-                const TextStyle(fontSize: 18, color: Colors.black),
+                const TextStyle(fontSize: 18, color: KColors.kBlackColor),
             actions: [
               TextButton(
                 onPressed: () {
