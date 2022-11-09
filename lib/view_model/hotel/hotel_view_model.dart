@@ -5,7 +5,15 @@ import 'package:premio_inn/view/screens/hotel_view/widgets/bottom_sheet.dart';
 import 'package:premio_inn/view/widgets/show_dialogs.dart';
 
 class HotelViewModel extends ChangeNotifier {
-  // -->> initial values
+  // =========>>>>>  VARIABLES  <<<<<=========
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  int guests = 1;
+  int rooms = 1;
+  int days = 1;
+  int amount = 0;
+  final PageController pController = PageController();
+
+  // =========>>>>>  INITIAL VALUES  <<<<<=========
   void onInit() {
     selectedDates = DateTimeRange(
         start: DateTime.now(),
@@ -16,28 +24,13 @@ class HotelViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // -->> vaiables
-  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  // =========>>>>>  TO SELECT DATE RANGE  <<<<<=========
   DateTimeRange selectedDates = DateTimeRange(
     start: DateTime.now(),
     end: DateTime.now().add(
       const Duration(days: 1),
     ),
   );
-  int guests = 1;
-  int rooms = 1;
-  int days = 1;
-  int amount = 0;
-  final Icon notFavIcon = Icon(
-    Icons.favorite_border,
-    size: 32,
-    color: Colors.grey.shade600,
-  );
-  final Icon favIcon =
-      const Icon(Icons.favorite_outlined, color: KColors.kRedColor, size: 32);
-  final PageController pController = PageController();
-
-  // -->> function to select date range
   Future<void> selectDate(BuildContext ctx, int amount) async {
     selectedDates = await showDateRangePicker(
           initialEntryMode: DatePickerEntryMode.calendarOnly,
@@ -54,7 +47,7 @@ class HotelViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // -->> function to room count ++
+  // =========>>>>>  TO INCREMENT ROOM COUNT  <<<<<=========  
   void roomCountPlus() {
     if (rooms < 10) {
       rooms++;
@@ -148,9 +141,19 @@ class HotelViewModel extends ChangeNotifier {
     );
   }
 
-  // -->> add to favorite bool
+  // ==========>>>>> FAVORITE BUTTON <<<<<==========
+  final Icon notFavIcon = Icon(
+    Icons.favorite_border,
+    size: 32,
+    color: Colors.grey.shade600,
+  );
+  final Icon favIcon = const Icon(
+    Icons.favorite_outlined,
+    color: KColors.kRedColor,
+    size: 32,
+  );
   bool _isFav = false;
-  get isFav => _isFav;
+  bool get isFav => _isFav;
   set isFav(value) {
     _isFav = value;
     notifyListeners();

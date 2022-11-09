@@ -63,15 +63,19 @@ class HotelScreen extends StatelessWidget {
                               ],
                             ),
                             const Spacer(),
-                            Consumer<HotelViewModel>(
-                                builder: (context, val, _) {
-                              return IconButton(
-                                icon: val.isFav ? val.favIcon : val.notFavIcon,
-                                onPressed: () {
-                                  val.isFav = !val.isFav;
-                                },
-                              );
-                            })
+                            Selector<HotelViewModel, bool>(
+                              selector: (_, provider) => provider.isFav,
+                              builder: (_, isFav, __) {
+                                return IconButton(
+                                  icon: isFav
+                                      ? hotelPro.favIcon
+                                      : hotelPro.notFavIcon,
+                                  onPressed: () {
+                                    hotelPro.isFav = !hotelPro.isFav;
+                                  },
+                                );
+                              },
+                            ),
                           ],
                         ),
                         KSizedBox.kHeigh_25,
@@ -91,22 +95,24 @@ class HotelScreen extends StatelessWidget {
                                 horizontal: 16.0, vertical: 12),
                             child: Column(children: [
                               Selector<HotelViewModel, DateTimeRange>(
-                                  selector: (_, provider) =>
-                                      provider.selectedDates,
-                                  builder: (_, dateRange, __) {
-                                    return BookingDetailsWidget(
-                                      icon: Icons.calendar_today_outlined,
-                                      title: 'Dates',
-                                      value:
-                                          '${DateFormat('EEE, MMM d').format(dateRange.start)} - ${DateFormat('EEE, MMM d').format(dateRange.end)}',
-                                      onTap: () {
-                                        hotelPro.selectRoomsAndGuests(
-                                            size.height / 1.9,
-                                            hotel.price ?? 0,
-                                            hotel);
-                                      },
-                                    );
-                                  }),
+                                selector: (_, provider) =>
+                                    provider.selectedDates,
+                                builder: (_, dateRange, __) {
+                                  return BookingDetailsWidget(
+                                    icon: Icons.calendar_today_outlined,
+                                    title: 'Dates',
+                                    value:
+                                        '${DateFormat('EEE, MMM d').format(dateRange.start)} - ${DateFormat('EEE, MMM d').format(dateRange.end)}',
+                                    onTap: () {
+                                      hotelPro.selectRoomsAndGuests(
+                                        size.height / 1.9,
+                                        hotel.price ?? 0,
+                                        hotel,
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
                               KSizedBox.kHeigh_5,
                               SizedBox(
                                 width: size.width / 1.6,
@@ -123,9 +129,10 @@ class HotelScreen extends StatelessWidget {
                                       '${value.rooms} Room, ${value.guests} Guests',
                                   onTap: () {
                                     hotelPro.selectRoomsAndGuests(
-                                        size.height / 1.9,
-                                        hotel.price ?? 0,
-                                        hotel);
+                                      size.height / 1.9,
+                                      hotel.price ?? 0,
+                                      hotel,
+                                    );
                                   },
                                 );
                               }),

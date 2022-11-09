@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final HomeViewModel homeProvider = context.read<HomeViewModel>();
+    final homeProvider = context.read<HomeViewModel>();
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
@@ -75,8 +75,8 @@ class HomeScreen extends StatelessWidget {
                   ),
                   KSizedBox.kHeigh_15,
                   Selector<HomeViewModel, bool>(
-                    selector: (context, obj) => obj.isLoading,
-                    builder: ((context, isLoading, _) {
+                    selector: (_, obj) => obj.isLoading,
+                    builder: ((__, isLoading, _) {
                       return homeProvider.isLoading
                           ? Column(
                               children: [
