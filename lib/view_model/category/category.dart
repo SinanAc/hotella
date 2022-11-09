@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 class CategoryViewModel extends ChangeNotifier {
   // =========>>>>>  CONSTRUCTOR TO SET INITIAL VALUES  <<<<<=========
-  CategoryViewModel() {
+  void onInit() {
     dropdownValue = null;
     notifyListeners();
   }
@@ -36,10 +36,12 @@ class CategoryViewModel extends ChangeNotifier {
     homePro.categoryWiseList.clear();
     if (val == 'Low to high') {
       homePro.categoryWiseList.addAll(tempList);
+      homePro.notifyListeners();
       notifyListeners();
       return;
     } else {
       homePro.categoryWiseList.addAll(tempList.reversed);
+      homePro.notifyListeners();
       notifyListeners();
     }
   }

@@ -18,7 +18,6 @@ class CategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    //final categoryPro = Provider.of<CategoryViewModel>(context);
     final homePro = context.read<HomeViewModel>();
     return Scaffold(
       body: SafeArea(
@@ -50,15 +49,15 @@ class CategoryScreen extends StatelessWidget {
                       ),
                       const Spacer(),
                       Consumer<CategoryViewModel>(
-                        builder: (_, value, __) => DropdownButton(
+                        builder: (_, category, __) => DropdownButton(
                           hint: TextWidget(
                             'Price',
                             color: Colors.grey.shade300,
                           ),
-                          value: value.dropdownValue,
-                          items: value.dropdownItems,
+                          value: category.dropdownValue,
+                          items: category.dropdownItems,
                           onChanged: (String? val) {
-                            value.onDropdownChanged(
+                            category.onDropdownChanged(
                                 val, homePro.categoryWiseList, context);
                           },
                           borderRadius: BorderRadius.circular(10),
@@ -75,17 +74,19 @@ class CategoryScreen extends StatelessWidget {
                     ],
                   ),
                   KSizedBox.kHeigh_5,
-                  ListView.separated(
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.all(10),
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: homePro.categoryWiseList.length,
-                    itemBuilder: ((context, index) {
-                      return MainCard(hotel: homePro.categoryWiseList[index]);
-                    }),
-                    separatorBuilder: ((context, index) {
-                      return KSizedBox.kHeigh_10;
-                    }),
+                  Consumer<HomeViewModel>(
+                    builder:(_,provider,__)=> ListView.separated(
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.all(10),
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: provider.categoryWiseList.length,
+                      itemBuilder: ((context, index) {
+                        return MainCard(hotel: provider.categoryWiseList[index]);
+                      }),
+                      separatorBuilder: ((context, index) {
+                        return KSizedBox.kHeigh_10;
+                      }),
+                    ),
                   ),
                 ],
               ),
