@@ -2,24 +2,26 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:premio_inn/model/bookings/booking/booking_req.dart';
 import 'package:premio_inn/model/bookings/booking/booking_respo.dart';
+import 'package:premio_inn/model/bookings/complete/complete_req.dart';
 import 'package:premio_inn/model/bookings/payment/paynow_respo_model.dart';
 import 'package:premio_inn/model/bookings/payment/razorpay_checkout.dart';
 import 'package:premio_inn/model/bookings/room_availability/request.dart';
 import 'package:premio_inn/model/bookings/room_availability/response.dart';
 import 'package:premio_inn/model/home/all_rooms.dart';
 import 'package:premio_inn/services/booking/booking_service.dart';
+import 'package:premio_inn/services/booking/complete_service.dart';
 import 'package:premio_inn/services/booking/paynow_service.dart';
 import 'package:premio_inn/services/booking/room_availability.dart';
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/navigations.dart';
 import 'package:premio_inn/view/screens/hotel_view/widgets/payment_options.dart';
-import 'package:premio_inn/view/screens/main_page/main_page.dart';
 import 'package:premio_inn/view/widgets/show_dialogs.dart';
 import 'package:premio_inn/view_model/hotel/hotel_view_model.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class BookingViewModel extends HotelViewModel {
   bool isLoading = false;
+  BookingResponseModel? bookingData;
   // =========>>>>>  CHECKING, IS ROOM AVAILABLE OR NOT  <<<<<==========
   Future<bool> isRoomAvailable(
       DateTimeRange dateRange, String hotelId, int rooms) async {
@@ -59,7 +61,7 @@ class BookingViewModel extends HotelViewModel {
   }
 
   // =========>>>>>  TO GET BOOKING DATA  <<<<<==========
-  Future<bool> _getBookingData(
+  Future<BookingResponseModel?> _getBookingData(
       String hotelId, int rooms, DateTimeRange dateRange) async {
     isLoading = true;
     notifyListeners();
@@ -71,22 +73,23 @@ class BookingViewModel extends HotelViewModel {
       isLoading = false;
       notifyListeners();
       ShowDialogs.popUp('Something went wrong !!');
-      return false;
+      return null;
     } else if (bookingResponse.success == false) {
       isLoading = false;
       notifyListeners();
       ShowDialogs.popUp(bookingResponse.message ?? 'Rooms are not available',
           color: Colors.black87);
-      return false;
+      return null;
     } else if (bookingResponse.success == true) {
       isLoading = false;
       notifyListeners();
-      return bookingResponse.success ?? false;
+      bookingData = bookingResponse;
+      return bookingResponse;
     } else {
       isLoading = false;
       notifyListeners();
       ShowDialogs.popUp(bookingResponse.message ?? 'Something went wrong !!');
-      return false;
+      return null;
     }
   }
 
@@ -95,19 +98,63 @@ class BookingViewModel extends HotelViewModel {
     final bool isRoomAvailables =
         await isRoomAvailable(selectedDates, hotel.id ?? '', rooms);
     if (isRoomAvailables) {
-      final bool isSuccess =
+      final BookingResponseModel? response =
           await _getBookingData(hotel.id ?? '', rooms, selectedDates);
-      isSuccess
-          ? showPaymentOptions(
-              width: width,
-              onPayAtHotelButton: () {},
-              onPayNowButton: () {
-                Navigations.pop();
-                onPayNowButton(totalAmount(hotel.price ?? 0));
-              },
-              price: totalAmount(hotel.price ?? 0),
-            )
-          : null;
+      if (response == null) {
+        return;
+      } else if (response.success == true) {
+        showPaymentOptions(
+          width: width,
+          onPayAtHotelButton: () {},
+          onPayNowButton: () {
+            Navigations.pop();
+            onPayNowButton(totalAmount(hotel.price ?? 0));
+          },
+          price: totalAmount(hotel.price ?? 0),
+        );
+      } else {
+        return;
+      }
+    }
+  }
+
+  // =========>>>>>  BOOKING COMPLETE METHOD  <<<<<==========
+  Future<void> completeBooking(
+      {required String paymentType,String? signature}) async {
+    if (bookingData == null) {
+      return;
+    } else {
+      if (paymentType == 'PAY AT HOTEL') {
+        final data = CompleteBookingRequestModel(
+          rooms: bookingData?.response?.room ?? '',
+          checkout: bookingData?.response?.id ?? '',
+          pay: paymentType,
+        );
+        final complete = await BookingCompleteService().bookingCompleteService(data);
+        if(complete==null){
+          // -->> handle null
+        } else if(complete.success==true){
+          // -->> go to home page with showing booking success
+        }else{
+          // -->> show error message
+        }
+      } else {
+        final data = CompleteBookingRequestModel(
+          rooms: bookingData?.response?.room ?? '',
+          checkout: bookingData?.response?.id ?? '',
+          pay: paymentType,
+          razorpaymentId: '',
+          order: ''
+        );
+        final complete = await BookingCompleteService().bookingCompleteService(data);
+        if(complete==null){
+          // -->> handle null
+        } else if(complete.success==true){
+          // -->> go to home page with showing booking success
+        }else{
+          // -->> show error message
+        }
+      }
     }
   }
 
@@ -121,7 +168,8 @@ class BookingViewModel extends HotelViewModel {
   }
 
   void _handlerPaymentSuccess(PaymentSuccessResponse response) async {
-    Navigations.pushRemoveUntil(const MainPage());
+    //Navigations.pushRemoveUntil(const MainPage());
+    //response.
     ShowDialogs.popUp('Payment success', color: KColors.kThemeGreen);
     razorPay.clear();
   }

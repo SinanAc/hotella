@@ -1,45 +1,41 @@
 class BookingResponseModel {
-    BookingResponseModel({
-        this.success,
-        this.response,
-        this.message
-    });
+  BookingResponseModel({this.success, this.response, this.message});
 
-    bool? success;
-    Responses? response;
-    String? message;
+  bool? success;
+  Responses? response;
+  String? message;
 
-    factory BookingResponseModel.fromJson(Map<String, dynamic> json) => BookingResponseModel(
+  factory BookingResponseModel.fromJson(Map<String, dynamic> json) =>
+      BookingResponseModel(
         success: json["success"],
         response: Responses.fromJson(json["response"]),
-    );
-
+      );
 }
 
 class Responses {
-    Responses({
-        this.user,
-        this.room,
-        this.roomNumber,
-        this.days,
-        this.isBooked,
-        this.completed,
-        this.cancel,
-        this.id,
-        this.v,
-    });
+  Responses({
+    this.user,
+    this.room,
+    this.roomNumber,
+    this.days,
+    this.isBooked,
+    this.completed,
+    this.cancel,
+    this.id,
+    this.v,
+  });
 
-    String? user;
-    String? room;
-    int? roomNumber;
-    String? days;
-    bool? isBooked;
-    bool? completed;
-    bool? cancel;
-    String? id;
-    int? v;
+  String? user;
+  String? room;
+  int? roomNumber;
+  String? days;
+  bool? isBooked;
+  bool? completed;
+  bool? cancel;
+  String? id;
+  int? v;
 
-    factory Responses.fromJson(Map<String, dynamic> json) => Responses(
+  factory Responses.fromJson(Map<String, dynamic> json) => Responses(
         user: json["user"],
         room: json["room"],
         roomNumber: json["roomNumber"],
@@ -49,6 +45,5 @@ class Responses {
         cancel: json["cancel"],
         id: json["_id"],
         v: json["__v"],
-    );
-
+      );
 }

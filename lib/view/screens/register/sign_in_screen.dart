@@ -61,8 +61,7 @@ class SignInScreen extends StatelessWidget {
                               hintText: 'Password',
                               controller: signinController.passwordController,
                               validator: signinController.passwordValidator,
-                              signPro: Provider.of<SigninViewModel>(context,
-                                  listen: false),
+                              signPro: Provider.of<SigninViewModel>(context),
                             ),
                             KSizedBox.kHeigh_30,
                             Selector<SigninViewModel, bool>(

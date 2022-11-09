@@ -64,8 +64,7 @@ class SignupScreen extends StatelessWidget {
                               hintText: 'Password',
                               controller: signupController.passwordController,
                               validator: signupController.passwordValidator,
-                              signPro: Provider.of<SignUpViewModel>(context,
-                                  listen: false),
+                              signPro: Provider.of<SignUpViewModel>(context),
                             ),
                             KSizedBox.kHeigh_20,
                             PasswordTextFieldWidget(
@@ -74,8 +73,7 @@ class SignupScreen extends StatelessWidget {
                                   signupController.confirmPasswordController,
                               validator:
                                   signupController.confirmPasswordValidator,
-                              signPro: Provider.of<SignUpViewModel>(context,
-                                  listen: false),
+                              signPro: Provider.of<SignUpViewModel>(context),
                             ),
                             KSizedBox.kHeigh_20,
                             Selector<SignUpViewModel, bool>(
