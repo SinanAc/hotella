@@ -17,7 +17,7 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final signinController = Provider.of<SigninViewModel>(context);
+    final signinController = context.read<SigninViewModel>();
     return Scaffold(
       backgroundColor: KColors.kThemeGreen,
       body: SafeArea(
@@ -30,43 +30,44 @@ class SignInScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                     TitleWidget(
-                       'Sign in to',
+                    TitleWidget(
+                      'Sign in to',
                       color: KColors.kWhiteColor,
                     ),
                     KSizedBox.kHeigh_5,
-                     TitleWidget(
+                    TitleWidget(
                       'Hotella',
                       color: KColors.kThemeYellow,
                     ),
                     KSizedBox.kHeigh_15,
-                    Consumer<SigninViewModel>(
-                      builder: (context, value, _) => Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: KColors.kWhiteColor,
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 15, right: 15, top: 30, bottom: 25),
-                          child: Column(
-                            children: [
-                              TextFieldWidget(
-                                hintText: 'Email / Mobile number',
-                                controller:
-                                    signinController.phoneOrEmailController,
-                                validator: signinController.emailValidator,
-                              ),
-                              KSizedBox.kHeigh_20,
-                              PasswordTextFieldWidget(
-                                hintText: 'Password',
-                                controller: signinController.passwordController,
-                                validator: signinController.passwordValidator,
-                                signPro: Provider.of<SigninViewModel>(context,
-                                    listen: false),
-                              ),
-                              KSizedBox.kHeigh_30,
-                              value.isLoading
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: KColors.kWhiteColor,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 15, right: 15, top: 30, bottom: 25),
+                        child: Column(
+                          children: [
+                            TextFieldWidget(
+                              hintText: 'Email / Mobile number',
+                              controller:
+                                  signinController.phoneOrEmailController,
+                              validator: signinController.emailValidator,
+                            ),
+                            KSizedBox.kHeigh_20,
+                            PasswordTextFieldWidget(
+                              hintText: 'Password',
+                              controller: signinController.passwordController,
+                              validator: signinController.passwordValidator,
+                              signPro: Provider.of<SigninViewModel>(context,
+                                  listen: false),
+                            ),
+                            KSizedBox.kHeigh_30,
+                            Selector<SigninViewModel, bool>(
+                              selector: ((_, provider) => provider.isLoading),
+                              builder: (__, isLoading, _) => isLoading
                                   ? const LoadingIndicator()
                                   : ButtonWidget(
                                       text: 'Sign in',
@@ -77,8 +78,8 @@ class SignInScreen extends StatelessWidget {
                                         signinController.onSigninButton();
                                       },
                                     ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ),

@@ -8,17 +8,18 @@ import 'package:premio_inn/view/screens/category/category_screen.dart';
 import 'package:premio_inn/view/widgets/show_dialogs.dart';
 
 class HomeViewModel extends ChangeNotifier {
-  // -->> variables
+  // =========>>>>>  VARIABLES  <<<<<==========
   List<AllRoomsModel> allRooms = [];
   bool isLoading = false;
   List<String> allCities = [];
   List<AllRoomsModel> categoryWiseList = [];
-  // -->> constructor to fetch all the in the initial stage
+
+  // =========>>>>>  CONSTRUCTOR TO SET INITIAL VALUES  <<<<<==========
   HomeViewModel() {
     getAllRoom();
   }
 
-  // -->> function to fetch all rooms
+  // =========>>>>>  TO FETCH ALL PROPERTIES  <<<<<==========
   Future<void> getAllRoom() async {
     if (await internetCheck()) {
       isLoading = true;
@@ -46,7 +47,7 @@ class HomeViewModel extends ChangeNotifier {
     }
   }
 
-  // -->> function to work when HOTEL category button is clicked
+  // =========>>>>>  TO GET ALL HOTELS  <<<<<==========
   void onHotelButton() {
     if (allRooms.isEmpty) {
       ShowDialogs.popUp('Properties are not availabe at this moment !!');
@@ -66,7 +67,7 @@ class HomeViewModel extends ChangeNotifier {
     }
   }
 
-  // -->> function to work when HOME_STAY category button is clicked
+  // =========>>>>>  TO GET ALL HOME STAYS  <<<<<==========
   void onHomeStayButton() {
     if (allRooms.isEmpty) {
       ShowDialogs.popUp('Properties are not availabe at this moment !!');
@@ -88,7 +89,7 @@ class HomeViewModel extends ChangeNotifier {
     }
   }
 
-  // -->> function to work when RESORT category button is clicked
+  // =========>>>>>  TO GET ALL RESORTS  <<<<<==========
   void onResortButton() {
     if (allRooms.isEmpty) {
       ShowDialogs.popUp('Properties are not availabe at this moment !!');
@@ -108,19 +109,19 @@ class HomeViewModel extends ChangeNotifier {
     }
   }
 
-  // -->> function to fetch all available cities
+  // =========>>>>>  TO GET ALL AVAILABLE CITIES  <<<<<==========
   void fetchAllCities() {
     allCities.clear();
-    //// loop to get every cities added
+    ////  --->>>  loop to get every cities added
     for (int i = 0; i < allRooms.length; i++) {
       allCities.add(allRooms[i].property?.city?.trim() ?? '');
     }
-    //// to remove duplicate cities
+    ////  --->>>   to remove duplicate cities
     allCities = allCities.toSet().toList();
     notifyListeners();
   }
 
-  // -->> function to make loading false
+  // =========>>>>>  TO MAKE LOADING FALSE  <<<<<==========
   void _isLoadingFalse() {
     isLoading = false;
     notifyListeners();

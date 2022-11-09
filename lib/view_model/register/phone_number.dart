@@ -10,7 +10,7 @@ import 'package:premio_inn/view/screens/register/widgets/bottom_sheet.dart';
 import 'package:premio_inn/view/widgets/show_dialogs.dart';
 
 class PhoneNumberViewModel extends ChangeNotifier {
-  // variables
+  // ==========>>>>>  VARIABLES  <<<<<==========
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   GlobalKey<FormState> numVerifyFormKey = GlobalKey<FormState>();
   TextEditingController mobileNumberController = TextEditingController();
@@ -18,7 +18,7 @@ class PhoneNumberViewModel extends ChangeNotifier {
   String hash = '';
   bool isLoading = false;
 
-  // this function will be called when get otp button is clicked
+  // ==========>>>>>  TO GET OTP  <<<<<==========
   Future<void> onGetOtpButton() async {
     if (numVerifyFormKey.currentState!.validate()) {
       isLoading = true;
@@ -43,7 +43,7 @@ class PhoneNumberViewModel extends ChangeNotifier {
     }
   }
 
-  // this function will be called when verify otp button is clicked
+  // ==========>>>>>  TO VERIFY OTP  <<<<<==========
   Future<void> onOtpVerifyButton() async {
     isLoading = true;
     notifyListeners();
@@ -73,7 +73,7 @@ class PhoneNumberViewModel extends ChangeNotifier {
     }
   }
 
-// function to validate mobile number
+  // ==========>>>>>  TO VALIDATE MOBILE NUMBER  <<<<<==========
   String? phoneNumberValidator(String? fieldContent) {
     if (fieldContent == null || fieldContent.isEmpty) {
       return 'Please enter your mobile number';
@@ -85,13 +85,13 @@ class PhoneNumberViewModel extends ChangeNotifier {
     return null;
   }
 
-  // make isLoading false
+  // ==========>>>>>  TO MAKE LOADING FALSE  <<<<<==========
   void _isLoadingFalse() {
     isLoading = false;
     notifyListeners();
   }
 
-  // function to call bottom sheet
+  // ==========>>>>>  BOTTOM SHEET  <<<<<==========
   void goToOtpBottomSheet() {
     showModalBottomSheet<OtpBottomSheet>(
       isDismissible: false,
@@ -111,7 +111,7 @@ class PhoneNumberViewModel extends ChangeNotifier {
     );
   }
 
-  // function dispose all variables
+  // ==========>>>>> DISPOSE VARIABLES  <<<<<==========
   void disposes() {
     numVerifyFormKey.currentState!.reset();
     mobileNumberController.clear();

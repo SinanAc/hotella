@@ -8,24 +8,26 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mainPageController = Provider.of<MainPageViewModel>(context);
-    return Scaffold(
-      appBar: AppBar(toolbarHeight: 0),
-      body: SafeArea(
-        child: MainPageViewModel.screenList[mainPageController.bottomNavIndex],
-      ),
-      bottomNavigationBar: BottomNavyBar(
-        selectedIndex: mainPageController.bottomNavIndex,
-        onItemSelected: (index) {
-          mainPageController.bottomNavIndex = index;
-        },
-        items: [
-          MainPageViewModel.bottomItems[0],
-          MainPageViewModel.bottomItems[1],
-          MainPageViewModel.bottomItems[2],
-          MainPageViewModel.bottomItems[3],
-        ],
-        curve: Curves.decelerate,
+    return Selector<MainPageViewModel, int>(
+      selector: ((_, provider) => provider.bottomNavIndex),
+      builder: (_, bottomIndexes, __) => Scaffold(
+        appBar: AppBar(toolbarHeight: 0),
+        body: SafeArea(
+          child: MainPageViewModel.screenList[bottomIndexes],
+        ),
+        bottomNavigationBar: BottomNavyBar(
+          selectedIndex: bottomIndexes,
+          onItemSelected: (index) {
+            Provider.of<MainPageViewModel>(context,listen: false).changeBottomIndex(index);
+          },
+          items: [
+            MainPageViewModel.bottomItems[0],
+            MainPageViewModel.bottomItems[1],
+            MainPageViewModel.bottomItems[2],
+            MainPageViewModel.bottomItems[3],
+          ],
+          itemCornerRadius: 10,
+        ),
       ),
     );
   }

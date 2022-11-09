@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:premio_inn/model/bookings/booking/booking_req.dart';
 import 'package:premio_inn/model/bookings/booking/booking_respo.dart';
@@ -21,38 +20,7 @@ import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class BookingViewModel extends HotelViewModel {
   bool isLoading = false;
-    Future<bool> getBookingId(
-      String hotelId, int rooms, DateTimeRange dateRange) async {
-    isLoading = true;
-    notifyListeners();
-    final data = BookingRequestModel(
-        hotelId: hotelId, rooms: rooms, dateTimeRange: dateRange);
-    final BookingResponseModel? bookingResponse =
-        await BookingService().bookingService(data);
-    if (bookingResponse == null) {
-      isLoading = false;
-      notifyListeners();
-      ShowDialogs.popUp('Something went wrong !!');
-      return false;
-    } else if (bookingResponse.success == false) {
-      isLoading = false;
-      notifyListeners();
-      ShowDialogs.popUp(
-          bookingResponse.message ??
-              'Rooms are not available on the selected range. Please try with other dates.',
-          color: Colors.black87);
-      return false;
-    } else if (bookingResponse.success == true) {
-      isLoading = false;
-      notifyListeners();
-      return bookingResponse.success ?? false;
-    } else {
-      isLoading = false;
-      notifyListeners();
-      ShowDialogs.popUp(bookingResponse.message ?? 'Something went wrong !!');
-      return false;
-    }
-  }
+  // =========>>>>>  CHECKING, IS ROOM AVAILABLE OR NOT  <<<<<==========
   Future<bool> isRoomAvailable(
       DateTimeRange dateRange, String hotelId, int rooms) async {
     isLoading = true;
@@ -90,12 +58,45 @@ class BookingViewModel extends HotelViewModel {
     }
   }
 
+  // =========>>>>>  TO GET BOOKING DATA  <<<<<==========
+  Future<bool> _getBookingData(
+      String hotelId, int rooms, DateTimeRange dateRange) async {
+    isLoading = true;
+    notifyListeners();
+    final data = BookingRequestModel(
+        hotelId: hotelId, rooms: rooms, dateTimeRange: dateRange);
+    final BookingResponseModel? bookingResponse =
+        await BookingService().bookingService(data);
+    if (bookingResponse == null) {
+      isLoading = false;
+      notifyListeners();
+      ShowDialogs.popUp('Something went wrong !!');
+      return false;
+    } else if (bookingResponse.success == false) {
+      isLoading = false;
+      notifyListeners();
+      ShowDialogs.popUp(bookingResponse.message ?? 'Rooms are not available',
+          color: Colors.black87);
+      return false;
+    } else if (bookingResponse.success == true) {
+      isLoading = false;
+      notifyListeners();
+      return bookingResponse.success ?? false;
+    } else {
+      isLoading = false;
+      notifyListeners();
+      ShowDialogs.popUp(bookingResponse.message ?? 'Something went wrong !!');
+      return false;
+    }
+  }
+
+  // =========>>>>>  FUNCTION TO EXECUTE ON BOOKNOW BUTTON  <<<<<==========
   Future<void> onBookNowButton(AllRoomsModel hotel, double width) async {
     final bool isRoomAvailables =
         await isRoomAvailable(selectedDates, hotel.id ?? '', rooms);
     if (isRoomAvailables) {
       final bool isSuccess =
-          await getBookingId(hotel.id ?? '', rooms, selectedDates);
+          await _getBookingData(hotel.id ?? '', rooms, selectedDates);
       isSuccess
           ? showPaymentOptions(
               width: width,
@@ -110,34 +111,34 @@ class BookingViewModel extends HotelViewModel {
     }
   }
 
+  // =========>>>>>  RAZORPAY CREDENTIALS  <<<<<==========
   late Razorpay razorPay;
   BookingViewModel() {
     razorPay = Razorpay();
-    razorPay.on(Razorpay.EVENT_PAYMENT_SUCCESS, handlerPaymentSuccess);
-    razorPay.on(Razorpay.EVENT_PAYMENT_ERROR, handlerErrorFailure);
-    razorPay.on(Razorpay.EVENT_EXTERNAL_WALLET, handlerExternalWallet);
+    razorPay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlerPaymentSuccess);
+    razorPay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlerErrorFailure);
+    razorPay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handlerExternalWallet);
   }
 
-  // void dispose() {
-  //   razorPay.clear();
-  // }
-
-  void handlerPaymentSuccess(PaymentSuccessResponse response) async {
+  void _handlerPaymentSuccess(PaymentSuccessResponse response) async {
     Navigations.pushRemoveUntil(const MainPage());
     ShowDialogs.popUp('Payment success', color: KColors.kThemeGreen);
+    razorPay.clear();
   }
 
-  void handlerErrorFailure(PaymentFailureResponse response) {
+  void _handlerErrorFailure(PaymentFailureResponse response) {
     ShowDialogs.popUp('Payment failed !!');
+    razorPay.clear();
   }
 
-  void handlerExternalWallet(ExternalWalletResponse response) {
+  void _handlerExternalWallet(ExternalWalletResponse response) {
     log('handlerExternalWallet');
+    razorPay.clear();
   }
 
-  // -->> function to pay online
+  // =========>>>>>  FUNCTION TO EXECUTE ON PAYNOW BUTTON  <<<<<==========
   Future<void> onPayNowButton(int amount) async {
-    final PayNowResponseModel? response = await getOnlinePaymentData(amount);
+    final PayNowResponseModel? response = await _getOnlinePaymentData(amount);
     if (response == null) {
       ShowDialogs.popUp('Oops!! Something went wrong. Please try again later');
       return;
@@ -158,10 +159,8 @@ class BookingViewModel extends HotelViewModel {
     }
   }
 
-  // ===========================  ================================ //
-
- // bool isPaynowLoading = false;
-  Future<PayNowResponseModel?> getOnlinePaymentData(int amount) async {
+  // =========>>>>>  TO GET ONLINE PAYMENT DATA  <<<<<==========
+  Future<PayNowResponseModel?> _getOnlinePaymentData(int amount) async {
     isLoading = true;
     super.notifyListeners();
     final PayNowResponseModel? response =
@@ -183,6 +182,6 @@ class BookingViewModel extends HotelViewModel {
     }
   }
 
-  // -->> function to pay at hotel
-  void onPayAtHotelButton() {}
+  // =========>>>>>  FUNCTION TO EXECUTE ON PAY AT HOTEL BUTTON  <<<<<==========
+  Future<void> onPayAtHotelButton() async {}
 }

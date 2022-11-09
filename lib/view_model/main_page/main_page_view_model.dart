@@ -6,20 +6,15 @@ import 'package:premio_inn/view/screens/saved/saved_screen.dart';
 import 'package:premio_inn/view/screens/home/home_screen.dart';
 import 'package:premio_inn/view/screens/bookings/booking_screen.dart';
 
-class MainPageViewModel extends ChangeNotifier{
-    // variables
-  int _bottomNavIndex = 0;
-
-  // getters
-  get bottomNavIndex => _bottomNavIndex;
-
-  // setters
-  set bottomNavIndex(index) {
-    _bottomNavIndex = index;
+class MainPageViewModel extends ChangeNotifier {
+  // ==========>>>>>  BOTTOM NAVIGATION INDEX  <<<<<==========
+  int bottomNavIndex = 0;
+  void changeBottomIndex(int idx){
+    bottomNavIndex = idx;
     notifyListeners();
   }
 
-  // main page bottomNav item list
+  // ==========>>>>>  BOTTOM NAVIGATION BAR ITEM LIST  <<<<<==========
   static List<BottomNavyBarItem> bottomItems = [
     BottomNavyBarItem(
         icon: const Icon(Icons.home),
@@ -48,13 +43,13 @@ class MainPageViewModel extends ChangeNotifier{
       inactiveColor: Colors.grey,
       textAlign: TextAlign.center,
     ),
-  ];  
+  ];
 
-  // main page screen list 
+  // ==========>>>>>  MAIN PAGE SCREEN LIST  <<<<<==========
   static List<Widget> screenList = [
     const HomeScreen(),
     const BookingScreen(),
     const SavedScreen(),
     const AccountScreen(),
-  ];  
+  ];
 }

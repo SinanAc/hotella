@@ -25,8 +25,8 @@ class OnboardingScreen extends StatelessWidget {
                   child: Image.asset('assets/images/onboarding.png'),
                 ),
               ),
-              SizedBox(height: size.height/10),              
-               TitleWidget(
+              SizedBox(height: size.height / 10),
+              TitleWidget(
                 'Welcome !',
                 fontSize: 30,
                 color: KColors.kThemeYellow,
@@ -35,9 +35,8 @@ class OnboardingScreen extends StatelessWidget {
               SizedBox(
                 height: 80,
                 width: size.width / 1.2,
-                child:  TitleWidget(
-                  
-                      'Get in to the largest collection of hotels, resorts, and home stays all over the world with all your favorite destinations',
+                child: TitleWidget(
+                  'Get in to the largest collection of hotels, resorts, and home stays all over the world with all your favorite destinations',
                   fontSize: 20,
                   color: Colors.white70,
                 ),

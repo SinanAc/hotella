@@ -61,7 +61,7 @@ class HotelViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // -->> function to room count --
+  // ==========>>>>>  TO DECREMENT ROOM COUNT  <<<<<==========
   void roomCountMinus() {
     if (rooms > 1) {
       rooms--;
@@ -75,7 +75,7 @@ class HotelViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // -->> function to guest count ++
+  // ==========>>>>>  TO INCCREMENT GUEST COUNT  <<<<<==========
   void guestCountPlus() {
     if (guests < rooms * 2) {
       guests++;
@@ -86,7 +86,7 @@ class HotelViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // -->> function to guest count --
+  // ==========>>>>>  TO DECREMENT GUEST COUNT  <<<<<==========
   void guestCountMinus() {
     if (guests > 1) {
       guests--;
@@ -100,7 +100,7 @@ class HotelViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // -->> function to get the total days selected
+  // ==========>>>>>  TO GET TOTAL DAYS  <<<<<==========
   void daysBetween(DateTime from, DateTime to) {
     from = DateTime(from.year, from.month, from.day);
     to = DateTime(to.year, to.month, to.day);
@@ -109,14 +109,14 @@ class HotelViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // -->> function to get the total amount to be paid
+  // ==========>>>>>  TO GET TOTAL AMOUNT TO BE PAID  <<<<<==========
   int totalAmount(int amount) {
     final int total = rooms * days * amount;
     this.amount = amount;
     return total;
   }
 
-  // -->> to get bottom sheet
+  // ==========>>>>>  BOTTOM SHEET TO SELECT DATE, ROOMS AND GUESTS  <<<<<==========
   void selectRoomsAndGuests(double height, int amount, AllRoomsModel hotel) {
     showModalBottomSheet<RoomsAndGuestsBottomSheet>(
       enableDrag: false,
@@ -141,7 +141,7 @@ class HotelViewModel extends ChangeNotifier {
     );
   }
 
-  // ==========>>>>> FAVORITE BUTTON <<<<<==========
+  // ==========>>>>>  FAVORITE BUTTON  <<<<<==========
   final Icon notFavIcon = Icon(
     Icons.favorite_border,
     size: 32,

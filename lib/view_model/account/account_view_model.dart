@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AccountViewModel extends ChangeNotifier {
-  // logout function
+  // ==========>>>>>  LOGOUT METHOD  <<<<<==========
   Future<void> onLogoutButton(context) async {
     final pref = await SharedPreferences.getInstance();
     await pref.setBool(KStrings.isLogggedIn, false);

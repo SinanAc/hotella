@@ -21,7 +21,7 @@ class MainCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return InkWell(
       onTap: () {
-        Provider.of<HotelViewModel>(context, listen: false).onInit();
+        context.read<HotelViewModel>().onInit();
         Navigations.push(HotelScreen(hotel: hotel));
       },
       child: Container(

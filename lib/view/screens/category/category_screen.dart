@@ -18,8 +18,8 @@ class CategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final categoryPro = Provider.of<CategoryViewModel>(context);
-    final homePro = Provider.of<HomeViewModel>(context);
+    //final categoryPro = Provider.of<CategoryViewModel>(context);
+    final homePro = context.read<HomeViewModel>();
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -49,25 +49,27 @@ class CategoryScreen extends StatelessWidget {
                         color: KColors.kThemeYellow,
                       ),
                       const Spacer(),
-                      DropdownButton(
-                        hint: TextWidget(
-                          'Price',
-                          color: Colors.grey.shade300,
+                      Consumer<CategoryViewModel>(
+                        builder: (_, value, __) => DropdownButton(
+                          hint: TextWidget(
+                            'Price',
+                            color: Colors.grey.shade300,
+                          ),
+                          value: value.dropdownValue,
+                          items: value.dropdownItems,
+                          onChanged: (String? val) {
+                            value.onDropdownChanged(
+                                val, homePro.categoryWiseList, context);
+                          },
+                          borderRadius: BorderRadius.circular(10),
+                          dropdownColor: Colors.grey.shade900,
+                          iconEnabledColor: Colors.grey.shade300,
+                          icon: const Padding(
+                            padding: EdgeInsets.only(left: 0),
+                            child: Icon(Icons.sort),
+                          ),
+                          underline: const Text(''),
                         ),
-                        value: categoryPro.dropdownValue,
-                        items: categoryPro.dropdownItems,
-                        onChanged: (String? val) {
-                          categoryPro.onDropdownChanged(
-                              val, homePro.categoryWiseList, context);
-                        },
-                        borderRadius: BorderRadius.circular(10),
-                        dropdownColor: Colors.grey.shade900,
-                        iconEnabledColor: Colors.grey.shade300,
-                        icon: const Padding(
-                          padding: EdgeInsets.only(left: 0),
-                          child: Icon(Icons.sort),
-                        ),
-                        underline: const Text(''),
                       ),
                       KSizedBox.kWidth_15,
                     ],

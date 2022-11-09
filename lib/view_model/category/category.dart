@@ -5,13 +5,13 @@ import 'package:premio_inn/view_model/home/home_view_model.dart';
 import 'package:provider/provider.dart';
 
 class CategoryViewModel extends ChangeNotifier {
-  // constructor
+  // =========>>>>>  CONSTRUCTOR TO SET INITIAL VALUES  <<<<<=========
   CategoryViewModel() {
     dropdownValue = null;
     notifyListeners();
   }
 
-  // variables
+  // ==========>>>>>  VARIABLES  <<<<<==========
   String? dropdownValue;
   List<DropdownMenuItem<String>> get dropdownItems {
     List<DropdownMenuItem<String>> menuItems = [
@@ -25,11 +25,11 @@ class CategoryViewModel extends ChangeNotifier {
     return menuItems;
   }
 
-// -->> dropdown onchanged
+// ==========>>>>>  PRICE BASED SORTING  <<<<<==========
   void onDropdownChanged(
       String? val, List<AllRoomsModel> roomList, BuildContext ctx) {
     dropdownValue = val;
-    final homePro = Provider.of<HomeViewModel>(ctx, listen: false);
+    final homePro = ctx.read<HomeViewModel>();
     roomList.sort((a, b) => (a.price as int).compareTo(b.price as int));
     List<AllRoomsModel> tempList = [];
     tempList.addAll(roomList);

@@ -9,12 +9,13 @@ import 'package:premio_inn/view/widgets/show_dialogs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SigninViewModel extends ChangeNotifier {
+  // ==========>>>>>  VARIABLES  <<<<<==========
   GlobalKey<FormState> signInFormKey = GlobalKey<FormState>();
   final phoneOrEmailController = TextEditingController();
   final passwordController = TextEditingController();
   bool isLoading = false;
 
-  // make text obscure for passwords
+  // ==========>>>>>  TO MAKE PASSWORD OBSCURE  <<<<<==========
   bool _isObscure = true;
   get isObscure => _isObscure;
   set isObscure(value) {
@@ -22,7 +23,7 @@ class SigninViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // sign in method
+  // ==========>>>>>  SIGN-IN  <<<<<==========
   Future<void> onSigninButton() async {
     if (signInFormKey.currentState!.validate()) {
       isLoading = true;
@@ -52,7 +53,7 @@ class SigninViewModel extends ChangeNotifier {
     }
   }
 
-  // text field validation functions
+  // ==========>>>>>  TEXTFIELD VALIDATIONS  <<<<<==========
   String? emailValidator(String? fieldContent) {
     if (fieldContent == null || fieldContent.isEmpty) {
       return 'Please fill the field';
@@ -73,13 +74,13 @@ class SigninViewModel extends ChangeNotifier {
     return null;
   }
 
-  // to make isLoading false
+  // ==========>>>>>  TO MAKE LOADING FALSE  <<<<<==========
   void _isLoadingFalse() {
     isLoading = false;
     notifyListeners();
   }
 
-  // to dispose all the variables
+  // ==========>>>>> DISPOSE VARIABLES  <<<<<==========
   void disposes() {
     signInFormKey.currentState!.reset();
     phoneOrEmailController.clear();

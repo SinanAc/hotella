@@ -15,8 +15,7 @@ class PhoneNumberScreen extends StatelessWidget {
   const PhoneNumberScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final numberVerifyController =
-        Provider.of<PhoneNumberViewModel>(context);
+    final numberVerifyController = context.read<PhoneNumberViewModel>();
     return Scaffold(
       key: numberVerifyController.scaffoldKey,
       backgroundColor: KColors.kThemeGreen,
@@ -50,8 +49,9 @@ class PhoneNumberScreen extends StatelessWidget {
                         keyType: const TextInputType.numberWithOptions(),
                       ),
                       KSizedBox.kHeigh_20,
-                      Consumer<PhoneNumberViewModel>(
-                        builder: (context, value, _) => value.isLoading
+                      Selector<PhoneNumberViewModel,bool>(
+                        selector: ((_, provider) => provider.isLoading),
+                        builder: (__, isLoading, _) => isLoading
                             ? const LoadingIndicator()
                             : ButtonWidget(
                                 text: 'Get OTP',
