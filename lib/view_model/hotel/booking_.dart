@@ -120,7 +120,7 @@ class BookingViewModel extends HotelViewModel {
 
   // =========>>>>>  BOOKING COMPLETE METHOD  <<<<<==========
   Future<void> completeBooking(
-      {required String paymentType,String? signature}) async {
+      {required String paymentType, String? signature}) async {
     if (bookingData == null) {
       return;
     } else {
@@ -130,28 +130,32 @@ class BookingViewModel extends HotelViewModel {
           checkout: bookingData?.response?.id ?? '',
           pay: paymentType,
         );
-        final complete = await BookingCompleteService().bookingCompleteService(data);
-        if(complete==null){
-          // -->> handle null
-        } else if(complete.success==true){
+        final complete =
+            await BookingCompleteService().bookingCompleteService(data);
+        if (complete == null) {
+          isLoading = false;
+          notifyListeners();
+          ShowDialogs.popUp('Something went wrong !!');
+          return;
+        } else if (complete.success == true) {
           // -->> go to home page with showing booking success
-        }else{
+        } else {
           // -->> show error message
         }
       } else {
         final data = CompleteBookingRequestModel(
-          rooms: bookingData?.response?.room ?? '',
-          checkout: bookingData?.response?.id ?? '',
-          pay: paymentType,
-          razorpaymentId: '',
-          order: ''
-        );
-        final complete = await BookingCompleteService().bookingCompleteService(data);
-        if(complete==null){
+            rooms: bookingData?.response?.room ?? '',
+            checkout: bookingData?.response?.id ?? '',
+            pay: paymentType,
+            razorpaymentId: '',
+            order: '');
+        final complete =
+            await BookingCompleteService().bookingCompleteService(data);
+        if (complete == null) {
           // -->> handle null
-        } else if(complete.success==true){
+        } else if (complete.success == true) {
           // -->> go to home page with showing booking success
-        }else{
+        } else {
           // -->> show error message
         }
       }
@@ -209,22 +213,18 @@ class BookingViewModel extends HotelViewModel {
 
   // =========>>>>>  TO GET ONLINE PAYMENT DATA  <<<<<==========
   Future<PayNowResponseModel?> _getOnlinePaymentData(int amount) async {
-    isLoading = true;
-    super.notifyListeners();
+    _isLoadingTrue();
     final PayNowResponseModel? response =
         await PayNowService().payNowService(amount);
     if (response == null) {
-      isLoading = false;
-      notifyListeners();
+      _isLoadingFalse();
       ShowDialogs.popUp('Something went wrong !!');
       return null;
     } else if (response.id != null) {
-      isLoading = false;
-      notifyListeners();
+      _isLoadingFalse();
       return response;
     } else {
-      isLoading = false;
-      notifyListeners();
+      _isLoadingFalse();
       ShowDialogs.popUp(response.message ?? 'Something went wrong !!');
       return null;
     }
@@ -232,4 +232,16 @@ class BookingViewModel extends HotelViewModel {
 
   // =========>>>>>  ON PAY AT HOTEL BUTTON  <<<<<==========
   Future<void> onPayAtHotelButton() async {}
+
+  // ==========>>>>>  TO MAKE LOADING TRUE  <<<<<==========
+  void _isLoadingTrue() {
+    isLoading = true;
+    notifyListeners();
+  }
+
+  // ==========>>>>>  TO MAKE LOADING FALSE  <<<<<==========
+  void _isLoadingFalse() {
+    isLoading = false;
+    notifyListeners();
+  }
 }
