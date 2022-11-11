@@ -94,10 +94,13 @@ class BookingViewModel extends HotelViewModel {
       } else if (response.success == true) {
         showPaymentOptions(
           width: width,
-          onPayAtHotelButton: () {},
+          onPayAtHotelButton: (){
+            Navigations.pop();
+            _onPayAtHotelButton();
+          },
           onPayNowButton: () {
             Navigations.pop();
-            onPayNowButton(totalAmount(hotel.price ?? 0));
+            _onPayNowButton(totalAmount(hotel.price ?? 0));
           },
           price: totalAmount(hotel.price ?? 0),
         );
@@ -108,7 +111,7 @@ class BookingViewModel extends HotelViewModel {
   }
 
   // =========>>>>>  BOOKING COMPLETE METHOD  <<<<<==========
-  Future<void> completeBooking({
+  Future<void> _completeBooking({
     required String paymentType,
     String? signature,
     String? payId,
@@ -148,6 +151,14 @@ class BookingViewModel extends HotelViewModel {
           razorpaymentId: payId,
           order: odrId,
         );
+        log('===============');
+        log(data.rooms.toString());
+        log(data.checkout.toString());
+        log(data.pay.toString());
+        log(data.razorpaymentId.toString());
+        log(data.order.toString());
+        log(signature.toString());
+        log('===============');
         final complete = await BookingCompleteService()
             .bookingCompleteService(data, signature: signature);
         if (complete == null) {
@@ -176,13 +187,13 @@ class BookingViewModel extends HotelViewModel {
     razorPay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handlerExternalWallet);
   }
 
-    _handlerPaymentSuccess(PaymentSuccessResponse response){
-    completeBooking(
+  _handlerPaymentSuccess(PaymentSuccessResponse response) {
+    _completeBooking(
       paymentType: 'ONLINE',
       signature: response.signature,
       payId: response.paymentId,
       odrId: response.orderId,
-      );
+    );
     razorPay.clear();
   }
 
@@ -197,7 +208,7 @@ class BookingViewModel extends HotelViewModel {
   }
 
   // =========>>>>>  ON PAYNOW BUTTON  <<<<<==========
-  Future<void> onPayNowButton(int amount) async {
+  Future<void> _onPayNowButton(int amount) async {
     final PayNowResponseModel? response = await _getOnlinePaymentData(amount);
     if (response == null) {
       ShowDialogs.popUp('Oops!! Something went wrong. Please try again later');
@@ -215,7 +226,7 @@ class BookingViewModel extends HotelViewModel {
       razorPay.open(options.toJson());
       notifyListeners();
     } catch (e) {
-      log(e.toString());
+      ShowDialogs.popUp('Something went wrong !!');
     }
   }
 
@@ -239,7 +250,9 @@ class BookingViewModel extends HotelViewModel {
   }
 
   // =========>>>>>  ON PAY AT HOTEL BUTTON  <<<<<==========
-  Future<void> onPayAtHotelButton() async {}
+  void _onPayAtHotelButton() {
+     _completeBooking(paymentType: 'PAY AT HOTEL');
+  }
 
   // ==========>>>>>  TO MAKE LOADING TRUE  <<<<<==========
   void _isLoadingTrue() {

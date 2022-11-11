@@ -9,8 +9,8 @@ import 'package:premio_inn/view/widgets/title_widget.dart';
 
 Future<void> showPaymentOptions({
   required double width,
-  required Function onPayAtHotelButton,
-  required Function onPayNowButton,
+  required VoidCallback onPayAtHotelButton,
+  required VoidCallback onPayNowButton,
   required int price,
 }) async {
   await showDialog(
@@ -33,18 +33,14 @@ Future<void> showPaymentOptions({
               ButtonWidget(
                 text: 'Pay at hotel',
                 width: width,
-                onTap: () {
-                  onPayAtHotelButton();
-                },
+                onTap: onPayAtHotelButton,
               ),
               KSizedBox.kHeigh_15,
               ButtonWidget(
                 text: 'Pay now',
                 color: KColors.kThemeGreen,
                 width: width,
-                onTap: () {
-                  onPayNowButton();
-                },
+                onTap: onPayNowButton,
               ),
             ],
           ),

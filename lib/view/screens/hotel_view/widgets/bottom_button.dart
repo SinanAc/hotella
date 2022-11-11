@@ -10,7 +10,7 @@ class BottomButtonWidget extends StatelessWidget {
     required this.onTap,
   }) : super(key: key);
   final String price;
-  final Function onTap;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +40,7 @@ class BottomButtonWidget extends StatelessWidget {
               ),
               ButtonWidget(
                 text: 'Book now',
-                onTap: () {
-                  onTap();
-                },
+                onTap: onTap,
                 width: MediaQuery.of(context).size.width / 2.5,
                 color: KColors.kThemeGreen,
               )
