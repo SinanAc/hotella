@@ -55,7 +55,7 @@ class PhoneNumberViewModel extends ChangeNotifier {
       ShowDialogs.popUp('Something went wrong !!');
       _isLoadingFalse();
       return;
-    } else if (otpResponse.created == true) {
+    } else if (otpResponse.success == true) {
       mobileNumberController.clear();
       otpController.clear();
       Navigations.pop();

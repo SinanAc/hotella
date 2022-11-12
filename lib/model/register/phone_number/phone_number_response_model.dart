@@ -1,17 +1,17 @@
 class PhoneNumberResponseModel {
-  String? message;
   bool? success;
   String? hash;
+  String? message;
 
   PhoneNumberResponseModel({
-    this.message,
     this.success,
     this.hash,
+    this.message,
   });
 
   factory PhoneNumberResponseModel.fromJson(Map<String, dynamic> json) =>
       PhoneNumberResponseModel(
-          message: json["message"] ?? '',
           success: json["success"] ?? false,
-          hash: json["hash"] ?? '');
+          hash: json["hash"] ?? '',
+          message: json["message"] ?? '');
 }

@@ -1,17 +1,18 @@
 class OtpResponseModel {
-  String? message;
-  bool? created;
+  bool? success;
   String? phone;
+  String? message;
 
   OtpResponseModel({
-    this.message,
-    this.created,
+    this.success,
     this.phone,
+    this.message,
   });
 
   factory OtpResponseModel.fromJson(Map<String, dynamic> json) =>
       OtpResponseModel(
-          message: json["message"] ?? '',
-          created: json["created"] ?? false,
-          phone: json["phone"] ?? '');
+        success: json["success"] ?? false,
+        phone: json["phone"] ?? '',
+        message: json["message"] ?? '',
+      );
 }

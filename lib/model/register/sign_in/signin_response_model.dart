@@ -21,7 +21,7 @@ class Profile {
     this.name,
     this.email,
     this.phone,
-    required this.token,
+    this.token,
   });
 
   String? name;

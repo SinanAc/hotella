@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:premio_inn/model/register/sign_in/signin_response_model.dart';
 import 'package:premio_inn/model/register/sign_up/signup_model.dart';
-import 'package:premio_inn/model/register/sign_up/signup_response_model.dart';
 import 'package:premio_inn/services/register/signup_service.dart';
 import 'package:premio_inn/utils/navigations.dart';
 import 'package:premio_inn/utils/strings.dart';
@@ -36,16 +36,16 @@ class SignUpViewModel extends ChangeNotifier {
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
-      SignUpResponseModel? signUpResponse =
+      SignInResponseModel? signUpResponse =
           await SignUpService().signUpRepo(obj);
       if (signUpResponse == null) {
-       ShowDialogs.popUp('No Response');
+        ShowDialogs.popUp('No Response');
         _isLoadingFalse();
         return;
-      } else if (signUpResponse.created == true) {
+      } else if (signUpResponse.isSuccess == true) {
         final pref = await SharedPreferences.getInstance();
-        await pref.setBool(KStrings.isLogggedIn, true);
-        await pref.setString(KStrings.token, signUpResponse.jwtKey??'');
+        await pref.setString(KStrings.phone, phoneNum);
+        await _storeUserData(signUpResponse);
         Navigations.push(const MainPage());
         _isLoadingFalse();
       } else {
@@ -101,6 +101,15 @@ class SignUpViewModel extends ChangeNotifier {
   void _isLoadingFalse() {
     isLoading = false;
     notifyListeners();
+  }
+
+  // ==========>>>>> STORING USER DATA LOCALLY  <<<<<==========
+  Future<void> _storeUserData(SignInResponseModel data) async {
+    final pref = await SharedPreferences.getInstance();
+    await pref.setBool(KStrings.isLogggedIn, true);
+    await pref.setString(KStrings.userName, data.profile?.name ?? '');
+    await pref.setString(KStrings.email, data.profile?.email ?? '');
+    await pref.setString(KStrings.token, data.profile?.token ?? '');
   }
 
   // ==========>>>>> DISPOSE VARIABLES  <<<<<==========

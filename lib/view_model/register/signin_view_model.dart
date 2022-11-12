@@ -39,15 +39,12 @@ class SigninViewModel extends ChangeNotifier {
         _isLoadingFalse();
         return;
       } else if (signInResponse.isSuccess == true) {
-        final pref = await SharedPreferences.getInstance();
-        await pref.setBool(KStrings.isLogggedIn, true);
-        await pref.setString(KStrings.token, signInResponse.profile?.token??'');
+        await _storeUserData(signInResponse);
         _isLoadingFalse();
         disposes();
         Navigations.pushRemoveUntil(const MainPage());
       } else {
-        ShowDialogs.popUp(
-            signInResponse.message ?? 'Something went wrong !!');
+        ShowDialogs.popUp(signInResponse.message ?? 'Something went wrong !!');
         _isLoadingFalse();
       }
     }
@@ -78,6 +75,17 @@ class SigninViewModel extends ChangeNotifier {
   void _isLoadingFalse() {
     isLoading = false;
     notifyListeners();
+  }
+
+  // ==========>>>>> STORING USER DATA LOCALLY  <<<<<==========
+  Future<void> _storeUserData(SignInResponseModel data) async {
+    final pref = await SharedPreferences.getInstance();
+    await pref.setBool(KStrings.isLogggedIn, true);
+    await pref.setString(KStrings.userName, data.profile?.name??'');
+    await pref.setString(KStrings.email, data.profile?.email??'');
+    await pref.setString(KStrings.phone, data.profile?.phone??'');
+    await pref.setString(KStrings.token, data.profile?.token ?? '');
+
   }
 
   // ==========>>>>> DISPOSE VARIABLES  <<<<<==========

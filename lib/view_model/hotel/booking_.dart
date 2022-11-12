@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:premio_inn/model/bookings/booking/booking_req.dart';
 import 'package:premio_inn/model/bookings/booking/booking_respo.dart';
@@ -8,15 +7,19 @@ import 'package:premio_inn/model/bookings/payment/razorpay_checkout.dart';
 import 'package:premio_inn/model/bookings/room_availability/request.dart';
 import 'package:premio_inn/model/bookings/room_availability/response.dart';
 import 'package:premio_inn/model/home/all_rooms.dart';
+import 'package:premio_inn/model/register/sign_in/signin_response_model.dart';
 import 'package:premio_inn/services/booking/booking_service.dart';
 import 'package:premio_inn/services/booking/complete_service.dart';
 import 'package:premio_inn/services/booking/paynow_service.dart';
 import 'package:premio_inn/services/booking/room_availability.dart';
 import 'package:premio_inn/utils/navigations.dart';
+import 'package:premio_inn/utils/strings.dart';
 import 'package:premio_inn/view/screens/hotel_view/widgets/payment_options.dart';
+import 'package:premio_inn/view/screens/main_page/main_page.dart';
 import 'package:premio_inn/view/widgets/show_dialogs.dart';
 import 'package:premio_inn/view_model/hotel/hotel_view_model.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BookingViewModel extends HotelViewModel {
   bool isLoading = false;
@@ -94,9 +97,9 @@ class BookingViewModel extends HotelViewModel {
       } else if (response.success == true) {
         showPaymentOptions(
           width: width,
-          onPayAtHotelButton: (){
+          onPayAtHotelButton: () {
             Navigations.pop();
-            _onPayAtHotelButton();
+            _completeBooking(paymentType: 'PAY AT HOTEL');
           },
           onPayNowButton: () {
             Navigations.pop();
@@ -136,7 +139,8 @@ class BookingViewModel extends HotelViewModel {
         } else if (complete.success == true) {
           _isLoadingFalse();
           ShowDialogs.popUp('Successfully booked', color: Colors.green);
-          await Future.delayed(const Duration(seconds: 2));
+          await Future.delayed(const Duration(seconds: 1));
+          Navigations.pushRemoveUntil(const MainPage());
           return;
         } else {
           _isLoadingFalse();
@@ -151,14 +155,6 @@ class BookingViewModel extends HotelViewModel {
           razorpaymentId: payId,
           order: odrId,
         );
-        log('===============');
-        log(data.rooms.toString());
-        log(data.checkout.toString());
-        log(data.pay.toString());
-        log(data.razorpaymentId.toString());
-        log(data.order.toString());
-        log(signature.toString());
-        log('===============');
         final complete = await BookingCompleteService()
             .bookingCompleteService(data, signature: signature);
         if (complete == null) {
@@ -168,7 +164,8 @@ class BookingViewModel extends HotelViewModel {
         } else if (complete.success == true) {
           _isLoadingFalse();
           ShowDialogs.popUp('Successfully booked', color: Colors.green);
-          await Future.delayed(const Duration(seconds: 2));
+          await Future.delayed(const Duration(seconds: 1));
+          Navigations.pushRemoveUntil(const MainPage());
           return;
         } else {
           _isLoadingFalse();
@@ -180,15 +177,15 @@ class BookingViewModel extends HotelViewModel {
 
   // =========>>>>>  RAZORPAY CREDENTIALS  <<<<<==========
   late Razorpay razorPay;
-  BookingViewModel() {
+  void initializeRazorPay() {
     razorPay = Razorpay();
     razorPay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlerPaymentSuccess);
     razorPay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlerErrorFailure);
     razorPay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handlerExternalWallet);
   }
 
-  _handlerPaymentSuccess(PaymentSuccessResponse response) {
-    _completeBooking(
+  _handlerPaymentSuccess(PaymentSuccessResponse response) async {
+    await _completeBooking(
       paymentType: 'ONLINE',
       signature: response.signature,
       payId: response.paymentId,
@@ -203,7 +200,6 @@ class BookingViewModel extends HotelViewModel {
   }
 
   void _handlerExternalWallet(ExternalWalletResponse response) {
-    log('handlerExternalWallet');
     razorPay.clear();
   }
 
@@ -214,14 +210,7 @@ class BookingViewModel extends HotelViewModel {
       ShowDialogs.popUp('Oops!! Something went wrong. Please try again later');
       return;
     }
-    RazorpayCheckoutModel options = RazorpayCheckoutModel(
-      key: response.keyId,
-      amount: response.amount.toString(),
-      currency: response.currency,
-      name: "Hotella",
-      description: "Payment to book your selected room via Hotella",
-      orderId: response.id,
-    );
+    final options = await _razorPayData(response);
     try {
       razorPay.open(options.toJson());
       notifyListeners();
@@ -249,9 +238,29 @@ class BookingViewModel extends HotelViewModel {
     }
   }
 
-  // =========>>>>>  ON PAY AT HOTEL BUTTON  <<<<<==========
-  void _onPayAtHotelButton() {
-     _completeBooking(paymentType: 'PAY AT HOTEL');
+  // ==========>>>>>  RAZORPAY CHECKOUT OPTIONS  <<<<<==========
+  Future<RazorpayCheckoutModel> _razorPayData(
+      PayNowResponseModel response) async {
+    final pref = await SharedPreferences.getInstance();
+    final userData = SignInResponseModel(
+        profile: Profile(
+      name: pref.getString(KStrings.userName),
+      email: pref.getString(KStrings.email),
+      phone: pref.getString(KStrings.phone),
+    ));
+    RazorpayCheckoutModel options = RazorpayCheckoutModel(
+        key: response.keyId,
+        amount: response.amount.toString(),
+        currency: response.currency,
+        name: "Hotella",
+        description: "Payment to book your selected room via Hotella",
+        orderId: response.id,
+        prefill: Prefill(
+          name: userData.profile?.name ?? '',
+          email: userData.profile?.email ?? '',
+          contact: userData.profile?.phone ?? '',
+        ));
+    return options;
   }
 
   // ==========>>>>>  TO MAKE LOADING TRUE  <<<<<==========

@@ -23,6 +23,7 @@ class HotelScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final hotelPro = context.read<HotelViewModel>();
     final bookingPro = context.read<BookingViewModel>();
+    bookingPro.initializeRazorPay();
     return Stack(
       children: [
         Scaffold(

@@ -1,8 +1,9 @@
 class KStrings {
   // --->>>  global shared_preferences key words
   static const String isLogggedIn = 'isLogggedIn';
-  static const String storedUserName = 'storedUserName';
-  static const String storedPassword = 'storedPassword';
+  static const String userName = 'userName';
+  static const String email = 'email';
+  static const String phone = 'phone';
   static const String token = 'token';
 
   // --->>>  dummy image to replace network images of rooms
