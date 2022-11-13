@@ -10,7 +10,6 @@ import 'package:premio_inn/view/screens/hotel_view/widgets/hotel_photos.dart';
 import 'package:premio_inn/view/widgets/loading_indicator.dart';
 import 'package:premio_inn/view/widgets/text_widget.dart';
 import 'package:premio_inn/view/widgets/title_widget.dart';
-import 'package:premio_inn/view_model/hotel/booking_.dart';
 import 'package:premio_inn/view_model/hotel/hotel_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -22,8 +21,7 @@ class HotelScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final hotelPro = context.read<HotelViewModel>();
-    final bookingPro = context.read<BookingViewModel>();
-    bookingPro.initializeRazorPay();
+    hotelPro.initializeRazorPay();
     return Stack(
       children: [
         Scaffold(
@@ -204,14 +202,14 @@ class HotelScreen extends StatelessWidget {
                 return BottomButtonWidget(
                   price: '$totalPrice',
                   onTap: () async {
-                    bookingPro.onBookNowButton(hotel, size.width / 2);
+                    hotelPro.onBookNowButton(hotel, size.width / 2);
                   },
                 );
               }),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
         ),
-        Selector<BookingViewModel, bool>(
+        Selector<HotelViewModel, bool>(
           selector: (_, provider) => provider.isLoading,
           builder: (_, isLoading, __) {
             return isLoading
@@ -223,7 +221,7 @@ class HotelScreen extends StatelessWidget {
                 : const SizedBox();
           },
         ),
-        Selector<BookingViewModel, bool>(
+        Selector<HotelViewModel, bool>(
           selector: (_, provider) => provider.isLoading,
           builder: (_, isLoading, __) {
             return isLoading

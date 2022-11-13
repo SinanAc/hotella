@@ -27,7 +27,7 @@ class Providers {
         ChangeNotifierProvider(create: (context) => HomeViewModel()),
         ChangeNotifierProvider(create: (context) => SearchViewModel()),
         ChangeNotifierProvider(create: (context) => CategoryViewModel()),
-        ChangeNotifierProvider(create: (context) => BookingViewModel()),
+        //ChangeNotifierProvider(create: (context) => BookingViewModel()),
       ],
       child: const MyApp(),
     );
