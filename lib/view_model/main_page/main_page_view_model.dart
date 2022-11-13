@@ -2,7 +2,6 @@ import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/view/screens/account/account_screen.dart';
-import 'package:premio_inn/view/screens/saved/saved_screen.dart';
 import 'package:premio_inn/view/screens/home/home_screen.dart';
 import 'package:premio_inn/view/screens/bookings/booking_screen.dart';
 
@@ -50,7 +49,7 @@ class MainPageViewModel extends ChangeNotifier {
   static List<Widget> screenList = [
     const HomeScreen(),
     const BookingScreen(),
-    const SavedScreen(),
+    //const SavedScreen(),
     const AccountScreen(),
   ];
 }
