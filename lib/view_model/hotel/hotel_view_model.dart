@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:premio_inn/model/bookings/payment/razorpay_checkout.dart';
+import 'package:premio_inn/model/booking/payment/razorpay_checkout.dart';
 import 'package:premio_inn/model/home/all_rooms.dart';
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/view/screens/hotel_view/widgets/bottom_sheet.dart';
 import 'package:premio_inn/view/widgets/show_dialogs.dart';
-import 'package:premio_inn/model/bookings/export.dart';
+import 'package:premio_inn/model/booking/export.dart';
 import 'package:premio_inn/model/register/sign_in/signin_response_model.dart';
 import 'package:premio_inn/services/booking/export.dart';
 import 'package:premio_inn/utils/navigations.dart';

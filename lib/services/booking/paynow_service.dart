@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:premio_inn/model/bookings/payment/paynow_respo_model.dart';
+import 'package:premio_inn/model/booking/payment/paynow_respo_model.dart';
 import 'package:premio_inn/services/dio/api_exceptions.dart';
 import 'package:premio_inn/services/dio/interceptor.dart';
 import 'package:premio_inn/services/dio/internet_checker.dart';

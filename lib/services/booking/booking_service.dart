@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:premio_inn/model/bookings/booking/booking_req.dart';
-import 'package:premio_inn/model/bookings/booking/booking_respo.dart';
+import 'package:premio_inn/model/booking/booking/booking_req.dart';
+import 'package:premio_inn/model/booking/booking/booking_respo.dart';
 import 'package:premio_inn/services/dio/api_exceptions.dart';
 import 'package:premio_inn/services/dio/interceptor.dart';
 import 'package:premio_inn/services/dio/internet_checker.dart';

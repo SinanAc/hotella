@@ -3,7 +3,6 @@ import 'package:premio_inn/main.dart';
 import 'package:premio_inn/view_model/account/account_view_model.dart';
 import 'package:premio_inn/view_model/category/category.dart';
 import 'package:premio_inn/view_model/home/home_view_model.dart';
-import 'package:premio_inn/view_model/hotel/booking_.dart';
 import 'package:premio_inn/view_model/hotel/hotel_view_model.dart';
 import 'package:premio_inn/view_model/main_page/main_page_view_model.dart';
 import 'package:premio_inn/view_model/register/phone_number.dart';
