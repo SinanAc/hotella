@@ -23,7 +23,7 @@ class MainPage extends StatelessWidget {
           items: [
             MainPageViewModel.bottomItems[0],
             MainPageViewModel.bottomItems[1],
-            MainPageViewModel.bottomItems[2],
+            // MainPageViewModel.bottomItems[2],
             MainPageViewModel.bottomItems[3],
           ],
           itemCornerRadius: 10,
