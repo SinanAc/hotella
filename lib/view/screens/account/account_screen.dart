@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/sizes.dart';
@@ -6,6 +8,7 @@ import 'package:premio_inn/view/screens/account/widgets/profile_section.dart';
 import 'package:premio_inn/view/widgets/double_color_title.dart';
 import 'package:premio_inn/view/widgets/show_dialogs.dart';
 import 'package:premio_inn/view_model/account/account_view_model.dart';
+import 'package:premio_inn/view_model/booked/bookings.dart';
 import 'package:provider/provider.dart';
 
 class AccountScreen extends StatelessWidget {
@@ -54,7 +57,10 @@ class AccountScreen extends StatelessWidget {
                     AccountGridItem(
                       icon: Icons.manage_accounts,
                       title: 'Edit Profile',
-                      onTap: () {},
+                      onTap: () {
+                        log('omnmm');
+                        context.read<BookedHotelsViewModel>().getAllBookedHotels();
+                      },
                     ),
                     AccountGridItem(
                       icon: Icons.info,

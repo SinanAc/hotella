@@ -7,11 +7,12 @@ import 'package:premio_inn/services/dio/internet_checker.dart';
 import 'package:premio_inn/utils/url.dart';
 
 class BookingService {
-  Future<BookingResponseModel?> bookingService(BookingRequestModel data)async{
-    final Dio dios = await InterceptorDio.getVerifiedUser();
-        if (await internetCheck()) {
+  Future<BookingResponseModel?> bookingService(BookingRequestModel data) async {
+    if (await internetCheck()) {
+      final Dio dios = await InterceptorDio.getVerifiedUser();
       try {
-        final Response response = await dios.post(Url.booking,data: data.toJson());
+        final Response response =
+            await dios.post(Url.booking, data: data.toJson());
         if (response.statusCode! >= 200 || response.statusCode! <= 299) {
           return BookingResponseModel.fromJson(response.data);
         } else {

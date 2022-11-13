@@ -5,13 +5,14 @@ import 'package:premio_inn/services/dio/interceptor.dart';
 import 'package:premio_inn/services/dio/internet_checker.dart';
 import 'package:premio_inn/utils/url.dart';
 
-class PayNowService{
-    // -->> api function to check is room available or not
-  Future<PayNowResponseModel?> payNowService(int amount)async{
-    final Dio dio = await InterceptorDio.getVerifiedUser();
-        if (await internetCheck()) {
+class PayNowService {
+  // -->> api function to check is room available or not
+  Future<PayNowResponseModel?> payNowService(int amount) async {
+    if (await internetCheck()) {
+      final Dio dio = await InterceptorDio.getVerifiedUser();
       try {
-        final Response response = await dio.post(Url.paynow,data: {"price":amount});
+        final Response response =
+            await dio.post(Url.paynow, data: {"price": amount});
         if (response.statusCode! >= 200 || response.statusCode! <= 299) {
           return PayNowResponseModel.fromJson(response.data);
         } else {

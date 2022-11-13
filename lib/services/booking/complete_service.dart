@@ -10,8 +10,8 @@ class BookingCompleteService {
   Future<CompleteBookingResponse?> bookingCompleteService(
       CompleteBookingRequestModel data,
       {String? signature}) async {
-    final Dio dios = await InterceptorDio.getVerifiedUser();
     if (await internetCheck()) {
+      final Dio dios = await InterceptorDio.getVerifiedUser();
       late Response response;
       try {
         if (signature != null) {
