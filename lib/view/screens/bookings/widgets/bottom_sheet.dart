@@ -1,7 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:premio_inn/model/booked/booked_rooms.dart';
+import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/navigations.dart';
 import 'package:premio_inn/utils/sizes.dart';
+import 'package:premio_inn/utils/strings.dart';
+import 'package:premio_inn/view/widgets/button_widget.dart';
+import 'package:premio_inn/view/widgets/shimmer_skelton.dart';
+import 'package:premio_inn/view/widgets/text_widget.dart';
 import 'package:premio_inn/view/widgets/title_widget.dart';
 import 'package:premio_inn/view_model/bookings/booking_view_model.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +21,7 @@ class BookedDetailsBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bookingPro = Provider.of<BookedHotelsViewModel>(context);
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       extendBody: true,
       backgroundColor: Colors.black.withOpacity(0.6),
@@ -33,7 +40,7 @@ class BookedDetailsBottomSheet extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 10),
           child: TitleWidget(
-            'Checked out',
+            'Upcoming booking',
             color: Colors.white,
             fontSize: 26,
           ),
@@ -42,12 +49,74 @@ class BookedDetailsBottomSheet extends StatelessWidget {
         Expanded(
           child: Container(
             height: double.infinity,
+            width: double.infinity,
             decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  topRight: Radius.circular(15),
-                ),
-                color: Colors.white),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(15),
+                topRight: Radius.circular(15),
+              ),
+              color: Colors.white,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                children: [
+                  KSizedBox.kHeigh_10,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            width: size.width / 1.8,
+                            child: TitleWidget(
+                                hotel.property?.propertyName ??
+                                    'Hotel name not available',
+                                fontSize: 22),
+                          ),
+                          KSizedBox.kHeigh_5,
+                          // TextWidget(
+                          //   '${DateFormat('MMM d').format(hotel.date?.startDate ?? DateTime.now())} - ${DateFormat('MMM d').format(hotel.date?.endDate ?? DateTime.now())} • ${hotel.room?.guest.toString()} Guests',
+                          //   size: 17,
+                          // ),
+                          SizedBox(
+                            width: size.width / 1.8,
+                            child: Text(
+                              hotel.property?.address ??
+                                  'Address not available',
+                              style: TextStyle(
+                                fontSize: 17,
+                                color: Colors.grey.shade600,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10.0),
+                        child: CachedNetworkImage(
+                          height: size.height / 6.7,
+                          width: size.height / 6.7,
+                          fit: BoxFit.cover,
+                          imageUrl: hotel.room?.images?.first.first.url ??
+                              KStrings.dummyNetImage,
+                          placeholder: (context, url) => ShimmerSkelton(
+                            height: size.height / 6.7,
+                            width: size.height / 6.7,
+                          ),
+                          errorWidget: (context, url, error) =>
+                              Image.asset(KStrings.noInterNetImage),
+                        ),
+                      ),
+                    ],
+                  ),
+                  KSizedBox.kHeigh_10,
+                  ButtonWidget(text: 'Cancell booking', onTap: () {},color: KColors.kRedColor,)
+                ],
+              ),
+            ),
           ),
         )
       ]),

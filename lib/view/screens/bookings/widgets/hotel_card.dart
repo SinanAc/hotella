@@ -19,68 +19,69 @@ class HotelCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final bookPro = context.read<BookedHotelsViewModel>();
     return InkWell(
-      onTap: ()=>bookPro.showMoreDetails(size.height, hotel),
+      onTap: () => bookPro.showMoreDetails(size.height, hotel),
       child: Card(
-          color: Colors.white,
-          elevation: 0,
-          child: Row(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10.0),
-                child: CachedNetworkImage(
+        color: Colors.white,
+        elevation: 0,
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10.0),
+              child: CachedNetworkImage(
+                height: size.height / 6.7,
+                width: size.height / 6.7,
+                fit: BoxFit.cover,
+                imageUrl: hotel.room?.images?.first.first.url ??
+                    KStrings.dummyNetImage,
+                placeholder: (context, url) => ShimmerSkelton(
                   height: size.height / 6.7,
                   width: size.height / 6.7,
-                  fit: BoxFit.cover,
-                  imageUrl: hotel.room?.images?.first.first.url ??
-                      KStrings.dummyNetImage,
-                  placeholder: (context, url) => ShimmerSkelton(
-                    height: size.height / 6.7,
-                    width: size.height / 6.7,
-                  ),
-                  errorWidget: (context, url, error) =>
-                      Image.asset(KStrings.noInterNetImage),
                 ),
+                errorWidget: (context, url, error) =>
+                    Image.asset(KStrings.noInterNetImage),
               ),
-              KSizedBox.kWidth_10,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TitleWidget(hotel.property?.city ?? 'City name not available',
-                      fontSize: 18),
-                  KSizedBox.kHeigh_5,
-                  TextWidget(
-                    '${DateFormat('MMM d').format(hotel.date?.startDate ?? DateTime.now())} - ${DateFormat('MMM d').format(hotel.date?.endDate ?? DateTime.now())} • ${hotel.room?.guest.toString()} Guests',
-                    size: 17,
-                  ),
-                  KSizedBox.kHeigh_5,
-                  SizedBox(
-                    width: size.width / 1.8,
-                    child: Text(
-                      overflow: TextOverflow.ellipsis,
-                      hotel.property?.propertyName ?? 'Hotel name not available',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey.shade600,
-                      ),
+            ),
+            KSizedBox.kWidth_10,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TitleWidget(hotel.property?.city ?? 'City name not available',
+                    fontSize: 18),
+                KSizedBox.kHeigh_5,
+                TextWidget(
+                  '${DateFormat('MMM d').format(hotel.date?.startDate ?? DateTime.now())} - ${DateFormat('MMM d').format(hotel.date?.endDate ?? DateTime.now())} • ${hotel.room?.guest.toString()} Guests',
+                  size: 17,
+                ),
+                KSizedBox.kHeigh_5,
+                SizedBox(
+                  width: size.width / 1.8,
+                  child: Text(
+                    overflow: TextOverflow.ellipsis,
+                    hotel.property?.propertyName ?? 'Hotel name not available',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey.shade600,
                     ),
                   ),
-                  KSizedBox.kHeigh_5,
-                  SizedBox(
-                    width: size.width / 1.9,
-                    child: Text(
-                      hotel.property?.address ?? 'Address not available',
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey.shade600,
-                      ),
+                ),
+                KSizedBox.kHeigh_5,
+                SizedBox(
+                  width: size.width / 1.9,
+                  child: Text(
+                    hotel.property?.address ?? 'Address not available',
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey.shade600,
                     ),
-                  )
-                ],
-              ),
-            ],
-          )),
+                  ),
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
