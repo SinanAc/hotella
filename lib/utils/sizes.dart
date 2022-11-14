@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class KSizedBox {
   // height sizes
-  static const kHeigh_3 = SizedBox(height: 3);
   static const kHeigh_5 = SizedBox(height: 5);
   static const kHeigh_10 = SizedBox(height: 10);
   static const kHeigh_15 = SizedBox(height: 15);

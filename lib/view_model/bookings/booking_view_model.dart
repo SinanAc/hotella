@@ -31,6 +31,7 @@ class BookedHotelsViewModel extends ChangeNotifier {
     }
   }
 
+  // ==========>>>>>  TO SORT  <<<<<==========
   void _sortBookedList(List<Completed> fullList) {
     upcomingList.clear();
     upcomingList
@@ -62,6 +63,15 @@ class BookedHotelsViewModel extends ChangeNotifier {
         //);
       },
     );
+  }
+
+  // ==========>>>>>  TO CALCULATE TOTAL AMOUNT  <<<<<==========
+  String totalAmount(int rooms, int price,int days) {
+    if (rooms == 0 || price == 0 || days == 0) {
+      return 'Not available';
+    }
+    final total = rooms * days * price;
+    return '₹${total.toString()}';
   }
 
   // // ==========>>>>>  TO MAKE LOADING TRUE  <<<<<==========

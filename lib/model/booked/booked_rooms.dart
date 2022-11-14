@@ -34,6 +34,8 @@ class Completed {
     this.roomNumber,
     this.date,
     this.days,
+    this.booingId,
+    this.paymentType,
     this.isBooked,
     this.completed,
     this.cancel,
@@ -47,6 +49,8 @@ class Completed {
   int? roomNumber;
   Date? date;
   String? days;
+  String? booingId;
+  String? paymentType;
   bool? isBooked;
   bool? completed;
   bool? cancel;
@@ -60,6 +64,8 @@ class Completed {
         roomNumber: json["roomNumber"],
         date: Date.fromJson(json["Date"]),
         days: json["days"],
+        booingId: json["bookingId"],
+        paymentType: json["PaymentType"]??'PAY AT HOTEL',
         isBooked: json["isBooked"],
         completed: json["completed"],
         cancel: json["cancel"],
