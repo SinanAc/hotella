@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:premio_inn/model/booked/booked_rooms.dart';
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/navigations.dart';
@@ -55,13 +56,13 @@ class BookedDetailsBottomSheet extends StatelessWidget {
                 topLeft: Radius.circular(15),
                 topRight: Radius.circular(15),
               ),
-              color: Colors.white,
+              color: KColors.kLieWhiteColor,
             ),
             child: Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 14.0),
               child: Column(
                 children: [
-                  KSizedBox.kHeigh_10,
+                  KSizedBox.kHeigh_20,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -74,7 +75,7 @@ class BookedDetailsBottomSheet extends StatelessWidget {
                             child: TitleWidget(
                                 hotel.property?.propertyName ??
                                     'Hotel name not available',
-                                fontSize: 22),
+                                fontSize: 24),
                           ),
                           KSizedBox.kHeigh_5,
                           // TextWidget(
@@ -112,8 +113,44 @@ class BookedDetailsBottomSheet extends StatelessWidget {
                       ),
                     ],
                   ),
-                  KSizedBox.kHeigh_10,
-                  ButtonWidget(text: 'Cancell booking', onTap: () {},color: KColors.kRedColor,)
+                  KSizedBox.kHeigh_15,
+                  ButtonWidget(
+                    text: 'Cancell booking',
+                    onTap: () {},
+                    color: KColors.kRedColor,
+                  ),
+                  KSizedBox.kHeigh_30,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TitleWidget('Check-in', fontSize: 20),
+                          KSizedBox.kHeigh_5,
+                          TextWidget(DateFormat('EEE, MMM d, yyyy')
+                              .format(hotel.date?.startDate ?? DateTime.now())),
+                          KSizedBox.kHeigh_3,
+                          TextWidget(
+                              '${hotel.room?.checkinTime} onwards',
+                              color: Colors.grey.shade700)
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          TitleWidget('Checkout', fontSize: 20),
+                          KSizedBox.kHeigh_5,
+                          TextWidget(DateFormat('EEE, MMM d, yyyy')
+                              .format(hotel.date?.endDate ?? DateTime.now())),
+                          KSizedBox.kHeigh_3,
+                          TextWidget(
+                              'Before ${hotel.room?.checkoutTime}',
+                              color: Colors.grey.shade700)
+                        ],
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),

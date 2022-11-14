@@ -10,6 +10,7 @@ class KColors {
   static const Color kIconColor = Color(0xff333333);
   static const kRedColor = Color(0xFFD32F2F);
   static const Color kTextFieldColor = Color(0xffFFE5E5);
+  static const Color kLieWhiteColor = Color(0xFFFAFAFA);
   static const Color kWhiteColor = Colors.white;
   static const Color kBlackColor = Colors.black;
   static const Color kBlueColor = Colors.blue;

@@ -46,15 +46,17 @@ class BookedHotelsViewModel extends ChangeNotifier {
   // ==========>>>>>  BOTTOM SHEET TO SHOW BOOKED DETAILS  <<<<<==========
   void showMoreDetails(double height, Completed hotel) {
     showModalBottomSheet<BookedDetailsBottomSheet>(
-     isScrollControlled: true,
+      isScrollControlled: true,
+      isDismissible: false,
+      enableDrag: false,
       backgroundColor: Colors.transparent,
       context: scaffoldKey.currentState!.context,
-      //clipBehavior: Clip.antiAliasWithSaveLayer,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
       builder: (_) {
-        return 
-        // Scaffold(
-        //     body:
-             BookedDetailsBottomSheet(
+        return
+            // Scaffold(
+            //     body:
+            BookedDetailsBottomSheet(
           hotel: hotel,
         );
         //);
