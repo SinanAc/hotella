@@ -19,12 +19,22 @@ class BookedHotelsViewModel extends ChangeNotifier {
     } else if (response.success == true) {
       bookedHotels.clear();
       bookedHotels.addAll(response.completed ?? []);
+      _sortBookedList(bookedHotels);
       _isLoading = false;
       return;
     } else {
       ShowDialogs.popUp('No data');
       _isLoading = false;
     }
+  }
+
+  void _sortBookedList(List<Completed> fullList) {
+    upcomingList.clear();
+    upcomingList.addAll(fullList.where((element) => element.isBooked == true).toList());
+    completedList.clear();
+    completedList.addAll(fullList.where((element) => element.completed == true).toList());
+    cancelledList.clear();
+    cancelledList.addAll(fullList.where((element) => element.cancel == true).toList());
   }
 
   // // ==========>>>>>  TO MAKE LOADING TRUE  <<<<<==========

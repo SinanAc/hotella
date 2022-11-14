@@ -16,7 +16,7 @@ class BookedRoomsService {
           return BookedRoomsModel.fromJson(response.data);
         } else {
           return BookedRoomsModel(
-              message: 'Something went wrong ! Please try again later');
+              message: 'Something went wrong!! Please try again later');
         }
       } catch (e) {
         return BookedRoomsModel(message: ApiExceptions.handleError(e));

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/sizes.dart';
-import 'package:premio_inn/view/screens/bookings/widgets/coming_screen.dart';
-import 'package:premio_inn/view/screens/bookings/widgets/history_screen.dart';
+import 'package:premio_inn/view/screens/bookings/screens/cancelled.dart';
+import 'package:premio_inn/view/screens/bookings/screens/coming.dart';
+import 'package:premio_inn/view/screens/bookings/screens/history.dart';
 import 'package:premio_inn/view/screens/bookings/widgets/tab_widget.dart';
 import 'package:premio_inn/view/widgets/double_color_title.dart';
 import 'package:premio_inn/view/widgets/loading_indicator.dart';
@@ -18,7 +19,7 @@ class BookingScreen extends StatelessWidget {
     return FutureBuilder(
       future: bookingsPro.getAllBookedHotels(),
       builder: (_, __) => DefaultTabController(
-        length: 2,
+        length: 3,
         child: Column(
           children: [
             ColoredBox(
@@ -38,6 +39,7 @@ class BookingScreen extends StatelessWidget {
                     tabs: const [
                       TabWidget(text: 'Coming'),
                       TabWidget(text: 'History'),
+                      TabWidget(text: 'Cancelled'),
                     ],
                     indicator: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
@@ -61,6 +63,7 @@ class BookingScreen extends StatelessWidget {
                             children: [
                                 ComingScreen(),
                                 HistoryScreen(),
+                                CancelledScreen(),
                               ]),
               ),
             ),
