@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:premio_inn/utils/sizes.dart';
-import 'package:premio_inn/view_model/booked/bookings.dart';
+import 'package:premio_inn/view/screens/bookings/widgets/hotel_card.dart';
+import 'package:premio_inn/view_model/bookings/booking_view_model.dart';
 import 'package:provider/provider.dart';
 
-class HistoryScreen extends StatelessWidget {
-  const HistoryScreen({Key? key}) : super(key: key);
+class CompletedScreen extends StatelessWidget {
+  const CompletedScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,15 +15,7 @@ class HistoryScreen extends StatelessWidget {
         : ListView.separated(
             itemCount: bookingsPro.completedList.length,
             itemBuilder: ((_, index) {
-              return const SizedBox(
-                width: 100,
-                child: ColoredBox(
-                  color: Colors.black,
-                  child: SizedBox(
-                    height: 100,
-                  ),
-                ),
-              );
+              return HotelCard(hotel: bookingsPro.completedList[index]);
             }),
             separatorBuilder: ((_, __) {
               return KSizedBox.kHeigh_10;

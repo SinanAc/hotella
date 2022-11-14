@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:premio_inn/model/booked/booked_rooms.dart';
 import 'package:premio_inn/services/booked/booked_rooms.dart';
+import 'package:premio_inn/view/screens/bookings/widgets/bottom_sheet.dart';
 import 'package:premio_inn/view/widgets/show_dialogs.dart';
 
 class BookedHotelsViewModel extends ChangeNotifier {
+  // ==========>>>>>  VARIABLES  <<<<<==========
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final List<Completed> bookedHotels = [];
   final List<Completed> upcomingList = [];
   final List<Completed> completedList = [];
@@ -30,11 +33,33 @@ class BookedHotelsViewModel extends ChangeNotifier {
 
   void _sortBookedList(List<Completed> fullList) {
     upcomingList.clear();
-    upcomingList.addAll(fullList.where((element) => element.isBooked == true).toList());
+    upcomingList
+        .addAll(fullList.where((element) => element.isBooked == true).toList());
     completedList.clear();
-    completedList.addAll(fullList.where((element) => element.completed == true).toList());
+    completedList.addAll(
+        fullList.where((element) => element.completed == true).toList());
     cancelledList.clear();
-    cancelledList.addAll(fullList.where((element) => element.cancel == true).toList());
+    cancelledList
+        .addAll(fullList.where((element) => element.cancel == true).toList());
+  }
+
+  // ==========>>>>>  BOTTOM SHEET TO SHOW BOOKED DETAILS  <<<<<==========
+  void showMoreDetails(double height, Completed hotel) {
+    showModalBottomSheet<BookedDetailsBottomSheet>(
+     isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      context: scaffoldKey.currentState!.context,
+      //clipBehavior: Clip.antiAliasWithSaveLayer,
+      builder: (_) {
+        return 
+        // Scaffold(
+        //     body:
+             BookedDetailsBottomSheet(
+          hotel: hotel,
+        );
+        //);
+      },
+    );
   }
 
   // // ==========>>>>>  TO MAKE LOADING TRUE  <<<<<==========

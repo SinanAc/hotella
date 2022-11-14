@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:premio_inn/utils/sizes.dart';
-import 'package:premio_inn/view_model/booked/bookings.dart';
+import 'package:premio_inn/view/screens/bookings/widgets/hotel_card.dart';
+import 'package:premio_inn/view_model/bookings/booking_view_model.dart';
 import 'package:provider/provider.dart';
 
 class CancelledScreen extends StatelessWidget {
@@ -14,18 +15,11 @@ class CancelledScreen extends StatelessWidget {
         : ListView.separated(
             itemCount: bookingsPro.cancelledList.length,
             itemBuilder: ((_, index) {
-              return const SizedBox(
-                width: 100,
-                child: ColoredBox(
-                  color: Colors.black,
-                  child: SizedBox(
-                    height: 100,
-                  ),
-                ),
-              );
+              return HotelCard(hotel: bookingsPro.cancelledList[index]);
             }),
             separatorBuilder: ((_, __) {
               return KSizedBox.kHeigh_10;
-            }));
+            }),
+          );
   }
 }
