@@ -15,7 +15,10 @@ class CancelledScreen extends StatelessWidget {
         : ListView.separated(
             itemCount: bookingsPro.cancelledList.length,
             itemBuilder: ((_, index) {
-              return HotelCard(hotel: bookingsPro.cancelledList[index]);
+              return HotelCard(
+                hotel: bookingsPro.cancelledList[index],
+                type:  BookingEnums.cancelled,
+                );
             }),
             separatorBuilder: ((_, __) {
               return KSizedBox.kHeigh_10;

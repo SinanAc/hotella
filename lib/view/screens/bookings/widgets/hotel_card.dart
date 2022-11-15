@@ -11,15 +11,19 @@ import 'package:premio_inn/view_model/bookings/booking_view_model.dart';
 import 'package:provider/provider.dart';
 
 class HotelCard extends StatelessWidget {
-  const HotelCard({Key? key, required this.hotel}) : super(key: key);
+  const HotelCard({
+    Key? key,
+    required this.hotel,
+    required this.type,
+  }) : super(key: key);
   final Completed hotel;
-
+  final BookingEnums type;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final bookPro = context.read<BookedHotelsViewModel>();
     return InkWell(
-      onTap: () => bookPro.showMoreDetails(size.height, hotel),
+      onTap: () => bookPro.showMoreDetails(hotel,type),
       child: Card(
         color: Colors.white,
         elevation: 0,

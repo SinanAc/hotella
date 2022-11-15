@@ -17,8 +17,10 @@ class BookedDetailsBottomSheet extends StatelessWidget {
   const BookedDetailsBottomSheet({
     Key? key,
     required this.hotel,
+    required this.type,
   }) : super(key: key);
   final Completed hotel;
+  final BookingEnums type;
   @override
   Widget build(BuildContext context) {
     final bookingPro = Provider.of<BookedHotelsViewModel>(context);
@@ -41,7 +43,12 @@ class BookedDetailsBottomSheet extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 10),
           child: TitleWidget(
-            'Upcoming booking',
+            type==BookingEnums.coming?
+            'Upcoming booking':
+            type==BookingEnums.completed?
+            'Completed':
+            'Cancelled'
+            ,
             color: Colors.white,
             fontSize: 26,
           ),
@@ -111,11 +118,12 @@ class BookedDetailsBottomSheet extends StatelessWidget {
                       ],
                     ),
                     KSizedBox.kHeigh_15,
+                    type==BookingEnums.coming?
                     ButtonWidget(
                       text: 'Cancel booking',
                       onTap: () {},
                       color: KColors.kRedColor,
-                    ),
+                    ):const SizedBox(),
                     KSizedBox.kHeigh_40,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

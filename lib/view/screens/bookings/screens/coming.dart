@@ -15,7 +15,10 @@ class ComingScreen extends StatelessWidget {
         : ListView.separated(
             itemCount: bookingsPro.upcomingList.length,
             itemBuilder: ((_, index) {
-              return HotelCard(hotel: bookingsPro.upcomingList[index]);
+              return  HotelCard(
+                hotel: bookingsPro.upcomingList[index],
+                type:  BookingEnums.coming,
+                );
             }),
             separatorBuilder: ((_, __) {
               return KSizedBox.kHeigh_10;

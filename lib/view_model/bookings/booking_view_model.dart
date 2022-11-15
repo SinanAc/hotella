@@ -45,7 +45,7 @@ class BookedHotelsViewModel extends ChangeNotifier {
   }
 
   // ==========>>>>>  BOTTOM SHEET TO SHOW BOOKED DETAILS  <<<<<==========
-  void showMoreDetails(double height, Completed hotel) {
+  void showMoreDetails(Completed hotel,BookingEnums type) {
     showModalBottomSheet<BookedDetailsBottomSheet>(
       isScrollControlled: true,
       isDismissible: false,
@@ -59,6 +59,7 @@ class BookedHotelsViewModel extends ChangeNotifier {
             //     body:
             BookedDetailsBottomSheet(
           hotel: hotel,
+          type: type
         );
         //);
       },
@@ -66,7 +67,7 @@ class BookedHotelsViewModel extends ChangeNotifier {
   }
 
   // ==========>>>>>  TO CALCULATE TOTAL AMOUNT  <<<<<==========
-  String totalAmount(int rooms, int price,int days) {
+  String totalAmount(int rooms, int price, int days) {
     if (rooms == 0 || price == 0 || days == 0) {
       return 'Not available';
     }
@@ -86,3 +87,5 @@ class BookedHotelsViewModel extends ChangeNotifier {
   //   notifyListeners();
   // }
 }
+
+enum BookingEnums { coming, completed, cancelled }

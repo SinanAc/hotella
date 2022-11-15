@@ -15,7 +15,10 @@ class CompletedScreen extends StatelessWidget {
         : ListView.separated(
             itemCount: bookingsPro.completedList.length,
             itemBuilder: ((_, index) {
-              return HotelCard(hotel: bookingsPro.completedList[index]);
+              return  HotelCard(
+                hotel: bookingsPro.completedList[index],
+                type:  BookingEnums.completed,
+                );
             }),
             separatorBuilder: ((_, __) {
               return KSizedBox.kHeigh_10;
