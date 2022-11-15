@@ -14,7 +14,7 @@ class Navigations {
   static pop() {
     navigatorKey.currentState?.pop();
   }
-
+  
   static pushReplace(page) {
     navigatorKey.currentState?.pushReplacement(
       MaterialPageRoute(

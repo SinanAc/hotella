@@ -30,7 +30,8 @@ class BookingScreen extends StatelessWidget {
                   children: [
                     KSizedBox.kHeigh_10,
                     const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 12, horizontal: 10),
                       child: DoubleColorTitle(
                           text1: 'My', text2: 'Bookings', textSize: 24),
                     ),

@@ -21,21 +21,23 @@ class BookedHotelsViewModel extends ChangeNotifier {
   final List<Completed> cancelledList = [];
 
   // ==========>>>>>  TO GET ALL BOOKED HOTELS  <<<<<==========
-  Future<void> getAllBookedHotels() async {
+  Future<bool> getAllBookedHotels() async {
     _isLoading = true;
     final BookedRoomsModel? response = await BookedRoomsService().bookedRooms();
     if (response == null) {
       _isLoading = false;
-      return;
+      return false;
     } else if (response.success == true) {
       bookedHotels.clear();
       bookedHotels.addAll(response.completed ?? []);
       _sortBookedList(bookedHotels);
+      notifyListeners();
       _isLoading = false;
-      return;
+      return false;
     } else {
       ShowDialogs.popUp('No data');
       _isLoading = false;
+      return false;
     }
   }
 
@@ -46,12 +48,13 @@ class BookedHotelsViewModel extends ChangeNotifier {
     final CancelResponseModel response =
         await CancelBookingService().cancelBooking(id);
     if (response.success == true) {
-      await getAllBookedHotels();
-      await ShowDialogs.popUp('Booking cancelled successfully',
-          color: KColors.kThemeGreen);
-      _cancelButtonLoading = false;
-      notifyListeners();
-      Navigations.pop();
+      getAllBookedHotels().then((_) {
+        ShowDialogs.popUp('Booking cancelled successfully',
+            color: KColors.kThemeGreen);
+        _cancelButtonLoading = false;
+        notifyListeners();
+        Navigations.pop();
+      });
       return;
     } else {
       ShowDialogs.popUp(
@@ -100,18 +103,6 @@ class BookedHotelsViewModel extends ChangeNotifier {
     final total = rooms * days * price;
     return '₹${total.toString()}';
   }
-
-  // // ==========>>>>>  TO MAKE LOADING TRUE  <<<<<==========
-  // void _isLoadingTrue() {
-  //   _isLoading = true;
-  //   notifyListeners();
-  // }
-
-  // // ==========>>>>>  TO MAKE LOADING FALSE  <<<<<==========
-  // void _isLoadingFalse() {
-  //   _isLoading = false;
-  //   notifyListeners();
-  // }
 }
 
 enum BookingEnums { coming, completed, cancelled }
