@@ -54,7 +54,7 @@ class HotelCard extends StatelessWidget {
                     fontSize: 18),
                 KSizedBox.kHeigh_5,
                 TextWidget(
-                  '${DateFormat('MMM d').format(hotel.date?.startDate ?? DateTime.now())} - ${DateFormat('MMM d').format(hotel.date?.endDate ?? DateTime.now())} • ${hotel.room?.guest.toString()} Guests',
+                  '${DateFormat('MMM d').format(hotel.date?.startDate?.add(const Duration(days: 1)) ?? DateTime.now())} - ${DateFormat('MMM d').format(hotel.date?.endDate?.add(const Duration(days: 1)) ?? DateTime.now())} • ${hotel.room?.guest.toString()} Guests',
                   size: 17,
                 ),
                 KSizedBox.kHeigh_5,

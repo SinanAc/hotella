@@ -145,7 +145,7 @@ class BookedDetailsBottomSheet extends StatelessWidget {
                             TitleWidget('Check-in', fontSize: 20),
                             KSizedBox.kHeigh_10,
                             TextWidget(DateFormat('EEE, MMM d, yyyy').format(
-                                hotel.date?.startDate ?? DateTime.now())),
+                                hotel.date?.startDate?.add(const Duration(days: 1)) ?? DateTime.now())),
                             KSizedBox.kHeigh_5,
                             TextWidget('${hotel.room?.checkinTime} onwards',
                                 color: Colors.grey.shade700)
@@ -179,7 +179,7 @@ class BookedDetailsBottomSheet extends StatelessWidget {
                             TitleWidget('Checkout', fontSize: 20),
                             KSizedBox.kHeigh_10,
                             TextWidget(DateFormat('EEE, MMM d, yyyy')
-                                .format(hotel.date?.endDate ?? DateTime.now())),
+                                .format(hotel.date?.endDate?.add(const Duration(days: 1)) ?? DateTime.now())),
                             KSizedBox.kHeigh_5,
                             TextWidget('Before ${hotel.room?.checkoutTime}',
                                 color: Colors.grey.shade700)
