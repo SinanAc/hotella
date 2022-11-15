@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:premio_inn/model/home/all_rooms.dart';
 import 'package:premio_inn/model/home/response.dart';
-import 'package:premio_inn/services/dio/internet_checker.dart';
 import 'package:premio_inn/services/home/get_all_rooms.dart';
 import 'package:premio_inn/utils/navigations.dart';
 import 'package:premio_inn/view/screens/category/category_screen.dart';
@@ -21,29 +20,20 @@ class HomeViewModel extends ChangeNotifier {
 
   // =========>>>>>  TO FETCH ALL PROPERTIES  <<<<<==========
   Future<void> getAllRoom() async {
-    if (await internetCheck()) {
-      isLoading = true;
-      notifyListeners();
-      AllRoomsResponse? roomResponse = await GetAllRoomsService().getAllRooms();
-      if (roomResponse == null) {
-        ShowDialogs.popUp('Please check your internet connection !');
-        _isLoadingFalse();
-        return;
-      } else if (roomResponse.isFailed == true) {
-        ShowDialogs.popUp(
-            roomResponse.errormessage ?? 'Something went wrong !!');
-        _isLoadingFalse();
-        return;
-      } else if (roomResponse.dataList != null) {
-        allRooms.clear();
-        allRooms.addAll(roomResponse.dataList ?? []);
-        _isLoadingFalse();
-        return;
-      } else {
-        return;
-      }
+    isLoading = true;
+    notifyListeners();
+    AllRoomsResponse? roomResponse = await GetAllRoomsService().getAllRooms();
+    if (roomResponse.isFailed == true) {
+      ShowDialogs.popUp(roomResponse.errormessage ?? 'Something went wrong !!');
+      _isLoadingFalse();
+      return;
+    } else if (roomResponse.dataList != null) {
+      allRooms.clear();
+      allRooms.addAll(roomResponse.dataList ?? []);
+      _isLoadingFalse();
+      return;
     } else {
-      ShowDialogs.popUp('Please check your internet connection !');
+      return;
     }
   }
 
@@ -83,8 +73,7 @@ class HomeViewModel extends ChangeNotifier {
       categoryWiseList.isEmpty
           ? ShowDialogs.popUp('Home Stays are not availabe at this moment !!')
           : Navigations.push(
-              const CategoryScreen(
-                  categoryName: 'Home Stays'),
+              const CategoryScreen(categoryName: 'Home Stays'),
             );
     }
   }
@@ -126,5 +115,4 @@ class HomeViewModel extends ChangeNotifier {
     isLoading = false;
     notifyListeners();
   }
-
 }

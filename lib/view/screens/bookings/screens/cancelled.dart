@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:premio_inn/model/booked/booked_rooms.dart';
 import 'package:premio_inn/utils/sizes.dart';
 import 'package:premio_inn/view/screens/bookings/widgets/hotel_card.dart';
 import 'package:premio_inn/view_model/bookings/booking_view_model.dart';
@@ -12,17 +13,21 @@ class CancelledScreen extends StatelessWidget {
     final bookingsPro = context.read<BookedHotelsViewModel>();
     return bookingsPro.cancelledList.isEmpty
         ? const Center(child: Text('No records found'))
-        : ListView.separated(
-            itemCount: bookingsPro.cancelledList.length,
-            itemBuilder: ((_, index) {
-              return HotelCard(
-                hotel: bookingsPro.cancelledList[index],
-                type:  BookingEnums.cancelled,
-                );
-            }),
-            separatorBuilder: ((_, __) {
-              return KSizedBox.kHeigh_10;
-            }),
-          );
+        : Selector<BookedHotelsViewModel, List<Completed>>(
+            selector: (_, provider) => provider.cancelledList,
+            builder: (_, value, __) {
+              return ListView.separated(
+                itemCount: value.length,
+                itemBuilder: ((_, index) {
+                  return HotelCard(
+                    hotel: value[index],
+                    type: BookingEnums.cancelled,
+                  );
+                }),
+                separatorBuilder: ((_, __) {
+                  return KSizedBox.kHeigh_10;
+                }),
+              );
+            });
   }
 }

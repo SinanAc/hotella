@@ -3,7 +3,7 @@ import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/sizes.dart';
 import 'package:premio_inn/view/screens/bookings/screens/cancelled.dart';
 import 'package:premio_inn/view/screens/bookings/screens/coming.dart';
-import 'package:premio_inn/view/screens/bookings/screens/history.dart';
+import 'package:premio_inn/view/screens/bookings/screens/completed.dart';
 import 'package:premio_inn/view/screens/bookings/widgets/tab_widget.dart';
 import 'package:premio_inn/view/widgets/double_color_title.dart';
 import 'package:premio_inn/view/widgets/loading_indicator.dart';

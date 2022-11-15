@@ -32,7 +32,7 @@ class BookingCompleteService {
         return CompleteBookingResponse(message: ApiExceptions.handleError(e));
       }
     } else {
-      return CompleteBookingResponse(message: "No Internet !!");
+      return CompleteBookingResponse(message: "Poor internet connection");
     }
   }
 }

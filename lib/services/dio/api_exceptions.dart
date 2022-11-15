@@ -4,9 +4,9 @@ import 'package:dio/dio.dart';
 
 class ApiExceptions {
   static String handleError(e) {
-    String defaultErrorMsg = 'Something went wrong !!';
-    String networkErrorMsg = 'Poor network connection !!';
-    String timeOutMsg = 'Connection timed out !!';
+    String defaultErrorMsg = 'Something went wrong!!';
+    String networkErrorMsg = 'Poor internet connection!!';
+    String timeOutMsg = 'Connection timed out!!';
 
     if (e is DioError) {
       if (e.response == null) {

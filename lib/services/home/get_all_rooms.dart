@@ -8,7 +8,7 @@ import 'package:premio_inn/services/dio/internet_checker.dart';
 import 'package:premio_inn/utils/url.dart';
 
 class GetAllRoomsService {
-  Future<AllRoomsResponse?> getAllRooms() async {
+  Future<AllRoomsResponse> getAllRooms() async {
     if (await internetCheck()) { 
       try {
         final Response response = await DioService.getMethod(url: Url.getAllRooms);
@@ -25,7 +25,7 @@ class GetAllRoomsService {
       }
     } else {
       await Future.delayed(const Duration(seconds: 1));
-      return null;
+      return AllRoomsResponse(isFailed: true,errormessage: 'Poor internet connection!!' );
     }
   }
 

@@ -4,7 +4,13 @@ import 'package:premio_inn/utils/url.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class InterceptorDio {
-  static final  Dio _dio = Dio(BaseOptions(baseUrl: Url.baseUrl));
+  static final _dio = Dio(
+    BaseOptions(
+      baseUrl: Url.baseUrl,
+      connectTimeout: 60 * 1000,
+      receiveTimeout: 60 * 1000,
+    ),
+  );
   static Future<Dio> getVerifiedUser() async {
     _dio.interceptors
         .add(InterceptorsWrapper(onRequest: (response, handler) async {

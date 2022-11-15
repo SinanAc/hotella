@@ -7,6 +7,7 @@ import 'package:premio_inn/utils/navigations.dart';
 import 'package:premio_inn/utils/sizes.dart';
 import 'package:premio_inn/utils/strings.dart';
 import 'package:premio_inn/view/widgets/button_widget.dart';
+import 'package:premio_inn/view/widgets/loading_indicator.dart';
 import 'package:premio_inn/view/widgets/shimmer_skelton.dart';
 import 'package:premio_inn/view/widgets/text_widget.dart';
 import 'package:premio_inn/view/widgets/title_widget.dart';
@@ -43,12 +44,11 @@ class BookedDetailsBottomSheet extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 10),
           child: TitleWidget(
-            type==BookingEnums.coming?
-            'Upcoming booking':
-            type==BookingEnums.completed?
-            'Completed':
-            'Cancelled'
-            ,
+            type == BookingEnums.coming
+                ? 'Upcoming booking'
+                : type == BookingEnums.completed
+                    ? 'Completed'
+                    : 'Cancelled',
             color: Colors.white,
             fontSize: 26,
           ),
@@ -118,12 +118,23 @@ class BookedDetailsBottomSheet extends StatelessWidget {
                       ],
                     ),
                     KSizedBox.kHeigh_15,
-                    type==BookingEnums.coming?
-                    ButtonWidget(
-                      text: 'Cancel booking',
-                      onTap: () {},
-                      color: KColors.kRedColor,
-                    ):const SizedBox(),
+                    Selector<BookedHotelsViewModel, bool>(
+                      selector: (_, provider) => provider.cancelButtonLoading,
+                      builder: (_, isLoad, __) {
+                        return type == BookingEnums.coming
+                            ? isLoad
+                                ? const LoadingIndicator(
+                                    color: KColors.kRedColor)
+                                : ButtonWidget(
+                                    text: 'Cancel booking',
+                                    onTap: () {
+                                      bookingPro.cancelBooking(hotel.id ?? '');
+                                    },
+                                    color: KColors.kRedColor,
+                                  )
+                            : const SizedBox();
+                      },
+                    ),
                     KSizedBox.kHeigh_40,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
