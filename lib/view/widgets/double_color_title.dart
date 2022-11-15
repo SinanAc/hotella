@@ -13,7 +13,7 @@ class DoubleColorTitle extends StatelessWidget {
     required this.text2,
     this.firstColor = KColors.kThemeGreen,
     this.gap = 3,
-    this.textSize = 20,
+    this.textSize = 22,
   }) : super(key: key);
 
   @override

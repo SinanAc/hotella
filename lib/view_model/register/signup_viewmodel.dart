@@ -46,7 +46,7 @@ class SignUpViewModel extends ChangeNotifier {
         final pref = await SharedPreferences.getInstance();
         await pref.setString(KStrings.phone, phoneNum);
         await _storeUserData(signUpResponse);
-        Navigations.push(const MainPage());
+        Navigations.pushRemoveUntil(const MainPage());
         _isLoadingFalse();
       } else {
         ShowDialogs.popUp("${signUpResponse.message}");
@@ -89,10 +89,10 @@ class SignUpViewModel extends ChangeNotifier {
 
   String? confirmPasswordValidator(String? fieldContent) {
     if (fieldContent!.isEmpty) {
-      return 'Confirm Password';
+      return 'Please confirm your Password';
     }
     if (fieldContent != passwordController.text) {
-      return 'Password Not Match';
+      return "Passwords doesn't Match";
     }
     return null;
   }

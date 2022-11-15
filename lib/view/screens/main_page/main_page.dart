@@ -10,7 +10,9 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Selector<MainPageViewModel, int>(
       selector: ((_, provider) => provider.bottomNavIndex),
-      builder: (_, bottomIndexes, __) => Scaffold(
+      builder: (_, bottomIndexes, __){
+        return Scaffold(
+          backgroundColor: Colors.grey.shade300,
         appBar: AppBar(toolbarHeight: 0),
         body: SafeArea(
           child: MainPageViewModel.screenList[bottomIndexes],
@@ -23,12 +25,12 @@ class MainPage extends StatelessWidget {
           items: [
             MainPageViewModel.bottomItems[0],
             MainPageViewModel.bottomItems[1],
-            // MainPageViewModel.bottomItems[2],
             MainPageViewModel.bottomItems[3],
           ],
           itemCornerRadius: 10,
         ),
-      ),
+      );
+      }
     );
   }
 }

@@ -49,7 +49,6 @@ class MainPageViewModel extends ChangeNotifier {
   static List<Widget> screenList = [
     const HomeScreen(),
     const BookingScreen(),
-    //const SavedScreen(),
     const AccountScreen(),
   ];
 }

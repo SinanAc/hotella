@@ -28,7 +28,7 @@ class BottomButtonWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TitleWidget(
-                    price,
+                    '₹$price',
                     fontSize: 20,
                   ),
                   TitleWidget(
