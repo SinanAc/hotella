@@ -31,11 +31,13 @@ class SignupScreen extends StatelessWidget {
                     TitleWidget(
                       'Sign up to',
                       color: KColors.kWhiteColor,
+                      fontSize: 22,
                     ),
                     KSizedBox.kHeigh_5,
                     TitleWidget(
-                      'Eat 24',
+                      'Hotella',
                       color: KColors.kThemeYellow,
+                      fontSize: 30,
                     ),
                     KSizedBox.kHeigh_15,
                     Container(

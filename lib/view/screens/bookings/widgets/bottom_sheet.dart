@@ -9,6 +9,7 @@ import 'package:premio_inn/utils/strings.dart';
 import 'package:premio_inn/view/widgets/button_widget.dart';
 import 'package:premio_inn/view/widgets/loading_indicator.dart';
 import 'package:premio_inn/view/widgets/shimmer_skelton.dart';
+import 'package:premio_inn/view/widgets/show_dialogs.dart';
 import 'package:premio_inn/view/widgets/text_widget.dart';
 import 'package:premio_inn/view/widgets/title_widget.dart';
 import 'package:premio_inn/view_model/bookings/booking_view_model.dart';
@@ -128,7 +129,15 @@ class BookedDetailsBottomSheet extends StatelessWidget {
                                 : ButtonWidget(
                                     text: 'Cancel booking',
                                     onTap: () {
-                                      bookingPro.cancelBooking(hotel.id ?? '');
+                                      ShowDialogs.dialogBox(
+                                          title: 'Cancel booking',
+                                          messege:
+                                              'Are you sure to want to cancel this booking?',
+                                          goOn: () {
+                                            Navigations.pop();
+                                            bookingPro
+                                                .cancelBooking(hotel.id ?? '');
+                                          });
                                     },
                                     color: KColors.kRedColor,
                                   )
@@ -145,7 +154,9 @@ class BookedDetailsBottomSheet extends StatelessWidget {
                             TitleWidget('Check-in', fontSize: 20),
                             KSizedBox.kHeigh_10,
                             TextWidget(DateFormat('EEE, MMM d, yyyy').format(
-                                hotel.date?.startDate?.add(const Duration(days: 1)) ?? DateTime.now())),
+                                hotel.date?.startDate
+                                        ?.add(const Duration(days: 1)) ??
+                                    DateTime.now())),
                             KSizedBox.kHeigh_5,
                             TextWidget('${hotel.room?.checkinTime} onwards',
                                 color: Colors.grey.shade700)
@@ -178,8 +189,10 @@ class BookedDetailsBottomSheet extends StatelessWidget {
                           children: [
                             TitleWidget('Checkout', fontSize: 20),
                             KSizedBox.kHeigh_10,
-                            TextWidget(DateFormat('EEE, MMM d, yyyy')
-                                .format(hotel.date?.endDate?.add(const Duration(days: 1)) ?? DateTime.now())),
+                            TextWidget(DateFormat('EEE, MMM d, yyyy').format(
+                                hotel.date?.endDate
+                                        ?.add(const Duration(days: 1)) ??
+                                    DateTime.now())),
                             KSizedBox.kHeigh_5,
                             TextWidget('Before ${hotel.room?.checkoutTime}',
                                 color: Colors.grey.shade700)

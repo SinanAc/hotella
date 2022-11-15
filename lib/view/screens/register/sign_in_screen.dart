@@ -33,11 +33,13 @@ class SignInScreen extends StatelessWidget {
                     TitleWidget(
                       'Sign in to',
                       color: KColors.kWhiteColor,
+                      fontSize: 22,
                     ),
                     KSizedBox.kHeigh_5,
                     TitleWidget(
                       'Hotella',
                       color: KColors.kThemeYellow,
+                      fontSize: 30,
                     ),
                     KSizedBox.kHeigh_15,
                     Container(
