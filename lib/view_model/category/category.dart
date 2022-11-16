@@ -5,7 +5,7 @@ import 'package:premio_inn/view_model/home/home_view_model.dart';
 import 'package:provider/provider.dart';
 
 class CategoryViewModel extends ChangeNotifier {
-  // =========>>>>>  CONSTRUCTOR TO SET INITIAL VALUES  <<<<<=========
+  // =========>>>>>  TO SET INITIAL VALUES  <<<<<=========
   void onInit() {
     dropdownValue = null;
     notifyListeners();

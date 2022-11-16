@@ -13,7 +13,7 @@ class HomeViewModel extends ChangeNotifier {
   List<String> allCities = [];
   List<AllRoomsModel> categoryWiseList = [];
 
-  // =========>>>>>  CONSTRUCTOR TO SET INITIAL VALUES  <<<<<==========
+  // =========>>>>>  CONSTRUCTOR TO GET INITIAL VALUES  <<<<<==========
   HomeViewModel() {
     getAllRoom();
   }

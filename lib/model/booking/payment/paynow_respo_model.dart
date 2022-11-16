@@ -1,11 +1,12 @@
 class PayNowResponseModel {
-  PayNowResponseModel(
-      {this.id,
-      this.currency,
-      this.amount,
-      this.receipt,
-      this.keyId,
-      this.message});
+  PayNowResponseModel({
+    this.id,
+    this.currency,
+    this.amount,
+    this.receipt,
+    this.keyId,
+    this.message,
+  });
 
   String? id;
   String? currency;

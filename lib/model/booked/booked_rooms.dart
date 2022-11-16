@@ -39,7 +39,6 @@ class Completed {
     this.isBooked,
     this.completed,
     this.cancel,
-    this.v,
     this.property,
   });
 
@@ -54,7 +53,6 @@ class Completed {
   bool? isBooked;
   bool? completed;
   bool? cancel;
-  int? v;
   Property? property;
 
   factory Completed.fromJson(Map<String, dynamic> json) => Completed(
@@ -69,7 +67,6 @@ class Completed {
         isBooked: json["isBooked"],
         completed: json["completed"],
         cancel: json["cancel"],
-        v: json["__v"],
         property: Property.fromJson(json["property"]),
       );
 }

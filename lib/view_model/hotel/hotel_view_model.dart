@@ -22,6 +22,8 @@ class HotelViewModel extends ChangeNotifier {
   int days = 1;
   int amount = 0;
   final PageController pController = PageController();
+  bool isLoading = false;
+  BookingResponseModel? bookingData;
 
   // =========>>>>>  INITIAL VALUES  <<<<<=========
   void onInit() {
@@ -169,8 +171,6 @@ class HotelViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool isLoading = false;
-  BookingResponseModel? bookingData;
   // =========>>>>>  CHECKING, IS ROOM AVAILABLE OR NOT  <<<<<==========
   Future<bool> isRoomAvailable(
       DateTimeRange dateRange, String hotelId, int rooms) async {
@@ -232,7 +232,7 @@ class HotelViewModel extends ChangeNotifier {
     }
   }
 
-  // =========>>>>>  ON BOOKNOW BUTTON  <<<<<==========
+  // =========>>>>>  ON BOOK_NOW BUTTON  <<<<<==========
   Future<void> onBookNowButton(AllRoomsModel hotel, double width) async {
     final bool isRoomAvailables =
         await isRoomAvailable(selectedDates, hotel.id ?? '', rooms);

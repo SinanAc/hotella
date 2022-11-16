@@ -9,7 +9,6 @@ class ProfileSection extends StatefulWidget {
   const ProfileSection({
     Key? key,
   }) : super(key: key);
-
   @override
   State<ProfileSection> createState() => _ProfileSectionState();
 }
@@ -34,8 +33,7 @@ class _ProfileSectionState extends State<ProfileSection> {
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: getStoredUserData(),
-      builder: (_, __) => 
-       Card(
+      builder: (_, __) => Card(
           elevation: 0,
           color: KColors.kWhiteColor,
           child: Padding(

@@ -1,5 +1,5 @@
 class KStrings {
-  // --->>>  global shared_preferences key words
+  // --->>>  global shared_preferences keys
   static const String isLogggedIn = 'isLogggedIn';
   static const String userName = 'userName';
   static const String email = 'email';

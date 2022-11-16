@@ -7,7 +7,6 @@ import 'package:premio_inn/services/dio/internet_checker.dart';
 import 'package:premio_inn/utils/url.dart';
 
 class RoomAvailabilityService {
-  // -->> api function to check is room available or not
   Future<RoomAvailabilityResponseModel?> isRoomAvailabileService(RoomAvailabiltyRequestModel data)async{
         if (await internetCheck()) {
       try {

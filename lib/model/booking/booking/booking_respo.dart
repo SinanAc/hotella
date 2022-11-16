@@ -22,7 +22,6 @@ class Responses {
     this.completed,
     this.cancel,
     this.id,
-    this.v,
   });
 
   String? user;
@@ -33,7 +32,6 @@ class Responses {
   bool? completed;
   bool? cancel;
   String? id;
-  int? v;
 
   factory Responses.fromJson(Map<String, dynamic> json) => Responses(
         user: json["user"],
@@ -44,6 +42,5 @@ class Responses {
         completed: json["completed"],
         cancel: json["cancel"],
         id: json["_id"],
-        v: json["__v"],
       );
 }

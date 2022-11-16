@@ -69,7 +69,6 @@ class BookedHotelsViewModel extends ChangeNotifier {
     upcomingList.clear();
     upcomingList
         .addAll(fullList.where((element) => element.isBooked == true).toList());
-    //upcomingList.sort((a, b) => (a.date?.startDate??DateTime.now()).compareTo(a.date?.startDate??DateTime.now()));
     notifyListeners();
     completedList.clear();
     completedList.addAll(

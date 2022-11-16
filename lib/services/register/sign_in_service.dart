@@ -21,7 +21,7 @@ class SignInService {
         return SignInResponseModel(message: ApiExceptions.handleError(e));
       }
     } else {
-      return SignInResponseModel(message: "No Internet !!");
+      return SignInResponseModel(message: "Poor internet connection!!");
     }
   }
 }
