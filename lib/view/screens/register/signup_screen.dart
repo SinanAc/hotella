@@ -19,7 +19,7 @@ class SignupScreen extends StatelessWidget {
       backgroundColor: KColors.kThemeGreen,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 14),
           child: Center(
             child: SingleChildScrollView(
               child: Form(
@@ -104,7 +104,6 @@ class SignupScreen extends StatelessWidget {
           ),
         ),
       ),
-      resizeToAvoidBottomInset: false,
     );
   }
 }
