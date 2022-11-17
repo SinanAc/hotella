@@ -23,6 +23,7 @@ class TextButtonWidget extends StatelessWidget {
           text,
           style: const TextStyle(
             color: Colors.white38,
+            fontSize: 16,
           ),
         ),
         TextButton(
@@ -30,6 +31,7 @@ class TextButtonWidget extends StatelessWidget {
           child: Text(
             buttonText,
             style:  TextStyle(
+              fontSize: 16,
               color: color,
               decoration: TextDecoration.underline,
             ),

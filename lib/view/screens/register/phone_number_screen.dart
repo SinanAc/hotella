@@ -21,57 +21,56 @@ class PhoneNumberScreen extends StatelessWidget {
       key: numberVerifyController.scaffoldKey,
       backgroundColor: KColors.kThemeGreen,
       body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Form(
-              key: numberVerifyController.numVerifyFormKey,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                   TitleWidget(
-                    "Let's Register",
-                    color: KColors.kWhiteColor,
-                    fontSize: 22,
-                  ),
-                  KSizedBox.kHeigh_5,
-                   TitleWidget(
-                     'Hotella',
-                    color: KColors.kThemeYellow,
-                    fontSize: 30,
-                  ),
-                  KSizedBox.kHeigh_20,
-                  Column(
-                    children: [
-                      TextFieldWidget(
-                        hintText: 'Enter your 10 digit mobile number',
-                        controller:
-                            numberVerifyController.mobileNumberController,
-                        validator: numberVerifyController.phoneNumberValidator,
-                        keyType: const TextInputType.numberWithOptions(),
-                        inputFormat: [FilteringTextInputFormatter.digitsOnly],
-                      ),
-                      KSizedBox.kHeigh_20,
-                      Selector<PhoneNumberViewModel,bool>(
-                        selector: ((_, provider) => provider.isLoading),
-                        builder: (__, isLoading, _) => isLoading
-                            ? const LoadingIndicator()
-                            : ButtonWidget(
-                                text: 'Get OTP',
-                                onTap: () {
-                                  numberVerifyController
-                                      .numVerifyFormKey.currentState
-                                      ?.validate();
-                                  numberVerifyController
-                                      .onGetOtpButton();
-                                },
-                              ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+        child: Form(
+          key: numberVerifyController.numVerifyFormKey,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal:14.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                 TitleWidget(
+                  "Let's Register",
+                  color: KColors.kWhiteColor,
+                  fontSize: 22,
+                ),
+                KSizedBox.kHeigh_5,
+                 TitleWidget(
+                   'Hotella',
+                  color: KColors.kThemeYellow,
+                  fontSize: 30,
+                ),
+                KSizedBox.kHeigh_20,
+                Column(
+                  children: [
+                    TextFieldWidget(
+                      hintText: 'Enter your 10 digit mobile number',
+                      controller:
+                          numberVerifyController.mobileNumberController,
+                      validator: numberVerifyController.phoneNumberValidator,
+                      keyType: const TextInputType.numberWithOptions(),
+                      inputFormat: [FilteringTextInputFormatter.digitsOnly],
+                    ),
+                    KSizedBox.kHeigh_20,
+                    Selector<PhoneNumberViewModel,bool>(
+                      selector: ((_, provider) => provider.isLoading),
+                      builder: (__, isLoading, _) => isLoading
+                          ? const LoadingIndicator()
+                          : ButtonWidget(
+                              text: 'Get OTP',
+                              onTap: () {
+                                numberVerifyController
+                                    .numVerifyFormKey.currentState
+                                    ?.validate();
+                                numberVerifyController
+                                    .onGetOtpButton();
+                              },
+                            ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),

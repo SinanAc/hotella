@@ -22,72 +22,69 @@ class SignInScreen extends StatelessWidget {
       backgroundColor: KColors.kThemeGreen,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 14),
           child: Form(
             key: signinController.signInFormKey,
-            child: Center(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TitleWidget(
-                      'Sign in to',
-                      color: KColors.kWhiteColor,
-                      fontSize: 22,
-                    ),
-                    KSizedBox.kHeigh_5,
-                    TitleWidget(
-                      'Hotella',
-                      color: KColors.kThemeYellow,
-                      fontSize: 30,
-                    ),
-                    KSizedBox.kHeigh_15,
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: KColors.kWhiteColor,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 15, right: 15, top: 30, bottom: 25),
-                        child: Column(
-                          children: [
-                            TextFieldWidget(
-                              hintText: 'Email / Mobile number',
-                              controller:
-                                  signinController.phoneOrEmailController,
-                              validator: signinController.emailValidator,
-                            ),
-                            KSizedBox.kHeigh_20,
-                            PasswordTextFieldWidget(
-                              hintText: 'Password',
-                              controller: signinController.passwordController,
-                              validator: signinController.passwordValidator,
-                              signPro: Provider.of<SigninViewModel>(context),
-                            ),
-                            KSizedBox.kHeigh_30,
-                            Selector<SigninViewModel, bool>(
-                              selector: ((_, provider) => provider.isLoading),
-                              builder: (__, isLoading, _) => isLoading
-                                  ? const LoadingIndicator()
-                                  : ButtonWidget(
-                                      text: 'Sign in',
-                                      onTap: () {
-                                        signinController
-                                            .signInFormKey.currentState
-                                            ?.validate();
-                                        signinController.onSigninButton();
-                                      },
-                                    ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    KSizedBox.kHeigh_40,
-                  ],
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TitleWidget(
+                  'Sign in to',
+                  color: KColors.kWhiteColor,
+                  fontSize: 22,
                 ),
-              ),
+                KSizedBox.kHeigh_5,
+                TitleWidget(
+                  'Hotella',
+                  color: KColors.kThemeYellow,
+                  fontSize: 30,
+                ),
+                KSizedBox.kHeigh_15,
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: KColors.kWhiteColor,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 15, right: 15, top: 30, bottom: 25),
+                    child: Column(
+                      children: [
+                        TextFieldWidget(
+                          hintText: 'Email / Mobile number',
+                          controller:
+                              signinController.phoneOrEmailController,
+                          validator: signinController.emailValidator,
+                        ),
+                        KSizedBox.kHeigh_20,
+                        PasswordTextFieldWidget(
+                          hintText: 'Password',
+                          controller: signinController.passwordController,
+                          validator: signinController.passwordValidator,
+                          signPro: Provider.of<SigninViewModel>(context),
+                        ),
+                        KSizedBox.kHeigh_30,
+                        Selector<SigninViewModel, bool>(
+                          selector: ((_, provider) => provider.isLoading),
+                          builder: (__, isLoading, _) => isLoading
+                              ? const LoadingIndicator()
+                              : ButtonWidget(
+                                  text: 'Sign in',
+                                  onTap: () {
+                                    signinController
+                                        .signInFormKey.currentState
+                                        ?.validate();
+                                    signinController.onSigninButton();
+                                  },
+                                ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                KSizedBox.kHeigh_40,
+              ],
             ),
           ),
         ),
