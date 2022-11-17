@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:premio_inn/utils/colors.dart';
 import 'package:premio_inn/utils/navigations.dart';
 import 'package:premio_inn/utils/sizes.dart';
@@ -32,11 +33,13 @@ class PhoneNumberScreen extends StatelessWidget {
                    TitleWidget(
                     "Let's Register",
                     color: KColors.kWhiteColor,
+                    fontSize: 22,
                   ),
                   KSizedBox.kHeigh_5,
                    TitleWidget(
                      'Hotella',
                     color: KColors.kThemeYellow,
+                    fontSize: 30,
                   ),
                   KSizedBox.kHeigh_20,
                   Column(
@@ -47,6 +50,7 @@ class PhoneNumberScreen extends StatelessWidget {
                             numberVerifyController.mobileNumberController,
                         validator: numberVerifyController.phoneNumberValidator,
                         keyType: const TextInputType.numberWithOptions(),
+                        inputFormat: [FilteringTextInputFormatter.digitsOnly],
                       ),
                       KSizedBox.kHeigh_20,
                       Selector<PhoneNumberViewModel,bool>(

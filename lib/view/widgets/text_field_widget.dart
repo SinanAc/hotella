@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:premio_inn/utils/colors.dart';
 
 class TextFieldWidget extends TextFormField {
@@ -8,6 +9,7 @@ class TextFieldWidget extends TextFormField {
     required TextEditingController controller,
     required String? Function(String?)? validator,
     TextInputType keyType = TextInputType.emailAddress,
+    List<TextInputFormatter>? inputFormat,
   }) : super(
           key: key,
           controller: controller,
@@ -22,5 +24,6 @@ class TextFieldWidget extends TextFormField {
             hintStyle: const TextStyle(color: KColors.kGreyColor),
           ),
           keyboardType: keyType,
+          inputFormatters: inputFormat,
         );
 }

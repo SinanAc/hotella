@@ -77,9 +77,7 @@ class PhoneNumberViewModel extends ChangeNotifier {
   String? phoneNumberValidator(String? fieldContent) {
     if (fieldContent == null || fieldContent.isEmpty) {
       return 'Please enter your mobile number';
-    } else if (!RegExp(
-            r'(^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$)')
-        .hasMatch(fieldContent)) {
+    } else if (fieldContent.length!=10) {
       return 'Enter a valid mobile number';
     }
     return null;

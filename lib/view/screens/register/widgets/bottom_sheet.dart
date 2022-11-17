@@ -22,7 +22,6 @@ class OtpBottomSheet extends StatefulWidget {
 }
 
 class _OtpBottomSheet extends State<OtpBottomSheet> {
-  bool _isTimesUp = false;
   Timer? _timer;
   int _start = 40;
 
@@ -32,10 +31,7 @@ class _OtpBottomSheet extends State<OtpBottomSheet> {
       oneSecond,
       (Timer timer) {
         if (_start == 0) {
-          setState(() {
-            _isTimesUp = true;
-            timer.cancel();
-          });
+          Navigations.pop();
         } else {
           setState(() {
             _start--;
@@ -92,29 +88,8 @@ class _OtpBottomSheet extends State<OtpBottomSheet> {
               controller: numberVerifyController.otpController,
               onChanged: (value) {},
               appContext: context,
-              readOnly: _isTimesUp ? true : false,
             ),
-            _isTimesUp
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TitleWidget(
-                        'Times up !!!',
-                        fontSize: 20,
-                        color: KColors.kRedColor,
-                      ),
-                      KSizedBox.kWidth_10,
-                      ButtonWidget(
-                        text: 'Go back',
-                        onTap: () {
-                          Navigations.pop();
-                        },
-                        width: 150,
-                        color: KColors.kThemeGreen,
-                      )
-                    ],
-                  )
-                : Row(
+                Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TitleWidget('You have  ', fontSize: 16),
