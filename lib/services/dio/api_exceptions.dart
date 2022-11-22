@@ -21,7 +21,7 @@ class ApiExceptions {
     } else if (e is SocketException) {
       return networkErrorMsg;
     }else if (e is FormatException) {
-      return 'Wrong format !';
+      return 'Wrong format!!';
     }
      else if (e is TimeoutException) {
       return timeOutMsg;

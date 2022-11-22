@@ -97,7 +97,6 @@ class Property {
     this.vendor,
     this.createdAt,
     this.updatedAt,
-    this.v,
     this.address,
     this.city,
     this.country,
@@ -116,7 +115,6 @@ class Property {
   String? vendor;
   DateTime? createdAt;
   DateTime? updatedAt;
-  int? v;
   String? address;
   String? city;
   String? country;
@@ -135,7 +133,6 @@ class Property {
         vendor: json["vendor"],
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
-        v: json["__v"],
         address: json["address"],
         city: json["city"],
         country: json["country"],
@@ -165,9 +162,6 @@ class Room {
     this.checkoutTime,
     this.images,
     this.roomNumbers,
-    this.createdAt,
-    this.updatedAt,
-    this.v,
   });
 
   String? id;
@@ -187,9 +181,6 @@ class Room {
   String? checkoutTime;
   List<List<Images>>? images;
   int? roomNumbers;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  int? v;
 
   factory Room.fromJson(Map<String, dynamic> json) => Room(
         id: json["_id"],
@@ -210,9 +201,6 @@ class Room {
         images: List<List<Images>>.from(json["images"]
             .map((x) => List<Images>.from(x.map((x) => Images.fromJson(x))))),
         roomNumbers: json["roomNumbers"],
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
-        v: json["__v"],
       );
 }
 

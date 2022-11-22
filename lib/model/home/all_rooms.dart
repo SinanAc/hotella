@@ -23,8 +23,6 @@ class AllRoomsModel {
   String? checkinTime;
   String? checkoutTime;
   List<List<Images>>? images;
-  DateTime? createdAt;
-  DateTime? updatedAt;
   String? message;
 
   factory AllRoomsModel.fromJson(Map<String, dynamic> json) => AllRoomsModel(

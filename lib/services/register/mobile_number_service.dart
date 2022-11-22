@@ -45,7 +45,7 @@ class PhoneNumberService {
         return OtpResponseModel(message: ApiExceptions.handleError(e));
       }
     } else {
-      return OtpResponseModel(message: "No Internet !!");
+      return OtpResponseModel(message: "Poor internet connection!!");
     }
   }
 }

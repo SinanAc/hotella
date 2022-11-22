@@ -5,7 +5,6 @@ class RazorpayCheckoutModel {
         this.currency,
         this.name,
         this.description,
-        this.image,
         this.orderId,
         this.prefill,
     });
@@ -15,7 +14,6 @@ class RazorpayCheckoutModel {
     String? currency;
     String? name;
     String? description;
-    String? image;
     String? orderId;
     Prefill? prefill;
 
@@ -25,7 +23,6 @@ class RazorpayCheckoutModel {
         "currency": currency,
         "name": name,
         "description": description,
-        "image": image,
         "order_id": orderId,
         "prefill": prefill?.toJson(),
     };
