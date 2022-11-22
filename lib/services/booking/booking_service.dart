@@ -22,7 +22,7 @@ class BookingService {
         return BookingResponseModel(message: ApiExceptions.handleError(e));
       }
     } else {
-      return BookingResponseModel(message: "Poor internet connection");
+      return BookingResponseModel(message: "Poor internet connection!!");
     }
   }
 }

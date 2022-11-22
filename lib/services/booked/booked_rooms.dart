@@ -23,7 +23,7 @@ class BookedRoomsService {
       }
     } else {
       await Future.delayed(const Duration(seconds: 1));
-      return BookedRoomsModel(message: 'Poor internet connection');
+      return BookedRoomsModel(message: 'Poor internet connection!!');
     }
   }
 }

@@ -21,7 +21,7 @@ class PayNowService {
         return PayNowResponseModel(message: ApiExceptions.handleError(e));
       }
     } else {
-      return PayNowResponseModel(message: "Poor internet connection");
+      return PayNowResponseModel(message: "Poor internet connection!!");
     }
   }
 }

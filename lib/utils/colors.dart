@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class KColors {
-  // normal colors
+  // --->>> normal colors
   static const Color kThemeGreen = Color(0xff0F6657);
   static const Color kThemeYellow = Color(0xffFBA808);
   static const Color kLiteGreen = Color(0xff00AD8F);
@@ -16,7 +16,7 @@ class KColors {
   static const Color kBlueColor = Colors.blue;
   static const kGreyColor = Colors.grey;
 
-// primary swatch color
+// --->>> primary swatch color
   static MaterialColor primarySwatchColor = const MaterialColor(0xff0F6657, {
     50: kThemeGreen,
     100: kThemeGreen,

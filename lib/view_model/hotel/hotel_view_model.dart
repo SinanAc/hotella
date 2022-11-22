@@ -331,7 +331,8 @@ class HotelViewModel extends ChangeNotifier {
     razorPay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handlerExternalWallet);
   }
 
-  _handlerPaymentSuccess(PaymentSuccessResponse response) async {
+  // =========>>>>>  ON PAYMENT SUCCESS  <<<<<==========
+  void _handlerPaymentSuccess(PaymentSuccessResponse response) async {
     await _completeBooking(
       paymentType: 'ONLINE',
       signature: response.signature,
@@ -341,11 +342,13 @@ class HotelViewModel extends ChangeNotifier {
     razorPay.clear();
   }
 
+  // =========>>>>>  ON PAYMENT FAILURE  <<<<<==========
   void _handlerErrorFailure(PaymentFailureResponse response) {
     ShowDialogs.popUp('Payment failed !!');
     razorPay.clear();
   }
 
+  // =========>>>>>  TO HANDLE EXTERNAL WALLETS  <<<<<==========
   void _handlerExternalWallet(ExternalWalletResponse response) {
     razorPay.clear();
   }

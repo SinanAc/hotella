@@ -21,7 +21,7 @@ class RoomAvailabilityService {
         return RoomAvailabilityResponseModel(message: ApiExceptions.handleError(e));
       }
     } else {
-      return RoomAvailabilityResponseModel(message: "Poor internet connection");
+      return RoomAvailabilityResponseModel(message: "Poor internet connection!!");
     }
   }
 }
