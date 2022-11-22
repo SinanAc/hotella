@@ -10,7 +10,7 @@ class AccountViewModel extends ChangeNotifier {
   Future<void> onLogoutButton(context) async {
     final pref = await SharedPreferences.getInstance();
     await pref.clear();
-    Provider.of<MainPageViewModel>(context,listen:  false).bottomNavIndex=0;
+    Provider.of<MainPageViewModel>(context, listen: false).bottomNavIndex = 0;
     Navigations.pushRemoveUntil(const SignInScreen());
   }
 }

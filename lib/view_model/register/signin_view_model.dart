@@ -81,11 +81,10 @@ class SigninViewModel extends ChangeNotifier {
   Future<void> _storeUserData(SignInResponseModel data) async {
     final pref = await SharedPreferences.getInstance();
     await pref.setBool(KStrings.isLogggedIn, true);
-    await pref.setString(KStrings.userName, data.profile?.name??'');
-    await pref.setString(KStrings.email, data.profile?.email??'');
-    await pref.setString(KStrings.phone, data.profile?.phone??'');
+    await pref.setString(KStrings.userName, data.profile?.name ?? '');
+    await pref.setString(KStrings.email, data.profile?.email ?? '');
+    await pref.setString(KStrings.phone, data.profile?.phone ?? '');
     await pref.setString(KStrings.token, data.profile?.token ?? '');
-
   }
 
   // ==========>>>>> DISPOSE VARIABLES  <<<<<==========

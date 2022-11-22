@@ -30,9 +30,9 @@ class Profile {
   String? token;
 
   factory Profile.fromJson(Map<String, dynamic> json) => Profile(
-        name: json["name"] ?? "",
-        email: json["email"] ?? "",
-        phone: json["phone"] ?? "",
-        token: json["token"] ?? "",
+        name: json["name"],
+        email: json["email"],
+        phone: json["phone"],
+        token: json["token"],
       );
 }

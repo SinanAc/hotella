@@ -1,8 +1,3 @@
-import 'dart:convert';
-
-BookedRoomsModel bookedRoomsModelFromJson(String str) =>
-    BookedRoomsModel.fromJson(json.decode(str));
-
 class BookedRoomsModel {
   BookedRoomsModel({
     this.success,
@@ -22,7 +17,7 @@ class BookedRoomsModel {
             (x) => Completed.fromJson(x),
           ),
         ),
-        message: json["message"], 
+        message: json["message"],
       );
 }
 
@@ -63,7 +58,7 @@ class Completed {
         date: Date.fromJson(json["Date"]),
         days: json["days"],
         booingId: json["bookingId"],
-        paymentType: json["PaymentType"]??'PAY AT HOTEL',
+        paymentType: json["PaymentType"] ?? 'PAY AT HOTEL',
         isBooked: json["isBooked"],
         completed: json["completed"],
         cancel: json["cancel"],

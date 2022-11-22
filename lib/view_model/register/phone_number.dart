@@ -77,7 +77,7 @@ class PhoneNumberViewModel extends ChangeNotifier {
   String? phoneNumberValidator(String? fieldContent) {
     if (fieldContent == null || fieldContent.isEmpty) {
       return 'Please enter your mobile number';
-    } else if (fieldContent.length!=10) {
+    } else if (fieldContent.length != 10) {
       return 'Enter a valid mobile number';
     }
     return null;

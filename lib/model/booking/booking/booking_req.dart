@@ -8,8 +8,7 @@ class BookingRequestModel {
   BookingRequestModel({
     required this.hotelId,
     required this.rooms,
-     required this.dateTimeRange,
-
+    required this.dateTimeRange,
   });
 
   Map<String, dynamic> toJson() {
@@ -18,6 +17,6 @@ class BookingRequestModel {
       "start": dateTimeRange.start.toIso8601String(),
       "room": rooms,
       "end": dateTimeRange.end.toIso8601String(),
-      };
+    };
   }
 }

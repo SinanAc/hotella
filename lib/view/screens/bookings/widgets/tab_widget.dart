@@ -9,15 +9,16 @@ class TabWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Tab(
-      height: MediaQuery.of(context).size.height/18,
+      height: MediaQuery.of(context).size.height / 18,
       child: Container(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            ),
+          borderRadius: BorderRadius.circular(10),
+        ),
         child: Align(
           alignment: Alignment.center,
-          child:
-              Text(text, style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 17)),
+          child: Text(text,
+              style:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
         ),
       ),
     );

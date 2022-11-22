@@ -53,8 +53,7 @@ class SignInScreen extends StatelessWidget {
                       children: [
                         TextFieldWidget(
                           hintText: 'Email / Mobile number',
-                          controller:
-                              signinController.phoneOrEmailController,
+                          controller: signinController.phoneOrEmailController,
                           validator: signinController.emailValidator,
                         ),
                         KSizedBox.kHeigh_20,
@@ -72,8 +71,7 @@ class SignInScreen extends StatelessWidget {
                               : ButtonWidget(
                                   text: 'Sign in',
                                   onTap: () {
-                                    signinController
-                                        .signInFormKey.currentState
+                                    signinController.signInFormKey.currentState
                                         ?.validate();
                                     signinController.onSigninButton();
                                   },

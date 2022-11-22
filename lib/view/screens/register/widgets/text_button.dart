@@ -30,7 +30,7 @@ class TextButtonWidget extends StatelessWidget {
           onPressed: onTap,
           child: Text(
             buttonText,
-            style:  TextStyle(
+            style: TextStyle(
               fontSize: 16,
               color: color,
               decoration: TextDecoration.underline,

@@ -1,5 +1,8 @@
 class CompleteBookingResponse {
-  CompleteBookingResponse({this.success, this.message});
+  CompleteBookingResponse({
+    this.success,
+    this.message,
+  });
   bool? success;
   String? message;
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:premio_inn/utils/colors.dart';
 
 class TitleWidget extends Text {
-    TitleWidget(
+  TitleWidget(
     super.data, {
     Key? key,
     double fontSize = 16,

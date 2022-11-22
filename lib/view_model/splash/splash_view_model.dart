@@ -13,7 +13,7 @@ class SplashViewModel extends ChangeNotifier {
     if (isLogggedIn == null || isLogggedIn == false) {
       Navigations.pushReplace(const PhoneNumberScreen());
     } else {
-     Navigations.pushReplace(const MainPage());
-     }
-   }
+      Navigations.pushReplace(const MainPage());
+    }
+  }
 }

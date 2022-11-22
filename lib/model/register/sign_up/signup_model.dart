@@ -11,6 +11,10 @@ class SignUpModel {
     required this.password,
   });
 
-  Map<String, dynamic>? toJson() =>
-      {"name": name, "phone": phone, "email": email, "password": password};
+  Map<String, dynamic>? toJson() => {
+        "name": name,
+        "phone": phone,
+        "email": email,
+        "password": password,
+      };
 }

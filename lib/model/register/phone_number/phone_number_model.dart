@@ -5,5 +5,7 @@ class PhoneNumberModel {
     required this.phoneNumber,
   });
 
-  Map<String, dynamic>? toJson() => {"phone_number": phoneNumber};
+  Map<String, dynamic>? toJson() => {
+        "phone_number": phoneNumber,
+      };
 }

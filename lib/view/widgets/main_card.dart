@@ -22,7 +22,9 @@ class MainCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         context.read<HotelViewModel>().onInit();
-        Navigations.push(HotelScreen(hotel: hotel));
+        Navigations.push(
+          HotelScreen(hotel: hotel),
+        );
       },
       child: Container(
         height: size.height / 3.7,
@@ -58,8 +60,9 @@ class MainCard extends StatelessWidget {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                            color: const Color.fromARGB(123, 0, 0, 0),
-                            borderRadius: BorderRadius.circular(8)),
+                          color: const Color.fromARGB(123, 0, 0, 0),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                         padding: const EdgeInsets.symmetric(
                             horizontal: 12, vertical: 8),
                         child: Column(
@@ -75,7 +78,7 @@ class MainCard extends StatelessWidget {
                               ),
                             ),
                             TitleWidget(
-                               hotel.property?.city ?? '',
+                              hotel.property?.city ?? '',
                               fontSize: 16,
                               color: Colors.white70,
                             ),
@@ -85,12 +88,13 @@ class MainCard extends StatelessWidget {
                       const Spacer(),
                       Container(
                         decoration: BoxDecoration(
-                            color: const Color.fromARGB(123, 0, 0, 0),
-                            borderRadius: BorderRadius.circular(8)),
+                          color: const Color.fromARGB(123, 0, 0, 0),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                         padding: const EdgeInsets.symmetric(
                             horizontal: 12, vertical: 8),
                         child: TitleWidget(
-                           '₹ ${hotel.price.toString()}',
+                          '₹ ${hotel.price.toString()}',
                           fontSize: 18,
                           color: KColors.kWhiteColor,
                         ),

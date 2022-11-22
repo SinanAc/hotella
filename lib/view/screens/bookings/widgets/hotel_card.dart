@@ -23,7 +23,7 @@ class HotelCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final bookPro = context.read<BookedHotelsViewModel>();
     return InkWell(
-      onTap: () => bookPro.showMoreDetails(hotel,type),
+      onTap: () => bookPro.showMoreDetails(hotel, type),
       child: Card(
         color: Colors.white,
         elevation: 0,

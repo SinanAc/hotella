@@ -89,15 +89,14 @@ class _OtpBottomSheet extends State<OtpBottomSheet> {
               onChanged: (value) {},
               appContext: context,
             ),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TitleWidget('You have  ', fontSize: 16),
-                      TitleWidget('$_start',
-                          fontSize: 20, color: KColors.kLiteGreen),
-                      TitleWidget('  Seconds remaining', fontSize: 16),
-                    ],
-                  ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TitleWidget('You have  ', fontSize: 16),
+                TitleWidget('$_start', fontSize: 20, color: KColors.kLiteGreen),
+                TitleWidget('  Seconds remaining', fontSize: 16),
+              ],
+            ),
             const Spacer(),
             Selector<PhoneNumberViewModel, bool>(
               selector: (_, obj) => obj.isLoading,

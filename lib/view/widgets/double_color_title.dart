@@ -22,7 +22,7 @@ class DoubleColorTitle extends StatelessWidget {
       children: [
         Text(
           text1,
-          style:  TextStyle(
+          style: TextStyle(
             color: firstColor,
             fontSize: textSize,
             fontWeight: FontWeight.bold,
@@ -35,7 +35,7 @@ class DoubleColorTitle extends StatelessWidget {
         ),
         Text(
           text2,
-          style:  TextStyle(
+          style: TextStyle(
             color: KColors.kThemeYellow,
             fontSize: textSize,
             fontWeight: FontWeight.bold,

@@ -1,5 +1,9 @@
 class BookingResponseModel {
-  BookingResponseModel({this.success, this.response, this.message});
+  BookingResponseModel({
+    this.success,
+    this.response,
+    this.message,
+  });
 
   bool? success;
   Responses? response;

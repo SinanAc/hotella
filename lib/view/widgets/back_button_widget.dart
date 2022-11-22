@@ -18,7 +18,7 @@ class BackButtonWidget extends StatelessWidget {
       child: Card(
         color: buttonColor,
         margin: const EdgeInsets.only(left: 20, top: 15),
-        child:  Padding(
+        child: Padding(
           padding: const EdgeInsets.only(left: 12, top: 6, bottom: 6, right: 2),
           child: Icon(
             Icons.arrow_back_ios,

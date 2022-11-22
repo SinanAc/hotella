@@ -6,7 +6,7 @@ class ShimmerSkelton extends StatelessWidget {
     Key? key,
     required this.height,
     required this.width,
-    this.radius=10,
+    this.radius = 10,
     this.color = Colors.white,
   }) : super(key: key);
   final double height;

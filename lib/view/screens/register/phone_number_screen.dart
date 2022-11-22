@@ -25,19 +25,19 @@ class PhoneNumberScreen extends StatelessWidget {
           key: numberVerifyController.numVerifyFormKey,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal:14.0),
+            padding: const EdgeInsets.symmetric(horizontal: 14.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                 TitleWidget(
+                TitleWidget(
                   "Let's Register",
                   color: KColors.kWhiteColor,
                   fontSize: 22,
                 ),
                 KSizedBox.kHeigh_5,
-                 TitleWidget(
-                   'Hotella',
+                TitleWidget(
+                  'Hotella',
                   color: KColors.kThemeYellow,
                   fontSize: 30,
                 ),
@@ -46,14 +46,13 @@ class PhoneNumberScreen extends StatelessWidget {
                   children: [
                     TextFieldWidget(
                       hintText: 'Enter your 10 digit mobile number',
-                      controller:
-                          numberVerifyController.mobileNumberController,
+                      controller: numberVerifyController.mobileNumberController,
                       validator: numberVerifyController.phoneNumberValidator,
                       keyType: const TextInputType.numberWithOptions(),
                       inputFormat: [FilteringTextInputFormatter.digitsOnly],
                     ),
                     KSizedBox.kHeigh_20,
-                    Selector<PhoneNumberViewModel,bool>(
+                    Selector<PhoneNumberViewModel, bool>(
                       selector: ((_, provider) => provider.isLoading),
                       builder: (__, isLoading, _) => isLoading
                           ? const LoadingIndicator()
@@ -63,8 +62,7 @@ class PhoneNumberScreen extends StatelessWidget {
                                 numberVerifyController
                                     .numVerifyFormKey.currentState
                                     ?.validate();
-                                numberVerifyController
-                                    .onGetOtpButton();
+                                numberVerifyController.onGetOtpButton();
                               },
                             ),
                     ),

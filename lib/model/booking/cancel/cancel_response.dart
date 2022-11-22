@@ -1,5 +1,8 @@
 class CancelResponseModel {
-  CancelResponseModel({this.success, this.message});
+  CancelResponseModel({
+    this.success,
+    this.message,
+  });
 
   bool? success;
   String? message;

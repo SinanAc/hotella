@@ -26,10 +26,10 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-         appBarTheme: const AppBarTheme(
-      backgroundColor: KColors.kThemeGreen,
-      elevation: 0,
-    ),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: KColors.kThemeGreen,
+          elevation: 0,
+        ),
       ),
       navigatorKey: Navigations.navigatorKey,
       scaffoldMessengerKey: ShowDialogs.rootScaffoldMessengerKey,

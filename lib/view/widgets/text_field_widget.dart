@@ -16,7 +16,9 @@ class TextFieldWidget extends TextFormField {
           validator: validator,
           decoration: InputDecoration(
             border: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(15.0)),
+              borderRadius: BorderRadius.all(
+                Radius.circular(15.0),
+              ),
             ),
             fillColor: KColors.kTextFieldColor,
             filled: true,
