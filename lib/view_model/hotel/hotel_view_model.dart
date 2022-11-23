@@ -286,7 +286,6 @@ class HotelViewModel extends ChangeNotifier {
         } else if (complete.success == true) {
           _isLoadingFalse();
           ShowDialogs.popUp('Successfully booked', color: Colors.green);
-          await Future.delayed(const Duration(seconds: 1));
           Navigations.pushRemoveUntil(const MainPage());
           return;
         } else {
