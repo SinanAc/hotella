@@ -31,7 +31,7 @@ class PhoneNumberService {
   }
 
   // ==========>>>>>  OTP VERIFY SERVICE  <<<<<==========
-  Future<OtpResponseModel?> otpVerifyRepo(OtpModel data) async {
+  Future<OtpResponseModel> otpVerifyRepo(OtpModel data) async {
     if (await internetCheck()) {
       try {
         final response = await DioService.postMethod(

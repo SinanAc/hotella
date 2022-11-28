@@ -7,7 +7,7 @@ import 'package:premio_inn/services/dio/internet_checker.dart';
 import 'package:premio_inn/utils/url.dart';
 
 class SignUpService {
-  Future<SignInResponseModel?> signUpRepo(SignUpModel data) async {
+  Future<SignInResponseModel> signUpRepo(SignUpModel data) async {
     if (await internetCheck()) {
       try {
         final Response response =

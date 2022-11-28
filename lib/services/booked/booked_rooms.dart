@@ -7,7 +7,7 @@ import 'package:premio_inn/services/dio/internet_checker.dart';
 import 'package:premio_inn/utils/url.dart';
 
 class BookedRoomsService {
-  Future<BookedRoomsModel?> bookedRooms() async {
+  Future<BookedRoomsModel> bookedRooms() async {
     if (await internetCheck()) {
       final Dio dio = await InterceptorDio.getVerifiedUser();
       try {

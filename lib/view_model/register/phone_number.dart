@@ -49,13 +49,9 @@ class PhoneNumberViewModel extends ChangeNotifier {
     notifyListeners();
     final otp = otpController.text.trim();
     final data = OtpModel(otp: otp, hash: hash);
-    OtpResponseModel? otpResponse =
+    OtpResponseModel otpResponse =
         await PhoneNumberService().otpVerifyRepo(data);
-    if (otpResponse == null) {
-      ShowDialogs.popUp('Something went wrong !!');
-      _isLoadingFalse();
-      return;
-    } else if (otpResponse.success == true) {
+    if (otpResponse.success == true) {
       mobileNumberController.clear();
       otpController.clear();
       Navigations.pop();

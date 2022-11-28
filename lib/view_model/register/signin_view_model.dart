@@ -32,13 +32,9 @@ class SigninViewModel extends ChangeNotifier {
       final password = passwordController.text.trim();
       final data = SignInModel(phoneOrEmail: phoneEmail, password: password);
 
-      SignInResponseModel? signInResponse =
+      SignInResponseModel signInResponse =
           await SignInService().signInRepo(data);
-      if (signInResponse == null) {
-        ShowDialogs.popUp('No Response');
-        _isLoadingFalse();
-        return;
-      } else if (signInResponse.isSuccess == true) {
+      if (signInResponse.isSuccess == true) {
         await _storeUserData(signInResponse);
         _isLoadingFalse();
         disposes();

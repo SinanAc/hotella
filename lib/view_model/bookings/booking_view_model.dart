@@ -23,11 +23,8 @@ class BookedHotelsViewModel extends ChangeNotifier {
   // ==========>>>>>  TO GET ALL BOOKED HOTELS  <<<<<==========
   Future<bool> getAllBookedHotels() async {
     _isLoading = true;
-    final BookedRoomsModel? response = await BookedRoomsService().bookedRooms();
-    if (response == null) {
-      _isLoading = false;
-      return false;
-    } else if (response.success == true) {
+    final BookedRoomsModel response = await BookedRoomsService().bookedRooms();
+    if (response.success == true) {
       bookedHotels.clear();
       bookedHotels.addAll(response.completed ?? []);
       _sortBookedList(bookedHotels);

@@ -36,13 +36,9 @@ class SignUpViewModel extends ChangeNotifier {
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
-      SignInResponseModel? signUpResponse =
+      SignInResponseModel signUpResponse =
           await SignUpService().signUpRepo(obj);
-      if (signUpResponse == null) {
-        ShowDialogs.popUp('No Response');
-        _isLoadingFalse();
-        return;
-      } else if (signUpResponse.isSuccess == true) {
+      if (signUpResponse.isSuccess == true) {
         final pref = await SharedPreferences.getInstance();
         await pref.setString(KStrings.phone, phoneNum);
         await _storeUserData(signUpResponse);
