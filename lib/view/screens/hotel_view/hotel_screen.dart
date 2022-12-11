@@ -64,16 +64,14 @@ class HotelScreen extends StatelessWidget {
                             const Spacer(),
                             Selector<HotelViewModel, bool>(
                               selector: (_, provider) => provider.isFav,
-                              builder: (_, isFav, __) {
-                                return IconButton(
-                                  icon: isFav
-                                      ? hotelPro.favIcon
-                                      : hotelPro.notFavIcon,
-                                  onPressed: () {
-                                    hotelPro.isFav = !hotelPro.isFav;
-                                  },
-                                );
-                              },
+                              builder: (_, isFav, __) => IconButton(
+                                icon: isFav
+                                    ? hotelPro.favIcon
+                                    : hotelPro.notFavIcon,
+                                onPressed: () {
+                                  hotelPro.isFav = !hotelPro.isFav;
+                                },
+                              ),
                             ),
                           ],
                         ),
@@ -92,12 +90,13 @@ class HotelScreen extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 16.0, vertical: 12),
-                            child: Column(children: [
-                              Selector<HotelViewModel, DateTimeRange>(
-                                selector: (_, provider) =>
-                                    provider.selectedDates,
-                                builder: (_, dateRange, __) {
-                                  return BookingDetailsWidget(
+                            child: Column(
+                              children: [
+                                Selector<HotelViewModel, DateTimeRange>(
+                                  selector: (_, provider) =>
+                                      provider.selectedDates,
+                                  builder: (_, dateRange, __) =>
+                                      BookingDetailsWidget(
                                     icon: Icons.calendar_today_outlined,
                                     title: 'Dates',
                                     value:
@@ -109,33 +108,34 @@ class HotelScreen extends StatelessWidget {
                                         hotel,
                                       );
                                     },
-                                  );
-                                },
-                              ),
-                              KSizedBox.kHeigh_5,
-                              SizedBox(
-                                width: size.width / 1.6,
-                                child: const Divider(
-                                  thickness: 1.5,
+                                  ),
                                 ),
-                              ),
-                              KSizedBox.kHeigh_5,
-                              Consumer<HotelViewModel>(builder: (_, value, __) {
-                                return BookingDetailsWidget(
-                                  icon: Icons.group_add_outlined,
-                                  title: 'Guests',
-                                  value:
-                                      '${value.rooms} Room, ${value.guests} Guests',
-                                  onTap: () {
-                                    hotelPro.selectRoomsAndGuests(
-                                      size.height / 1.9,
-                                      hotel.price ?? 0,
-                                      hotel,
-                                    );
-                                  },
-                                );
-                              }),
-                            ]),
+                                KSizedBox.kHeigh_5,
+                                SizedBox(
+                                  width: size.width / 1.6,
+                                  child: const Divider(
+                                    thickness: 1.5,
+                                  ),
+                                ),
+                                KSizedBox.kHeigh_5,
+                                Consumer<HotelViewModel>(
+                                  builder: (_, value, __) =>
+                                      BookingDetailsWidget(
+                                    icon: Icons.group_add_outlined,
+                                    title: 'Guests',
+                                    value:
+                                        '${value.rooms} Room, ${value.guests} Guests',
+                                    onTap: () {
+                                      hotelPro.selectRoomsAndGuests(
+                                        size.height / 1.9,
+                                        hotel.price ?? 0,
+                                        hotel,
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         KSizedBox.kHeigh_30,
@@ -197,47 +197,47 @@ class HotelScreen extends StatelessWidget {
             ),
           ),
           floatingActionButton: Selector<HotelViewModel, int>(
-              selector: (_, provider) => provider.totalAmount(hotel.price ?? 0),
-              builder: (_, totalPrice, __) {
-                return BottomButtonWidget(
-                  price: '$totalPrice',
-                  onTap: () async {
-                    hotelPro.onBookNowButton(hotel, size.width / 2);
-                  },
-                );
-              }),
+            selector: (_, provider) => provider.totalAmount(hotel.price ?? 0),
+            builder: (_, totalPrice, __) => BottomButtonWidget(
+              price: '$totalPrice',
+              onTap: () async {
+                hotelPro.onBookNowButton(hotel, size.width / 2);
+              },
+            ),
+          ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
         ),
         Selector<HotelViewModel, bool>(
           selector: (_, provider) => provider.isLoading,
-          builder: (_, isLoading, __) {
-            return isLoading
-                ? const Opacity(
-                    opacity: 0.7,
-                    child:
-                        ModalBarrier(dismissible: false, color: Colors.black),
-                  )
-                : const SizedBox();
-          },
+          builder: (_, isLoading, __) => isLoading
+              ? const Opacity(
+                  opacity: 0.7,
+                  child: ModalBarrier(
+                    dismissible: false,
+                    color: Colors.black,
+                  ),
+                )
+              : const SizedBox(),
         ),
         Selector<HotelViewModel, bool>(
           selector: (_, provider) => provider.isLoading,
-          builder: (_, isLoading, __) {
-            return isLoading
-                ? Scaffold(
-                    backgroundColor: Colors.transparent,
-                    body: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const LoadingIndicator(),
-                        KSizedBox.kHeigh_15,
-                        TextWidget('Please wait...', color: Colors.white)
-                      ],
-                    ),
-                  )
-                : const SizedBox();
-          },
+          builder: (_, isLoading, __) => isLoading
+              ? Scaffold(
+                  backgroundColor: Colors.transparent,
+                  body: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const LoadingIndicator(),
+                      KSizedBox.kHeigh_15,
+                      TextWidget(
+                        'Please wait...',
+                        color: Colors.white,
+                      )
+                    ],
+                  ),
+                )
+              : const SizedBox(),
         ),
       ],
     );

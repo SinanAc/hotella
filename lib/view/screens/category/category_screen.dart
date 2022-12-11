@@ -80,13 +80,9 @@ class CategoryScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(10),
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: provider.categoryWiseList.length,
-                      itemBuilder: ((_, index) {
-                        return MainCard(
-                            hotel: provider.categoryWiseList[index]);
-                      }),
-                      separatorBuilder: ((_, __) {
-                        return KSizedBox.kHeigh_10;
-                      }),
+                      itemBuilder: (_, index) =>
+                          MainCard(hotel: provider.categoryWiseList[index]),
+                      separatorBuilder: (_, __) => KSizedBox.kHeigh_10,
                     ),
                   ),
                 ],
