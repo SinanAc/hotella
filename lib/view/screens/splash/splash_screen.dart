@@ -10,18 +10,24 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final splashController = context.read<SplashViewModel>();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Timer(const Duration(seconds: 2), () {
-        splashController.checkLogin();
-      });
-    });
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        Timer(
+          const Duration(seconds: 2),
+          () {
+            splashController.checkLogin();
+          },
+        );
+      },
+    );
     return Scaffold(
       backgroundColor: KColors.kThemeGreen,
       body: Center(
-          child: Image.asset(
-        'assets/images/logo.png',
-        height: 120,
-      )),
+        child: Image.asset(
+          'assets/images/logo.png',
+          height: 120,
+        ),
+      ),
     );
   }
 }
