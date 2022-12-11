@@ -11,7 +11,6 @@ class KSizedBox {
   static const kHeigh_40 = SizedBox(height: 40);
   static const kHeigh_50 = SizedBox(height: 50);
   // --->>> width sizes
-  static const kWidth_5 = SizedBox(width: 5);
   static const kWidth_10 = SizedBox(width: 10);
   static const kWidth_15 = SizedBox(width: 15);
   static const kWidth_20 = SizedBox(width: 20);
