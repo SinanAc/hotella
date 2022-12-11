@@ -26,51 +26,46 @@ class SearchScreen extends StatelessWidget {
                 KSizedBox.kHeigh_15,
                 Selector<SearchViewModel, List<String>>(
                   selector: (_, obj) => obj.searchCityList,
-                  builder: ((__, list, _) {
-                    return ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: list.length,
-                        itemBuilder: ((_, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: ListTile(
-                                title: TitleWidget(list[index]),
-                                tileColor: const Color.fromARGB(29, 3, 2, 0),
-                                onTap: () {
-                                  searchProvider.getSearchResults(
-                                      city: list[index],
-                                      allRooms: homePro.allRooms);
-                                  list.clear();
-                                }),
+                  builder: (__, list, _) => ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: list.length,
+                    itemBuilder: (_, index) => Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: ListTile(
+                        title: TitleWidget(list[index]),
+                        tileColor: const Color.fromARGB(29, 3, 2, 0),
+                        onTap: () {
+                          searchProvider.getSearchResults(
+                            city: list[index],
+                            allRooms: homePro.allRooms,
                           );
-                        }));
-                  }),
+                          list.clear();
+                        },
+                      ),
+                    ),
+                  ),
                 ),
                 KSizedBox.kHeigh_5,
                 Selector<SearchViewModel, List<AllRoomsModel>>(
                   selector: (_, obj) => obj.searchResultList,
-                  builder: ((__, list, _) {
-                    return list.isEmpty
-                        ? ListView.separated(
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: homePro.allRooms.length,
-                            itemBuilder: ((_, index) {
-                              return MainCard(hotel: homePro.allRooms[index]);
-                            }),
-                            separatorBuilder: (_, __) => KSizedBox.kHeigh_10,
-                          )
-                        : ListView.separated(
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: list.length,
-                            itemBuilder: ((_, index) {
-                              return MainCard(hotel: list[index]);
-                            }),
-                            separatorBuilder: (_, __) => KSizedBox.kHeigh_10,
-                          );
-                  }),
+                  builder: (__, list, _) => list.isEmpty
+                      ? ListView.separated(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: homePro.allRooms.length,
+                          itemBuilder: (_, index) =>
+                              MainCard(hotel: homePro.allRooms[index]),
+                          separatorBuilder: (_, __) => KSizedBox.kHeigh_10,
+                        )
+                      : ListView.separated(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: list.length,
+                          itemBuilder: (_, index) =>
+                              MainCard(hotel: list[index]),
+                          separatorBuilder: (_, __) => KSizedBox.kHeigh_10,
+                        ),
                 ),
               ],
             ),
