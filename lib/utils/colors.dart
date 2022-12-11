@@ -17,16 +17,19 @@ class KColors {
   static const kGreyColor = Colors.grey;
 
 // --->>> primary swatch color
-  static MaterialColor primarySwatchColor = const MaterialColor(0xff0F6657, {
-    50: kThemeGreen,
-    100: kThemeGreen,
-    200: kThemeGreen,
-    300: kThemeGreen,
-    400: kThemeGreen,
-    500: kThemeGreen,
-    600: kThemeGreen,
-    700: kThemeGreen,
-    800: kThemeGreen,
-    900: kThemeGreen,
-  });
+  static MaterialColor primarySwatchColor = const MaterialColor(
+    0xff0F6657,
+    {
+      50: kThemeGreen,
+      100: kThemeGreen,
+      200: kThemeGreen,
+      300: kThemeGreen,
+      400: kThemeGreen,
+      500: kThemeGreen,
+      600: kThemeGreen,
+      700: kThemeGreen,
+      800: kThemeGreen,
+      900: kThemeGreen,
+    },
+  );
 }

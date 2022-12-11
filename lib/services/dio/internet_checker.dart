@@ -1,8 +1,4 @@
 import 'dart:io';
-// Future<bool> internetCheck() async {
-//   bool result = await InternetConnectionChecker().hasConnection;
-//   return result;
-// }
 
 Future<bool> internetCheck() async {
   try {
