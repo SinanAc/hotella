@@ -13,8 +13,7 @@ class AccountGridItem extends StatelessWidget {
   final String title;
   final VoidCallback onTap;
   @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
+  Widget build(BuildContext context) => GestureDetector(
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -49,5 +48,4 @@ class AccountGridItem extends StatelessWidget {
         ),
       ),
     );
-  }
 }

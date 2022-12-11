@@ -30,10 +30,9 @@ class _ProfileSectionState extends State<ProfileSection> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: getStoredUserData(),
-      builder: (_, __) => Card(
+  Widget build(BuildContext context) => FutureBuilder(
+        future: getStoredUserData(),
+        builder: (_, __) => Card(
           elevation: 0,
           color: KColors.kWhiteColor,
           child: Padding(
@@ -63,7 +62,7 @@ class _ProfileSectionState extends State<ProfileSection> {
                 ),
               ],
             ),
-          )),
-    );
-  }
+          ),
+        ),
+      );
 }

@@ -15,19 +15,14 @@ class CompletedScreen extends StatelessWidget {
         ? const Center(child: Text('No records found'))
         : Selector<BookedHotelsViewModel, List<Completed>>(
             selector: (_, provider) => provider.completedList,
-            builder: (_, value, __) {
-              return ListView.separated(
-                itemCount: value.length,
-                itemBuilder: ((_, index) {
-                  return HotelCard(
-                    hotel: value[index],
-                    type: BookingEnums.completed,
-                  );
-                }),
-                separatorBuilder: ((_, __) {
-                  return KSizedBox.kHeigh_10;
-                }),
-              );
-            });
+            builder: (_, value, __) => ListView.separated(
+              itemCount: value.length,
+              itemBuilder: (_, index) => HotelCard(
+                hotel: value[index],
+                type: BookingEnums.completed,
+              ),
+              separatorBuilder: (_, __) => KSizedBox.kHeigh_10,
+            ),
+          );
   }
 }

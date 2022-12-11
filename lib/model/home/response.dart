@@ -13,9 +13,11 @@ class AllRoomsResponse {
 
   factory AllRoomsResponse.fromJson(Map<String, dynamic> json) {
     return AllRoomsResponse(
-      dataList: (json as List).map((e) {
-        return AllRoomsModel.fromJson(e);
-      }).toList(),
+      dataList: (json as List).map(
+        (e) {
+          return AllRoomsModel.fromJson(e);
+        },
+      ).toList(),
       isFailed: false,
     );
   }

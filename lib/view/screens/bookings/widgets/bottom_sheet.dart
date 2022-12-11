@@ -244,10 +244,13 @@ class BookedDetailsBottomSheet extends StatelessWidget {
                             KSizedBox.kHeigh_15,
                             TextWidget(hotel.days ?? 'Not available'),
                             KSizedBox.kHeigh_15,
-                            TextWidget(bookingPro.totalAmount(
+                            TextWidget(
+                              bookingPro.totalAmount(
                                 hotel.roomNumber ?? 0,
                                 hotel.room?.price ?? 0,
-                                int.parse(hotel.days ?? '0'))),
+                                int.parse(hotel.days ?? '0'),
+                              ),
+                            ),
                           ],
                         ),
                       ],
@@ -271,30 +274,28 @@ class DetailsWidget extends StatelessWidget {
   final String subTitle;
 
   @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TitleWidget(title, fontSize: 20),
-            KSizedBox.kHeigh_10,
-            TextWidget(subTitle)
-          ],
-        ),
-        title == 'Booking ID'
-            ? IconButton(
-                icon: Icon(
-                  Icons.copy_sharp,
-                  color: Colors.grey.shade600,
-                ),
-                onPressed: () {},
-              )
-            : const SizedBox(),
-      ],
-    );
-  }
+  Widget build(BuildContext context) => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TitleWidget(title, fontSize: 20),
+              KSizedBox.kHeigh_10,
+              TextWidget(subTitle)
+            ],
+          ),
+          title == 'Booking ID'
+              ? IconButton(
+                  icon: Icon(
+                    Icons.copy_sharp,
+                    color: Colors.grey.shade600,
+                  ),
+                  onPressed: () {},
+                )
+              : const SizedBox(),
+        ],
+      );
 }
 
 class DividerWidget extends StatelessWidget {
@@ -303,13 +304,11 @@ class DividerWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(vertical: 20),
-      child: Divider(
-        thickness: 0.58,
-        color: Colors.grey,
-      ),
-    );
-  }
+  Widget build(BuildContext context) => const Padding(
+        padding: EdgeInsets.symmetric(vertical: 20),
+        child: Divider(
+          thickness: 0.58,
+          color: Colors.grey,
+        ),
+      );
 }

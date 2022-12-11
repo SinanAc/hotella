@@ -35,8 +35,15 @@ class AllRoomsModel {
         guest: json["guest"],
         checkinTime: json["checkin_time"],
         checkoutTime: json["checkout_time"],
-        images: List<List<Images>>.from(json["images"]
-            .map((x) => List<Images>.from(x.map((x) => Images.fromJson(x))))),
+        images: List<List<Images>>.from(
+          json["images"].map(
+            (x) => List<Images>.from(
+              x.map(
+                (x) => Images.fromJson(x),
+              ),
+            ),
+          ),
+        ),
       );
 }
 
