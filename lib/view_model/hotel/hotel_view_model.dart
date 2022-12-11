@@ -106,8 +106,10 @@ class HotelViewModel extends ChangeNotifier {
         rooms--;
       }
     } else {
-      ShowDialogs.popUp('At least one guest is needed !!',
-          color: Colors.black87);
+      ShowDialogs.popUp(
+        'At least one guest is needed !!',
+        color: Colors.black87,
+      );
     }
     notifyListeners();
   }
@@ -143,12 +145,14 @@ class HotelViewModel extends ChangeNotifier {
       clipBehavior: Clip.antiAliasWithSaveLayer,
       builder: (_) {
         return SizedBox(
-            height: height,
-            child: Scaffold(
-                body: RoomsAndGuestsBottomSheet(
+          height: height,
+          child: Scaffold(
+            body: RoomsAndGuestsBottomSheet(
               amount: amount,
               hotel: hotel,
-            )));
+            ),
+          ),
+        );
       },
     );
   }
@@ -189,9 +193,10 @@ class HotelViewModel extends ChangeNotifier {
     } else if (isRoomAvailableResponse.isAvailable == false) {
       _isLoadingFalse();
       ShowDialogs.popUp(
-          isRoomAvailableResponse.message ??
-              'Rooms are not available on the selected range. Please try with other dates.',
-          color: Colors.black87);
+        isRoomAvailableResponse.message ??
+            'Rooms are not available on the selected range. Please try with other dates.',
+        color: Colors.black87,
+      );
       return false;
     } else if (isRoomAvailableResponse.isAvailable == true) {
       _isLoadingFalse();
@@ -392,23 +397,25 @@ class HotelViewModel extends ChangeNotifier {
       PayNowResponseModel response) async {
     final pref = await SharedPreferences.getInstance();
     final userData = SignInResponseModel(
-        profile: Profile(
-      name: pref.getString(KStrings.userName),
-      email: pref.getString(KStrings.email),
-      phone: pref.getString(KStrings.phone),
-    ));
+      profile: Profile(
+        name: pref.getString(KStrings.userName),
+        email: pref.getString(KStrings.email),
+        phone: pref.getString(KStrings.phone),
+      ),
+    );
     RazorpayCheckoutModel options = RazorpayCheckoutModel(
-        key: response.keyId,
-        amount: response.amount.toString(),
-        currency: response.currency,
-        name: "Hotella",
-        description: "Payment to book your selected room via Hotella",
-        orderId: response.id,
-        prefill: Prefill(
-          name: userData.profile?.name ?? '',
-          email: userData.profile?.email ?? '',
-          contact: userData.profile?.phone ?? '',
-        ));
+      key: response.keyId,
+      amount: response.amount.toString(),
+      currency: response.currency,
+      name: "Hotella",
+      description: "Payment to book your selected room via Hotella",
+      orderId: response.id,
+      prefill: Prefill(
+        name: userData.profile?.name ?? '',
+        email: userData.profile?.email ?? '',
+        contact: userData.profile?.phone ?? '',
+      ),
+    );
     return options;
   }
 

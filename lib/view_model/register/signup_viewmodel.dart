@@ -15,7 +15,8 @@ class SignUpViewModel extends ChangeNotifier {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
-  bool isLoading = false;
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
 
   // ==========>>>>>  TO MAKE PASSWORD OBSCURE  <<<<<==========
   bool _isObscure = true;
@@ -28,7 +29,7 @@ class SignUpViewModel extends ChangeNotifier {
   // ==========>>>>>  SIGNUP  <<<<<==========
   Future<void> onSignupButton(String phoneNum) async {
     if (signUpKey.currentState!.validate()) {
-      isLoading = true;
+      _isLoading = true;
       notifyListeners();
       final obj = SignUpModel(
         name: nameController.text.trim(),
@@ -95,7 +96,7 @@ class SignUpViewModel extends ChangeNotifier {
 
   // ==========>>>>>  TO MAKE LOADING FALSE  <<<<<==========
   void _isLoadingFalse() {
-    isLoading = false;
+    _isLoading = false;
     notifyListeners();
   }
 
@@ -116,7 +117,7 @@ class SignUpViewModel extends ChangeNotifier {
     passwordController.clear();
     confirmPasswordController.clear();
     _isObscure = true;
-    isLoading = false;
+    _isLoading = false;
     notifyListeners();
   }
 }

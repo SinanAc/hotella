@@ -16,11 +16,13 @@ class CategoryViewModel extends ChangeNotifier {
   List<DropdownMenuItem<String>> get dropdownItems {
     List<DropdownMenuItem<String>> menuItems = [
       DropdownMenuItem(
-          value: "Low to high",
-          child: TextWidget("Low to high", color: Colors.grey.shade300)),
+        value: "Low to high",
+        child: TextWidget("Low to high", color: Colors.grey.shade300),
+      ),
       DropdownMenuItem(
-          value: "High to low",
-          child: TextWidget("High to low", color: Colors.grey.shade300)),
+        value: "High to low",
+        child: TextWidget("High to low", color: Colors.grey.shade300),
+      ),
     ];
     return menuItems;
   }

@@ -13,7 +13,8 @@ class SigninViewModel extends ChangeNotifier {
   GlobalKey<FormState> signInFormKey = GlobalKey<FormState>();
   final phoneOrEmailController = TextEditingController();
   final passwordController = TextEditingController();
-  bool isLoading = false;
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
 
   // ==========>>>>>  TO MAKE PASSWORD OBSCURE  <<<<<==========
   bool _isObscure = true;
@@ -26,7 +27,7 @@ class SigninViewModel extends ChangeNotifier {
   // ==========>>>>>  SIGN-IN  <<<<<==========
   Future<void> onSigninButton() async {
     if (signInFormKey.currentState!.validate()) {
-      isLoading = true;
+      _isLoading = true;
       notifyListeners();
       final phoneEmail = phoneOrEmailController.text.trim();
       final password = passwordController.text.trim();
@@ -69,7 +70,7 @@ class SigninViewModel extends ChangeNotifier {
 
   // ==========>>>>>  TO MAKE LOADING FALSE  <<<<<==========
   void _isLoadingFalse() {
-    isLoading = false;
+    _isLoading = false;
     notifyListeners();
   }
 
@@ -89,7 +90,7 @@ class SigninViewModel extends ChangeNotifier {
     phoneOrEmailController.clear();
     passwordController.clear();
     isObscure = true;
-    isLoading = false;
+    _isLoading = false;
     notifyListeners();
   }
 }
