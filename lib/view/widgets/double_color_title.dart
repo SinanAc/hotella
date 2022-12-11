@@ -17,33 +17,31 @@ class DoubleColorTitle extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(
-          text1,
-          style: TextStyle(
-            color: firstColor,
-            fontSize: textSize,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'SubMainFont',
-            letterSpacing: 1,
+  Widget build(BuildContext context) => Row(
+        children: [
+          Text(
+            text1,
+            style: TextStyle(
+              color: firstColor,
+              fontSize: textSize,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'SubMainFont',
+              letterSpacing: 1,
+            ),
           ),
-        ),
-        SizedBox(
-          width: gap,
-        ),
-        Text(
-          text2,
-          style: TextStyle(
-            color: KColors.kThemeYellow,
-            fontSize: textSize,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'SubMainFont',
-            letterSpacing: 1,
+          SizedBox(
+            width: gap,
           ),
-        ),
-      ],
-    );
-  }
+          Text(
+            text2,
+            style: TextStyle(
+              color: KColors.kThemeYellow,
+              fontSize: textSize,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'SubMainFont',
+              letterSpacing: 1,
+            ),
+          ),
+        ],
+      );
 }

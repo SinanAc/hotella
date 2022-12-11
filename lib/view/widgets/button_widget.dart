@@ -15,31 +15,29 @@ class ButtonWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: width,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: color,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+  Widget build(BuildContext context) => SizedBox(
+        width: width,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: color,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            padding: const EdgeInsets.symmetric(
+              vertical: 13,
+            ),
+            elevation: 0,
           ),
-          padding: const EdgeInsets.symmetric(
-            vertical: 13,
+          onPressed: onTap,
+          child: Text(
+            text,
+            style: const TextStyle(
+              color: KColors.kWhiteColor,
+              fontSize: 16,
+              fontFamily: 'SubMainFont',
+              letterSpacing: 1,
+            ),
           ),
-          elevation: 0,
         ),
-        onPressed: onTap,
-        child: Text(
-          text,
-          style: const TextStyle(
-            color: KColors.kWhiteColor,
-            fontSize: 16,
-            fontFamily: 'SubMainFont',
-            letterSpacing: 1,
-          ),
-        ),
-      ),
-    );
-  }
+      );
 }

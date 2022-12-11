@@ -46,38 +46,36 @@ class ShowDialogs {
       required Function goOn}) async {
     await showDialog(
       context: Navigations.navigatorKey.currentContext!,
-      builder: (ctx) {
-        return AlertDialog(
-          title: Text(
-            title,
+      builder: (ctx) => AlertDialog(
+        title: Text(
+          title,
+        ),
+        titleTextStyle:
+            const TextStyle(fontSize: 24, color: KColors.kBlackColor),
+        content: Text(messege),
+        contentTextStyle:
+            const TextStyle(fontSize: 18, color: KColors.kBlackColor),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigations.pop();
+            },
+            child: const Text(
+              'No',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            ),
           ),
-          titleTextStyle:
-              const TextStyle(fontSize: 24, color: KColors.kBlackColor),
-          content: Text(messege),
-          contentTextStyle:
-              const TextStyle(fontSize: 18, color: KColors.kBlackColor),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigations.pop();
-              },
-              child: const Text(
-                'No',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-              ),
+          TextButton(
+            onPressed: () {
+              goOn();
+            },
+            child: const Text(
+              'Yes',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
-            TextButton(
-              onPressed: () {
-                goOn();
-              },
-              child: const Text(
-                'Yes',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-              ),
-            ),
-          ],
-        );
-      },
+          ),
+        ],
+      ),
     );
   }
 }

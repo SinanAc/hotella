@@ -12,21 +12,20 @@ class BackButtonWidget extends StatelessWidget {
   final Color iconColor;
 
   @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: Navigations.pop,
-      child: Card(
-        color: buttonColor,
-        margin: const EdgeInsets.only(left: 20, top: 15),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 12, top: 6, bottom: 6, right: 2),
-          child: Icon(
-            Icons.arrow_back_ios,
-            color: iconColor,
-            size: 20,
+  Widget build(BuildContext context) => GestureDetector(
+        onTap: Navigations.pop,
+        child: Card(
+          color: buttonColor,
+          margin: const EdgeInsets.only(left: 20, top: 15),
+          child: Padding(
+            padding:
+                const EdgeInsets.only(left: 12, top: 6, bottom: 6, right: 2),
+            child: Icon(
+              Icons.arrow_back_ios,
+              color: iconColor,
+              size: 20,
+            ),
           ),
         ),
-      ),
-    );
-  }
+      );
 }

@@ -10,12 +10,10 @@ class LoadingIndicator extends StatelessWidget {
   final Color color;
   final double thickness;
   @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: CircularProgressIndicator(
-        color: color,
-        strokeWidth: thickness,
-      ),
-    );
-  }
+  Widget build(BuildContext context) => Center(
+        child: CircularProgressIndicator(
+          color: color,
+          strokeWidth: thickness,
+        ),
+      );
 }

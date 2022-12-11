@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:premio_inn/utils/colors.dart';
 
 class PasswordTextFieldWidget extends TextFormField {
-  PasswordTextFieldWidget(
-      {Key? key,
-      required String hintText,
-      required TextEditingController controller,
-      required String? Function(String?)? validator,
-      required dynamic signPro})
-      : super(
+  PasswordTextFieldWidget({
+    Key? key,
+    required String hintText,
+    required TextEditingController controller,
+    required String? Function(String?)? validator,
+    required dynamic signPro,
+  }) : super(
           key: key,
           controller: controller,
           validator: validator,
