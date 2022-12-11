@@ -83,11 +83,12 @@ class AccountScreen extends StatelessWidget {
                       title: 'Logout',
                       onTap: () {
                         ShowDialogs.dialogBox(
-                            title: 'Logout !!',
-                            messege: 'Are you sure to want to logout?',
-                            goOn: () {
-                              accountContoller.onLogoutButton(context);
-                            });
+                          title: 'Logout !!',
+                          messege: 'Are you sure to want to logout?',
+                          goOn: () {
+                            accountContoller.onLogoutButton(context);
+                          },
+                        );
                       },
                     ),
                   ],

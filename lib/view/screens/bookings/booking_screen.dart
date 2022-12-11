@@ -64,10 +64,11 @@ class BookingScreen extends StatelessWidget {
                           : const TabBarView(
                               physics: NeverScrollableScrollPhysics(),
                               children: [
-                                  ComingScreen(),
-                                  CompletedScreen(),
-                                  CancelledScreen(),
-                                ]),
+                                ComingScreen(),
+                                CompletedScreen(),
+                                CancelledScreen(),
+                              ],
+                            ),
                 ),
               ),
             ],
