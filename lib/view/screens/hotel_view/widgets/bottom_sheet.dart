@@ -22,8 +22,7 @@ class RoomsAndGuestsBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final hotelPro = Provider.of<HotelViewModel>(context);
-    final bookingPro = Provider.of<HotelViewModel>(context);
+    final hotelPro = context.read<HotelViewModel>();
     return Scaffold(
       extendBody: true,
       backgroundColor: Colors.transparent,
@@ -76,8 +75,9 @@ class RoomsAndGuestsBottomSheet extends StatelessWidget {
                   TextWidget('Rooms', size: 20),
                   Container(
                     decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(10)),
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                     child: Row(
                       children: [
                         IconButton(
@@ -112,8 +112,9 @@ class RoomsAndGuestsBottomSheet extends StatelessWidget {
                   TextWidget('Guests', size: 20),
                   Container(
                     decoration: BoxDecoration(
-                        border: Border.all(color: KColors.kGreyColor),
-                        borderRadius: BorderRadius.circular(10)),
+                      border: Border.all(color: KColors.kGreyColor),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                     child: Row(
                       children: [
                         IconButton(
@@ -153,16 +154,15 @@ class RoomsAndGuestsBottomSheet extends StatelessWidget {
                     color: KColors.kRedColor,
                     width: size.width / 2.3,
                   ),
-                  bookingPro.isLoading
+                  hotelPro.isLoading
                       ? const LoadingIndicator(color: KColors.kThemeGreen)
                       : ButtonWidget(
                           text: 'Confirm',
                           onTap: () async {
-                            final isAvailable =
-                                await bookingPro.isRoomAvailable(
-                                    hotelPro.selectedDates,
-                                    hotel.id ?? '',
-                                    hotelPro.rooms);
+                            final isAvailable = await hotelPro.isRoomAvailable(
+                                hotelPro.selectedDates,
+                                hotel.id ?? '',
+                                hotelPro.rooms);
                             if (isAvailable) {
                               Navigations.pop();
                             }

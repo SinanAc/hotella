@@ -18,7 +18,7 @@ class HotelPhotos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hotelProvider = Provider.of<HotelViewModel>(context, listen: false);
+    final hotelProvider = context.read<HotelViewModel>();
     return Stack(
       children: [
         SizedBox(
@@ -26,31 +26,30 @@ class HotelPhotos extends StatelessWidget {
           width: size.width,
         ),
         Positioned(
-            top: 0,
-            left: 0.0,
-            right: 0.0,
-            bottom: 0.0,
-            child: PageView.builder(
-              controller: hotelProvider.pController,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return Container(
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(KStrings.dummyAssetImage),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  child: Image.network(
-                    hotel.images?.first[index].url ?? KStrings.dummyNetImage,
-                    height: size.height / 2.7,
-                    width: size.width,
-                    fit: BoxFit.cover,
-                  ),
-                );
-              },
-              itemCount: hotel.images?.first.length ?? 1,
-            )),
+          top: 0,
+          left: 0.0,
+          right: 0.0,
+          bottom: 0.0,
+          child: PageView.builder(
+            controller: hotelProvider.pController,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (_, index) => Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(KStrings.dummyAssetImage),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: Image.network(
+                hotel.images?.first[index].url ?? KStrings.dummyNetImage,
+                height: size.height / 2.7,
+                width: size.width,
+                fit: BoxFit.cover,
+              ),
+            ),
+            itemCount: hotel.images?.first.length ?? 1,
+          ),
+        ),
         const BackButtonWidget(
           buttonColor: KColors.kWhiteColor,
           iconColor: KColors.kThemeGreen,

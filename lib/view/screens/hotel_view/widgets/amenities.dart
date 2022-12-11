@@ -12,13 +12,11 @@ class AmenitiesWidget extends StatelessWidget {
   final String title;
 
   @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Icon(icon),
-        KSizedBox.kWidth_15,
-        TextWidget(title),
-      ],
-    );
-  }
+  Widget build(BuildContext context) => Row(
+        children: [
+          Icon(icon),
+          KSizedBox.kWidth_15,
+          TextWidget(title),
+        ],
+      );
 }

@@ -64,55 +64,58 @@ class _OtpBottomSheet extends State<OtpBottomSheet> {
         backgroundColor: Colors.transparent,
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-          child: Column(children: [
-            KSizedBox.kHeigh_10,
-            TitleWidget(
-              'Verify otp',
-              color: KColors.kThemeGreen,
-            ),
-            KSizedBox.kHeigh_20,
-            PinCodeTextField(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              autoDisposeControllers: false,
-              length: 6,
-              obscureText: false,
-              animationType: AnimationType.fade,
-              pinTheme: PinTheme(
-                shape: PinCodeFieldShape.box,
-                borderRadius: BorderRadius.circular(5),
-                fieldHeight: 50,
-                fieldWidth: 40,
-                activeFillColor: Colors.white,
+          child: Column(
+            children: [
+              KSizedBox.kHeigh_10,
+              TitleWidget(
+                'Verify otp',
+                color: KColors.kThemeGreen,
               ),
-              animationDuration: const Duration(milliseconds: 300),
-              controller: numberVerifyController.otpController,
-              onChanged: (value) {},
-              appContext: context,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TitleWidget('You have  ', fontSize: 16),
-                TitleWidget('$_start', fontSize: 20, color: KColors.kLiteGreen),
-                TitleWidget('  Seconds remaining', fontSize: 16),
-              ],
-            ),
-            const Spacer(),
-            Selector<PhoneNumberViewModel, bool>(
-              selector: (_, obj) => obj.isLoading,
-              builder: (__, isLoading, _) => isLoading
-                  ? const LoadingIndicator(
-                      color: KColors.kThemeGreen,
-                    )
-                  : ButtonWidget(
-                      text: 'Verify',
-                      onTap: () {
-                        numberVerifyController.onOtpVerifyButton();
-                      },
-                      color: KColors.kThemeGreen,
-                    ),
-            )
-          ]),
+              KSizedBox.kHeigh_20,
+              PinCodeTextField(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                autoDisposeControllers: false,
+                length: 6,
+                obscureText: false,
+                animationType: AnimationType.fade,
+                pinTheme: PinTheme(
+                  shape: PinCodeFieldShape.box,
+                  borderRadius: BorderRadius.circular(5),
+                  fieldHeight: 50,
+                  fieldWidth: 40,
+                  activeFillColor: Colors.white,
+                ),
+                animationDuration: const Duration(milliseconds: 300),
+                controller: numberVerifyController.otpController,
+                onChanged: (value) {},
+                appContext: context,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TitleWidget('You have  ', fontSize: 16),
+                  TitleWidget('$_start',
+                      fontSize: 20, color: KColors.kLiteGreen),
+                  TitleWidget('  Seconds remaining', fontSize: 16),
+                ],
+              ),
+              const Spacer(),
+              Selector<PhoneNumberViewModel, bool>(
+                selector: (_, obj) => obj.isLoading,
+                builder: (__, isLoading, _) => isLoading
+                    ? const LoadingIndicator(
+                        color: KColors.kThemeGreen,
+                      )
+                    : ButtonWidget(
+                        text: 'Verify',
+                        onTap: () {
+                          numberVerifyController.onOtpVerifyButton();
+                        },
+                        color: KColors.kThemeGreen,
+                      ),
+              )
+            ],
+          ),
         ),
       ),
     );

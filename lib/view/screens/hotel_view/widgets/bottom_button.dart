@@ -13,41 +13,39 @@ class BottomButtonWidget extends StatelessWidget {
   final VoidCallback onTap;
 
   @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 70,
-      child: ColoredBox(
-        color: KColors.kThemeBackground,
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TitleWidget(
-                    '₹$price',
-                    fontSize: 20,
-                  ),
-                  TitleWidget(
-                    'Total amount',
-                    fontSize: 18,
-                    color: Colors.grey.shade700,
-                  ),
-                ],
-              ),
-              ButtonWidget(
-                text: 'Book now',
-                onTap: onTap,
-                width: MediaQuery.of(context).size.width / 2.5,
-                color: KColors.kThemeGreen,
-              )
-            ],
+  Widget build(BuildContext context) => SizedBox(
+        height: 70,
+        child: ColoredBox(
+          color: KColors.kThemeBackground,
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TitleWidget(
+                      '₹$price',
+                      fontSize: 20,
+                    ),
+                    TitleWidget(
+                      'Total amount',
+                      fontSize: 18,
+                      color: Colors.grey.shade700,
+                    ),
+                  ],
+                ),
+                ButtonWidget(
+                  text: 'Book now',
+                  onTap: onTap,
+                  width: MediaQuery.of(context).size.width / 2.5,
+                  color: KColors.kThemeGreen,
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-    );
-  }
+      );
 }

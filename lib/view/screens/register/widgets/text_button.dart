@@ -15,29 +15,27 @@ class TextButtonWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          text,
-          style: const TextStyle(
-            color: Colors.white38,
-            fontSize: 16,
-          ),
-        ),
-        TextButton(
-          onPressed: onTap,
-          child: Text(
-            buttonText,
-            style: TextStyle(
+  Widget build(BuildContext context) => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            text,
+            style: const TextStyle(
+              color: Colors.white38,
               fontSize: 16,
-              color: color,
-              decoration: TextDecoration.underline,
             ),
           ),
-        ),
-      ],
-    );
-  }
+          TextButton(
+            onPressed: onTap,
+            child: Text(
+              buttonText,
+              style: TextStyle(
+                fontSize: 16,
+                color: color,
+                decoration: TextDecoration.underline,
+              ),
+            ),
+          ),
+        ],
+      );
 }
