@@ -4,7 +4,4 @@
 
 ### Getting Started
 
-Hello people, Hotella is a hotel room booking application using flutter as front end and node js as backend. The application contains user authentication, map integration, payment system, push notification, and most importantly, storing data to database and handling by api. The project is following MVVM architecture and using Provider as state management.
-
-### currently working on this project
-### will update this section after completing the project.
+Hello people, Hotella is a hotel room booking application created by using Flutter framework for frontend and collaborated with a backend developer who built the backend by using NodeJs. By completing this project I have learned more about user authentication, map integration, payment getaways and push notification using Firebase. The project is following MVVM architecture and using Provider as state management.
